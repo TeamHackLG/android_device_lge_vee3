@@ -3,9 +3,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
-$(call inherit-product-if-exists, vendor/lge/vee3/vee3-vendor.mk)
+$(call inherit-product-if-exists, vendor/lge/e435/e435-vendor.mk)
 
-DEVICE_PACKAGE_OVERLAYS += device/lge/vee3/overlay
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
@@ -14,34 +14,34 @@ PRODUCT_AAPT_PREF_CONFIG := ldpi
 
 # Rootdir
 PRODUCT_COPY_FILES += \
-	device/lge/vee3/rootdir/fstab.vee3:root/fstab.vee3 \
-	device/lge/vee3/rootdir/init.vee3.rc:root/init.vee3.rc \
-	device/lge/vee3/rootdir/init.vee3.usb.rc:root/init.vee3.usb.rc \
-	device/lge/vee3/rootdir/ueventd.vee3.rc:root/ueventd.vee3.rc \
-	device/lge/vee3/rootdir/init.lge.usb.sh:root/init.lge.usb.sh \
-	device/lge/vee3/rootdir/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
-	device/lge/vee3/rootdir/init.qcom.class_main.sh:root/init.qcom.class_main.sh\
-	device/lge/vee3/rootdir/init.qcom.sh:root/init.qcom.sh
+	$(LOCAL_PATH)/rootdir/fstab.e435:root/fstab.e435 \
+	$(LOCAL_PATH)/rootdir/init.e435.rc:root/init.e435.rc \
+	$(LOCAL_PATH)/rootdir/init.e435.usb.rc:root/init.e435.usb.rc \
+	$(LOCAL_PATH)/rootdir/ueventd.e435.rc:root/ueventd.e435.rc \
+	$(LOCAL_PATH)/rootdir/init.lge.usb.sh:root/init.lge.usb.sh \
+	$(LOCAL_PATH)/rootdir/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
+	$(LOCAL_PATH)/rootdir/init.qcom.class_main.sh:root/init.qcom.class_main.sh\
+	$(LOCAL_PATH)/rootdir/init.qcom.sh:root/init.qcom.sh
 
 # Configs
 PRODUCT_COPY_FILES += \
-	device/lge/vee3/configs/7k_handset.kl:system/usr/keylayout/7k_handset.kl \
-	device/lge/vee3/configs/7x27a_kp.kl:system/usr/keylayout/7x27a_kp.kl \
-	device/lge/vee3/configs/AudioFilter.csv:system/etc/AudioFilter.csv \
-	device/lge/vee3/configs/media_codecs.xml:system/etc/media_codecs.xml \
-	device/lge/vee3/configs/media_profiles.xml:system/etc/media_profiles.xml \
-	device/lge/vee3/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
-	device/lge/vee3/configs/touch_mcs8000.idc:system/usr/idc/touch_mcs8000.idc \
-	device/lge/vee3/configs/touch_mcs8000.kl:system/usr/keylayout/touch_mcs8000.kl \
-	device/lge/vee3/configs/vee3_keypad.kl:system/usr/keylayout/vee3_keypad.kl \
-	device/lge/vee3/configs/vold.fstab:system/etc/vold.fstab
+	$(LOCAL_PATH)/configs/7k_handset.kl:system/usr/keylayout/7k_handset.kl \
+	$(LOCAL_PATH)/configs/7x27a_kp.kl:system/usr/keylayout/7x27a_kp.kl \
+	$(LOCAL_PATH)/configs/AudioFilter.csv:system/etc/AudioFilter.csv \
+	$(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
+	$(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml \
+	$(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
+	$(LOCAL_PATH)/configs/touch_mcs8000.idc:system/usr/idc/touch_mcs8000.idc \
+	$(LOCAL_PATH)/configs/touch_mcs8000.kl:system/usr/keylayout/touch_mcs8000.kl \
+	$(LOCAL_PATH)/configs/e435_keypad.kl:system/usr/keylayout/e435_keypad.kl \
+	$(LOCAL_PATH)/configs/vold.fstab:system/etc/vold.fstab
 
 # Wlan
 PRODUCT_COPY_FILES += \
-	device/lge/vee3/wlan/firmware/WCN1314_qcom_wlan_nv.bin:system/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin \
-	device/lge/vee3/wlan/firmware/WCN1314_qcom_fw.bin:system/etc/firmware/wlan/volans/WCN1314_qcom_fw.bin \
-	device/lge/vee3/wlan/firmware/WCN1314_cfg.dat:system/etc/firmware/wlan/volans/WCN1314_cfg.dat \
-	device/lge/vee3/wlan/firmware/WCN1314_qcom_cfg.ini:system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini
+	$(LOCAL_PATH)/wlan/firmware/WCN1314_qcom_wlan_nv.bin:system/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin \
+	$(LOCAL_PATH)/wlan/firmware/WCN1314_qcom_fw.bin:system/etc/firmware/wlan/volans/WCN1314_qcom_fw.bin \
+	$(LOCAL_PATH)/wlan/firmware/WCN1314_cfg.dat:system/etc/firmware/wlan/volans/WCN1314_cfg.dat \
+	$(LOCAL_PATH)/wlan/firmware/WCN1314_qcom_cfg.ini:system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini
 
 # Permission files
 PRODUCT_COPY_FILES := \
@@ -213,5 +213,5 @@ PRODUCT_PACKAGES += libqcomvoiceprocessing
 PRODUCT_PACKAGES += Torch
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
-PRODUCT_NAME := full_vee3
-PRODUCT_DEVICE := vee3
+PRODUCT_NAME := full_e435
+PRODUCT_DEVICE := e435

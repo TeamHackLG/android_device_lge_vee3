@@ -1,9 +1,9 @@
 USE_CAMERA_STUB := true
 
 # inherit from the proprietary version
--include vendor/lge/vee3/BoardConfigVendor.mk
+-include vendor/lge/e435/BoardConfigVendor.mk
 
-TARGET_SPECIFIC_HEADER_PATH := device/lge/vee3/include
+TARGET_SPECIFIC_HEADER_PATH := device/lge/e435/include
 
 # CFLags
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_ABI_HACK -DUSE_MDP3
@@ -12,7 +12,7 @@ TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 
 TARGET_NO_BOOTLOADER := true
-TARGET_BOOTLOADER_BOARD_NAME := vee3
+TARGET_BOOTLOADER_BOARD_NAME := e435
 TARGET_BOARD_PLATFORM := msm7x27a
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 
@@ -48,7 +48,7 @@ BOARD_VOLD_MAX_PARTITIONS := 26
 # Recovery
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_FSTAB_VERSION := 2
-TARGET_RECOVERY_FSTAB := device/lge/vee3/rootdir/fstab.vee3
+TARGET_RECOVERY_FSTAB := device/lge/e435/rootdir/fstab.vee3
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := "<font_7x16.h>"
@@ -63,7 +63,7 @@ TARGET_USES_QCOM_BSP := true
 COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP
 BOARD_USES_QCOM_LIBS := true
 TARGET_USES_ION := true
-BOARD_EGL_CFG := device/lge/vee3/egl.cfg
+BOARD_EGL_CFG := device/lge/e435/egl.cfg
 
 # FM
 BOARD_HAVE_QCOM_FM := true
@@ -93,7 +93,7 @@ USE_OPENGL_RENDERER := true
 
 # BT
 BOARD_HAVE_BLUETOOTH := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/vee3/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/e435/bluetooth
 
 # BotAnimation
 TARGET_BOOTANIMATION_PRELOAD := true
@@ -101,7 +101,7 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
 # SEPolicy
 BOARD_SEPOLICY_DIRS := \
-       device/lge/vee3/sepolicy
+       device/lge/e435/sepolicy
 
 BOARD_SEPOLICY_UNION := \
        device.te \
