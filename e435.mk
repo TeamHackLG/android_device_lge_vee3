@@ -14,10 +14,10 @@ PRODUCT_AAPT_PREF_CONFIG := ldpi
 
 # Rootdir
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/rootdir/fstab.e435:root/fstab.e435 \
-	$(LOCAL_PATH)/rootdir/init.e435.rc:root/init.e435.rc \
-	$(LOCAL_PATH)/rootdir/init.e435.usb.rc:root/init.e435.usb.rc \
-	$(LOCAL_PATH)/rootdir/ueventd.e435.rc:root/ueventd.e435.rc \
+	$(LOCAL_PATH)/rootdir/fstab.vee3:root/fstab.vee3 \
+	$(LOCAL_PATH)/rootdir/init.vee3.rc:root/init.vee3.rc \
+	$(LOCAL_PATH)/rootdir/init.vee3.usb.rc:root/init.vee3.usb.rc \
+	$(LOCAL_PATH)/rootdir/ueventd.vee3.rc:root/ueventd.vee3.rc \
 	$(LOCAL_PATH)/rootdir/init.lge.usb.sh:root/init.lge.usb.sh \
 	$(LOCAL_PATH)/rootdir/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
 	$(LOCAL_PATH)/rootdir/init.qcom.class_main.sh:root/init.qcom.class_main.sh\
@@ -33,7 +33,7 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
 	$(LOCAL_PATH)/configs/touch_mcs8000.idc:system/usr/idc/touch_mcs8000.idc \
 	$(LOCAL_PATH)/configs/touch_mcs8000.kl:system/usr/keylayout/touch_mcs8000.kl \
-	$(LOCAL_PATH)/configs/e435_keypad.kl:system/usr/keylayout/e435_keypad.kl \
+	$(LOCAL_PATH)/configs/vee3_keypad.kl:system/usr/keylayout/vee3_keypad.kl \
 	$(LOCAL_PATH)/configs/vold.fstab:system/etc/vold.fstab
 
 # Wlan
