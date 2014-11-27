@@ -24,6 +24,5 @@
 # WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
 # OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#LGE_CHANGE_S [jyothishre.nk@lge.com] 20120928:Adding mount for SDcard
-#LGE_CHANGE_S [jyothishre.nk@lge.com] 20121031:change external_SD path
+
 dev_mount sdcard /storage/external_SD auto /devices/platform/msm_sdcc.1/mmc_host/mmc1

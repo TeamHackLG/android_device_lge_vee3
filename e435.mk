@@ -39,24 +39,27 @@ PRODUCT_PACKAGES += \
     init.qcom.sh
 
 # Configs
-PRODUCT_COPY_FILES += \
-    device/lge/e435/configs/7k_handset.kl:system/usr/keylayout/7k_handset.kl \
-    device/lge/e435/configs/7x27a_kp.kl:system/usr/keylayout/7x27a_kp.kl \
-    device/lge/e435/configs/AudioFilter.csv:system/etc/AudioFilter.csv \
-    device/lge/e435/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    device/lge/e435/configs/media_profiles.xml:system/etc/media_profiles.xml \
-    device/lge/e435/configs/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
-    device/lge/e435/configs/touch_mcs8000.idc:system/usr/idc/touch_mcs8000.idc \
-    device/lge/e435/configs/touch_mcs8000.kl:system/usr/keylayout/touch_mcs8000.kl \
-    device/lge/e435/configs/vee3_keypad.kl:system/usr/keylayout/vee3_keypad.kl \
-    device/lge/e435/configs/vold.fstab:system/etc/vold.fstab
+PRODUCT_PACKAGES += \
+    vee3_keypad.kcm \
+    7k_handset.kl \
+    7x27a_kp.kl \
+    touch_mcs8000.kl \
+    vee3_keypad.kl \
+    AudioFilter.csv \
+    media_codecs.xml \
+    media_profiles.xml \
+    wpa_supplicant.conf \
+    vold.fstab \
+    hostapd.accept \
+    hostapd_default.conf \
+    hostapd.deny
 
 # Wlan
-PRODUCT_COPY_FILES += \
-    device/lge/e435/wlan/firmware/WCN1314_qcom_wlan_nv.bin:system/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin \
-    device/lge/e435/wlan/firmware/WCN1314_qcom_fw.bin:system/etc/firmware/wlan/volans/WCN1314_qcom_fw.bin \
-    device/lge/e435/wlan/firmware/WCN1314_cfg.dat:system/etc/firmware/wlan/volans/WCN1314_cfg.dat \
-    device/lge/e435/wlan/firmware/WCN1314_qcom_cfg.ini:system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini
+PRODUCT_PACKAGES += \
+    WCN1314_qcom_wlan_nv.bin \
+    WCN1314_qcom_fw.bin \
+    WCN1314_cfg.dat \
+    WCN1314_qcom_cfg.ini
 
 # Permission files
 PRODUCT_COPY_FILES += \
@@ -106,15 +109,6 @@ PRODUCT_PACKAGES += \
     libloc_eng \
     libloc_api_v02
 
-# HOSTAPD
-PRODUCT_PACKAGES += \
-    hostapd \
-    hostapd_cli \
-    hostapd.conf \
-    hostapd_default.conf \
-    hostapd.deny \
-    hostapd.accept
-
 # LIBCAMERA
 PRODUCT_PACKAGES += \
     libcamera \
@@ -139,10 +133,6 @@ PRODUCT_PACKAGES += \
     libgenlock \
     libqdutils \
     libqdMetaData
-
-# MEDIA_PROFILES
-PRODUCT_PACKAGES += \
-    media_profiles.xml
 
 PRODUCT_PACKAGES += \
     libmm-omxcore \
@@ -171,10 +161,6 @@ PRODUCT_PACKAGES += \
     libomx_sharedlibrary \
     libomx_amr_component_lib
 
-# WPA
-PRODUCT_PACKAGES += \
-    wpa_supplicant.conf
-
 # off-mode charging
 PRODUCT_PACKAGES += \
     charger \
@@ -191,10 +177,6 @@ PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
 # Build.prop Properties
-PRODUCT_PROPERTY_OVERRIDES += \
-    com.qc.hardware=true \
-    ro.opengles.version=131072
-
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
@@ -202,25 +184,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/system/lib/libqc-opt.so
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/system/lib/libril-qc-qmi-1.so \
-    rild.libargs=-d/dev/smd0
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=120 \
-    debug.camcorder.disablemeta=1
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.fuse_sdcard=true \
-    ro.emmc.sdcard.partition=20
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.stagefright.enable-player=true \
-    media.stagefright.enable-meta=false \
-    media.stagefright.enable-scan=true \
-    media.stagefright.enable-http=true \
-    media.stagefright.enable-fma2dp=true \
-    media.stagefright.enable-aac=true \
-    media.stagefright.enable-qcp=true
+    ro.sf.lcd_density=120
 
 # Voice processing
 PRODUCT_PACKAGES += libqcomvoiceprocessing
