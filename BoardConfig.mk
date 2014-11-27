@@ -1,3 +1,19 @@
+#
+# Copyright (C) 2014 The CyanogenMod Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
 USE_CAMERA_STUB := true
 
 # inherit from the proprietary version
@@ -48,7 +64,7 @@ BOARD_VOLD_MAX_PARTITIONS := 26
 # Recovery
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_FSTAB_VERSION := 2
-TARGET_RECOVERY_FSTAB := device/lge/e435/rootdir/fstab.vee3
+TARGET_RECOVERY_FSTAB := device/lge/e435/rootdir/etc/fstab.vee3
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := "<font_7x16.h>"
