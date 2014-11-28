@@ -16,7 +16,7 @@ on init
     start bootlogo
 
 on fs
-    mount_all ./fstab.vee3
+    mount_all fstab.vee3
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system

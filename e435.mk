@@ -34,7 +34,7 @@ PRODUCT_PACKAGES += \
     init.vee3.rc \
     init.vee3.usb.rc \
     ueventd.vee3.rc \
-    init.lge.usb.sh \
+    init.qcom.usb.sh \
     init.qcom.class_main.sh \
     init.qcom.sh
 

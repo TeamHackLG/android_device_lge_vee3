@@ -96,7 +96,7 @@ case "$usb_config" in
                     ;;
                 esac
             ;;
-            "msm7x27a")
+            "msm7627a" | "msm7x27a")
                 setprop persist.sys.usb.config diag,serial_smd,serial_tty,rmnet_smd,mass_storage,adb
             ;;
             * )
