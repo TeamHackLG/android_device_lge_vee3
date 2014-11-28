@@ -1,6 +1,5 @@
 #!/system/bin/sh
 # Copyright (c) 2012, Code Aurora Forum. All rights reserved.
-# Copyright (c) 2012, LG Electronics Inc. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -28,19 +27,24 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 #
-# Allow unique persistent serial numbers for devices connected via usb
-# User needs to set unique usb serial number to persist.usb.serialno and
-# if persistent serial number is not set then Update USB serial number if
-# passed from command line
+# Update USB serial number from persist storage if present, if not update
+# with value passed from kernel command line, if none of these values are
+# set then use the default value. This order is needed as for devices which
+# do not have unique serial number.
+# User needs to set unique usb serial number to persist.usb.serialno
 #
 serialno=`getprop persist.usb.serialno`
 case "$serialno" in
     "")
     serialnum=`getprop ro.serialno`
-    echo "LGOTMS$serialnum" > /sys/class/android_usb/android0/iSerial
+    case "$serialnum" in
+        "");; #Do nothing, use default serial number
+        *)
+        echo "$serialnum" > /sys/class/android_usb/android0/iSerial
+    esac
     ;;
-    * )
-    echo "LGOTMS$serialno" > /sys/class/android_usb/android0/iSerial
+    *)
+    echo "$serialno" > /sys/class/android_usb/android0/iSerial
 esac
 
 chown root.system /sys/devices/platform/msm_hsusb/gadget/wakeup
@@ -69,44 +73,31 @@ esac
 #
 # Allow USB enumeration with default PID/VID
 #
-#  setprop persist.sys.usb.config charge_only,adb
-
+setprop sys.usb.config.extra diag
 baseband=`getprop ro.baseband`
-usermode=`getprop ro.debuggable`
 echo 1  > /sys/class/android_usb/f_mass_storage/lun/nofua
 usb_config=`getprop persist.sys.usb.config`
 case "$usb_config" in
     "" | "adb") #USB persist config not set, select default configuration
         case $target in
+            "msm8974")
+                setprop persist.sys.usb.config diag,adb
+                ;;
             "msm8960")
-                socid=`cat /sys/devices/system/soc/soc0/id`
-                case "$socid" in
-                    "109")
-                         setprop persist.sys.usb.config diag,adb
+                case "$baseband" in
+                    "mdm")
+                         setprop persist.sys.usb.config diag,diag_mdm,serial_hsic,serial_tty,rmnet_hsic,mass_storage,adb
+                    ;;
+                    "sglte")
+                         setprop persist.sys.usb.config diag,diag_mdm,serial_smd,serial_tty,serial_hsuart,rmnet_hsuart,mass_storage,adb
                     ;;
                     *)
-                        case "$baseband" in
-                            "mdm")
-                                 setprop persist.sys.usb.config diag,diag_mdm,serial_hsic,serial_tty,rmnet_hsic,mass_storage,adb
-                            ;;
-                            *)
-                                 setprop persist.sys.usb.config diag,serial_smd,serial_tty,rmnet_bam,mass_storage,adb
-                            ;;
-                        esac
+                         setprop persist.sys.usb.config diag,serial_smd,serial_tty,rmnet_bam,mass_storage,adb
                     ;;
                 esac
             ;;
             "msm7x27a")
-                case "$usermode" in
-                   "0") #usermode compile, disable adb
-                        setprop persist.sys.usb.config charge_only
-                    ;;
-                    *)
-                        # LGE_CHANGE,lbh.lee@lge.com,default pid change
-                        #setprop persist.sys.usb.config charge_only,adb
-			setprop persist.sys.usb.config pc_suite,adb
-                    ;;
-                 esac
+                setprop persist.sys.usb.config diag,serial_smd,serial_tty,rmnet_smd,mass_storage,adb
             ;;
             * )
                 case "$baseband" in
