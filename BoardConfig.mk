@@ -44,7 +44,7 @@ TARGET_USE_SPARROW_BIONIC_OPTIMIZATION := true
 
 # Try to build the kernel
 TARGET_KERNEL_CONFIG := cyanogenmod_vee3ds_defconfig
-TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-linaro-4.6.2
+#TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-linaro-4.6.2
 
 # Kernel commands
 BOARD_KERNEL_BASE := 0x00200000

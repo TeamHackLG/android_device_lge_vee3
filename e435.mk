@@ -191,6 +191,11 @@ PRODUCT_PACKAGES += libqcomvoiceprocessing
 
 PRODUCT_PACKAGES += Torch
 
+# For userdebug builds
+ADDITIONAL_DEFAULT_PROPERTIES += \
+	ro.secure=0 \
+	ro.adb.secure=0
+
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := full_e435
 PRODUCT_DEVICE := e435
