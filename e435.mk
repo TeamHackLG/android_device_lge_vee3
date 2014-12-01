@@ -76,90 +76,56 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
 
-# Live Wallpapers
-PRODUCT_PACKAGES += \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    VisualizationWallpapers \
-    librs_jni
-
 # Audio
 PRODUCT_PACKAGES += \
-    audio.primary.msm7x27a \
     audio.a2dp.default \
+    audio.primary.msm7x27a \
+    audio_policy.conf \
     audio_policy.msm7x27a \
-    audio_policy.conf
+    audio.usb.default \
+    libaudioparameter \
+    libaudio-resampler \
+    libtinyalsa \
+    tinycap \
+    tinymix \
+    tinyplay
 
-# MM_AUDIO
+# Video
 PRODUCT_PACKAGES += \
-    libOmxAacDec \
-    libOmxAacEnc \
-    libOmxAmrEnc \
-    libOmxEvrcEnc \
-    libOmxMp3Dec \
-    libOmxQcelp13Enc \
-    libOmxAc3HwDec
+    libI420colorconvert \
+    libstagefrighthw \
+    libmm-omxcore \
+    libOmxCore
 
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm7x27a \
-    gps.mahimahi \
-    libloc_adapter \
+    gps.default \
     libgps.utils \
+    libloc_adapter \
     libloc_eng \
-    libloc_api_v02
+    libloc_api-rpc-qc
 
-# LIBCAMERA
+# Display
 PRODUCT_PACKAGES += \
-    libcamera \
-    camera.msm7x27a \
-    libmmcamera_interface2 \
-    libmmjpeg_interface
-
-# LIBGRALLOC
-PRODUCT_PACKAGES += \
+    copybit.msm7x27a \
     gralloc.msm7x27a \
-    libmemalloc \
-    lights.msm7x27a \
     hwcomposer.msm7x27a \
-    power.msm7x27a \
-    copybit.msm7x27a
-
-# LIBAUDIOPARAM
-PRODUCT_PACKAGES += \
-    libaudioparameter \
+    libc2dcolorconvert \
     liboverlay \
-    overlay.default \
+    libmemalloc \
+    libtilerenderer \
     libgenlock \
     libqdutils \
     libqdMetaData
 
+# Light
 PRODUCT_PACKAGES += \
-    libmm-omxcore \
-    libdivxdrmdecrypt \
-    libOmxVdec \
-    libOmxVenc \
-    libOmxCore \
-    libstagefrighthw \
-    libc2dcolorconvert
+    lights.msm7x27a
 
-# MM_VIDEO
+# Camera
 PRODUCT_PACKAGES += \
-    libdivxdrmdecrypt \
-    liblasic \
-    libOmxVidEnc \
-    mm-vdec-omx-property-mgr
-
-# OMX
-PRODUCT_PACKAGES += \
-    libomx_aacdec_sharedlibrary \
-    libomx_amrdec_sharedlibrary \
-    libomx_amrenc_sharedlibrary \
-    libomx_avcdec_sharedlibrary \
-    libomx_m4vdec_sharedlibrary \
-    libomx_mp3dec_sharedlibrary \
-    libomx_sharedlibrary \
-    libomx_amr_component_lib
+    camera.msm7x27a
 
 # off-mode charging
 PRODUCT_PACKAGES += \

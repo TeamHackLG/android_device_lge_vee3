@@ -17,3 +17,5 @@
 add_lunch_combo cm_e435-user
 add_lunch_combo cm_e435-userdebug
 add_lunch_combo cm_e435-eng
+
+sh device/lge/e435/patches/apply.sh
