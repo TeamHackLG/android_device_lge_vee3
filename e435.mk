@@ -123,6 +123,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     lights.msm7x27a
 
+# FM Radio
+PRODUCT_PACKAGES += \
+    FM2 \
+    FMRecord \
+    libqcomfm_jni \
+    qcom.fmradio
+
+# Power Hal
+PRODUCT_PACKAGES += \
+    power.msm7x27a
+
 # Camera
 PRODUCT_PACKAGES += \
     camera.msm7x27a
