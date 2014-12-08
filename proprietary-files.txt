@@ -43,7 +43,6 @@ lib/libchromatix_imx074_zsl.so
 lib/libchromatix_imx091_default_video.so
 lib/libchromatix_imx091_preview.so
 lib/libchromatix_imx091_video_hd.so
-lib/libgsl.so
 lib/libmmcamera_faceproc.so
 lib/libmmcamera_frameproc.so
 lib/libmmcamera_hdr_lib.so
@@ -53,7 +52,6 @@ lib/libmmcamera_statsproc31.so
 lib/libmmjpeg.so
 lib/libmmcamera_wavelet_lib.so
 lib/liboemcamera.so
-lib/libOpenVG.so
 lib/libsc-a2xx.so
 lib/libOmxAacDec.so
 lib/libOmxAacEnc.so
@@ -135,14 +133,6 @@ lib/libxml.so
 lib/qnet-plugin.so
 lib/libwidevine.so
 
-# Graphics
-lib/egl/eglsubAndroid.so
-lib/egl/libEGL_adreno200.so
-lib/egl/libGLES_android.so
-lib/egl/libGLESv1_CM_adreno200.so
-lib/egl/libGLESv2_adreno200.so
-lib/egl/libq3dtools_adreno200.so
-
 # Binaries
 bin/atd
 bin/cnd
@@ -163,9 +153,6 @@ etc/firmware/yamato_pm4.fw
 
 
 # Misc
-lib/libOpenVG.so
-lib/libgsl.so
-lib/libsc-a2xx.so
 lib/libwmsts.so
 lib/libwms.so
 lib/libwfcu.so

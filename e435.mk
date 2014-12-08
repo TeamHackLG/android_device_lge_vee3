@@ -21,6 +21,8 @@ $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
 $(call inherit-product-if-exists, vendor/lge/e435/e435-vendor.mk)
 
+$(call inherit-product-if-exists, vendor/lge/msm7x27a-common/msm7x27a-common-vendor.mk)
+
 DEVICE_PACKAGE_OVERLAYS += device/lge/e435/overlay
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)

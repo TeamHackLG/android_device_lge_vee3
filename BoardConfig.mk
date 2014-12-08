@@ -17,13 +17,16 @@
 # inherit from the proprietary version
 -include vendor/lge/e435/BoardConfigVendor.mk
 
+# inherit from the common proprietary version
+-include vendor/lge/msm7x27a-common//BoardConfigVendor.mk
+
 TARGET_SPECIFIC_HEADER_PATH := device/lge/e435/include
 
 # Compiler flags
-TARGET_GLOBAL_CFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4 -mtune=cortex-a5
-TARGET_GLOBAL_CPPFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4 -mtune=cortex-a5
 COMMON_GLOBAL_CFLAGS += -DUSE_MDP3
 COMMON_GLOBAL_CFLAGS += -DLPA_DEFAULT_BUFFER_SIZE=480
+TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 
 TARGET_NO_RADIOIMAGE := true
 TARGET_NO_BOOTLOADER := true
@@ -39,6 +42,7 @@ TARGET_CPU_VARIANT := cortex-a5
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 ARCH_ARM_HAVE_TLS_REGISTER := true
+TARGET_CORTEX_CACHE_LINE_32 := true
 ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 
 # Try to build the kernel
@@ -46,7 +50,7 @@ TARGET_KERNEL_CONFIG := cyanogenmod_vee3ds_defconfig
 
 # Kernel commands
 BOARD_KERNEL_BASE := 0x00200000
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=vee3 user_debug=31 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=vee3 androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01300000
 BOARD_KERNEL_PAGESIZE := 4096
 
@@ -102,7 +106,7 @@ BOARD_USES_LEGACY_ALSA_AUDIO := true
 TARGET_HAS_QACT := true
 
 # Display
-TARGET_QCOM_DISPLAY_VARIANT := legacy
+TARGET_QCOM_DISPLAY_VARIANT := caf
 USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
 BOARD_ADRENO_DECIDE_TEXTURE_TARGET := true
@@ -127,6 +131,10 @@ BOARD_SEPOLICY_UNION := \
        device.te \
        app.te \
        file_contexts
+
+# Bootanimation
+TARGET_BOOTANIMATION_PRELOAD := true
+TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
 DEVICE_RESOLUTION := 240x320
 
