@@ -113,6 +113,7 @@ PRODUCT_PACKAGES += \
     copybit.msm7x27a \
     gralloc.msm7x27a \
     hwcomposer.msm7x27a \
+    memtrack.msm7x27a \
     libc2dcolorconvert \
     liboverlay \
     libmemalloc \
