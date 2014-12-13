@@ -141,6 +141,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     camera.msm7x27a
 
+# Omx
+PRODUCT_PACKAGES += \
+    libmm-omxcore \
+    libOmxCore \
+    libstagefrighthw \
+    libdashplayer
+
 # off-mode charging
 PRODUCT_PACKAGES += \
     charger \

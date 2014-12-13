@@ -47,7 +47,7 @@ ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 
 # Try to build the kernel
 
-TARGET_KERNEL_SOURCE := kernel/lge/lproj
+TARGET_KERNEL_SOURCE := kernel/lge/p715
 TARGET_KERNEL_CONFIG := cyanogenmod_vee3ds_defconfig
 
 # Kernel commands
@@ -112,7 +112,7 @@ BOARD_USES_LEGACY_ALSA_AUDIO := true
 TARGET_HAS_QACT := true
 
 # Display
-TARGET_QCOM_DISPLAY_VARIANT := caf
+TARGET_QCOM_DISPLAY_VARIANT := legacy
 USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
 BOARD_ADRENO_DECIDE_TEXTURE_TARGET := true
@@ -120,6 +120,8 @@ BOARD_EGL_WORKAROUND_BUG_10194508 := true
 TARGET_DISPLAY_USE_RETIRE_FENCE := true
 BOARD_EGL_CFG := device/lge/e435/egl.cfg
 TARGET_NO_INITLOGO := true
+BOARD_USE_MHEAP_SCREENSHOT := true
+HWUI_COMPILE_FOR_PERF := true
 
 # BT
 BOARD_HAVE_BLUETOOTH := true
@@ -144,6 +146,10 @@ BOARD_SEPOLICY_UNION := \
 # Bootanimation
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
+
+## Mass Storage
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun/file
+BOARD_UMS_LUNFILE := /sys/class/android_usb/android0/f_mass_storage/lun/file
 
 DEVICE_RESOLUTION := 240x320
 
