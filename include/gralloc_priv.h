@@ -289,3 +289,4 @@ struct private_handle_t : public native_handle {
     };
 
 #endif /* GRALLOC_PRIV_H_ */
+
