@@ -70,6 +70,8 @@
 #define MSMFB_MDP_PP _IOWR(MSMFB_IOCTL_MAGIC, 156, struct msmfb_mdp_pp)
 #define MSMFB_OVERLAY_VSYNC_CTRL _IOW(MSMFB_IOCTL_MAGIC, 160, unsigned int)
 #define MSMFB_VSYNC_CTRL  _IOW(MSMFB_IOCTL_MAGIC, 161, unsigned int)
+#define MSMFB_METADATA_SET  _IOW(MSMFB_IOCTL_MAGIC, 165, struct msmfb_metadata)
+#define MSMFB_METADATA_GET  _IOW(MSMFB_IOCTL_MAGIC, 166, struct msmfb_metadata)
 #define FB_TYPE_3D_PANEL 0x10101010
 #define MDP_IMGTYPE2_START 0x10000
 #define MSMFB_DRIVER_VERSION	0xF9E8D701
@@ -328,13 +330,10 @@ struct mdp_histogram {
 
 
 /*
-
 	mdp_block_type defines the identifiers for each of pipes in MDP 4.3
-
 	MDP_BLOCK_RESERVED is provided for backward compatibility and is
 	deprecated. It corresponds to DMA_P. So MDP_BLOCK_DMA_P should be used
 	instead.
-
 */
 
 enum {
@@ -489,6 +488,30 @@ struct msmfb_mdp_pp {
 	} data;
 };
 
+enum {
+	metadata_op_none,
+	metadata_op_base_blend,
+	metadata_op_frame_rate,
+	metadata_op_max
+};
+
+struct mdp_blend_cfg {
+	uint32_t is_premultiplied;
+};
+
+struct mdp_mixer_cfg {
+	uint32_t writeback_format;
+	uint32_t alpha;
+};
+
+struct msmfb_metadata {
+	uint32_t op;
+	uint32_t flags;
+	union {
+		struct mdp_blend_cfg blend_cfg;
+		uint32_t panel_frame_rate;
+	} data;
+};
 
 struct mdp_page_protection {
 	uint32_t page_protection;
