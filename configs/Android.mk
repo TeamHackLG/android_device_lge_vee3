@@ -4,16 +4,6 @@ include $(CLEAR_VARS)
 # Key mappings
 # ------------
 
-# Key Chars
-# ---------
-include $(CLEAR_VARS)
-LOCAL_MODULE       := vee3_keypad.kcm
-LOCAL_MODULE_TAGS  := optional
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := keychars/$(LOCAL_MODULE)
-LOCAL_MODULE_PATH  := $(TARGET_OUT_KEYCHARS)
-include $(BUILD_PREBUILT)
-
 # Key Layout
 # ----------
 include $(CLEAR_VARS)

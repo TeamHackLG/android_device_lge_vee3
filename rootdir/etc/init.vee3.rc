@@ -3,17 +3,15 @@ import init.vee3.usb.rc
 on init
     mkdir /storage 0775 system sdcard_r
     mkdir /storage/sdcard0 0000 system system
-    mkdir /storage/sdcard1 0000 system system
+   #mkdir /storage/sdcard1 0000 system system
     mkdir /mnt 0775 root system
     mkdir /mnt/sdcard 0000 system system
 
     export EXTERNAL_STORAGE /storage/sdcard0
-    export EXTERNAL_ADD_STORAGE /storage/sdcard1
+   #export EXTERNAL_ADD_STORAGE /storage/sdcard1
 
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard0 /mnt/sdcard
-
-    start bootlogo
 
 on fs
     mount_all fstab.vee3

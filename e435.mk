@@ -42,7 +42,6 @@ PRODUCT_PACKAGES += \
 
 # Configs
 PRODUCT_PACKAGES += \
-    vee3_keypad.kcm \
     7k_handset.kl \
     7x27a_kp.kl \
     touch_mcs8000.kl \
