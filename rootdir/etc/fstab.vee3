@@ -8,10 +8,6 @@
 /dev/block/mmcblk0p14	/system	ext4	ro,barrier=1,noatime	wait
 /dev/block/mmcblk0p20	/data	ext4	nosuid,nodev,noatime,barrier=1,noauto_da_alloc,errors=continue	check
 /dev/block/mmcblk0p16	/cache	ext4	nosuid,nodev,barrier=1	wait,check
-/dev/block/mmcblk1p1	/external_sd	auto	defaults	defaults
 
-# SD-Ext
-/dev/block/mmcblk1p2	/sd-ext	auto	defaults	defaults
-
-# USB Storage
-/devices/platform/msm_hsusb_host/usb        /storage/usbdisk0       auto    defaults    voldmanaged=sda:auto
+# External-SD
+/devices/platform/msm_sdcc.1/mmc_host	/storage/external_SD	vfat	defaults	voldmanaged=external_SD:auto
