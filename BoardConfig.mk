@@ -123,6 +123,7 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/e435/bluetooth
 
 # Camera
 USE_CAMERA_STUB := true
+COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_WITH_GENLOCK -DNEEDS_VECTORIMPL_SYMBOLS
 
 # Light
 TARGET_PROVIDES_LIBLIGHT := true
@@ -147,18 +148,20 @@ BOARD_UMS_LUNFILE := /sys/class/android_usb/android0/f_mass_storage/lun/file
 DEVICE_RESOLUTION := 240x320
 
 # Wlan
-BOARD_HAS_QCOM_WLAN := true
-BOARD_WLAN_DEVICE := qcwcn
-WPA_SUPPLICANT_VERSION := VER_0_8_X
-BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+BOARD_HAS_QCOM_WLAN              := true
+BOARD_HAS_QCOM_WLAN_SDK          := true
+BOARD_WLAN_DEVICE                := qcwcn
+WPA_SUPPLICANT_VERSION           := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-BOARD_HOSTAPD_DRIVER := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
-WIFI_EXT_MODULE_PATH := "/system/lib/modules/librasdioif.ko"
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
-WIFI_EXT_MODULE_NAME := "librasdioif"
-WIFI_DRIVER_MODULE_NAME := "wlan"
-WIFI_DRIVER_FW_PATH_STA := "sta"
-WIFI_DRIVER_FW_PATH_AP := "ap"
-WIFI_DRIVER_FW_PATH_P2P := "p2p"
-WIFI_DRIVER_FW_PATH_PARAM := "/data/misc/wifi/fwpath"
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+WIFI_EXT_MODULE_PATH             := "/system/lib/modules/librasdioif.ko"
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlan.ko"
+WIFI_EXT_MODULE_NAME             := "librasdioif"
+WIFI_DRIVER_MODULE_NAME          := "wlan"
+WIFI_DRIVER_FW_PATH_STA          := "sta"
+WIFI_DRIVER_FW_PATH_AP           := "ap"
+WIFI_DRIVER_FW_PATH_P2P          := "p2p"
+WIFI_DRIVER_FW_PATH_PARAM        := "/data/misc/wifi/fwpath"
+BOARD_LEGACY_NL80211_STA_EVENTS  := true

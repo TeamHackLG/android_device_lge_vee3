@@ -1,11 +1,8 @@
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
-# Key mappings
-# ------------
-
 # Key Layout
-# ----------
+
 include $(CLEAR_VARS)
 LOCAL_MODULE       := 7k_handset.kl
 LOCAL_MODULE_TAGS  := optional
@@ -38,43 +35,7 @@ LOCAL_SRC_FILES    := keylayout/$(LOCAL_MODULE)
 LOCAL_MODULE_PATH  := $(TARGET_OUT_KEYLAYOUT)
 include $(BUILD_PREBUILT)
 
-# ETC
-# ---
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := AudioFilter.csv
-LOCAL_MODULE_TAGS  := optional
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := etc/$(LOCAL_MODULE)
-LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := media_codecs.xml
-LOCAL_MODULE_TAGS  := optional
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := etc/$(LOCAL_MODULE)
-LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := media_profiles.xml
-LOCAL_MODULE_TAGS  := optional
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := etc/$(LOCAL_MODULE)
-LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := vold.fstab
-LOCAL_MODULE_TAGS  := optional
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := etc/$(LOCAL_MODULE)
-LOCAL_MODULE_PATH  := $(TARGET_OUT_ETC)
-include $(BUILD_PREBUILT)
-
 # HostAPD
-# -------
 
 include $(CLEAR_VARS)
 LOCAL_MODULE       := hostapd.accept
