@@ -108,7 +108,6 @@
              channels="1" />
     </EncoderProfile>
 
-
     <EncoderProfile quality="high" fileFormat="3gp" duration="30">
       <Video codec="h264"
              bitRate="2000000"

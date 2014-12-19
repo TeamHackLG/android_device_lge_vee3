@@ -63,6 +63,10 @@ enum ion_heap_type {
  * Id's are spaced by purpose to allow new Id's to be inserted in-between (for
  * possible fallbacks)
  */
+#define ION_FLAG_CACHED 1		/* mappings of this buffer should be
+					   cached, ion will do cache
+					   maintenance when the buffer is
+					   mapped for dma */
 
 enum ion_heap_ids {
 	INVALID_HEAP_ID = -1,
