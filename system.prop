@@ -153,3 +153,13 @@ debug.camera.landscape=true
 # RIL configs
 #
 ro.telephony.default_network=3
+ro.ril.hsxpa=1
+ro.ril.gprsclass=10
+ro.telephony.ril.v3=skippinpukcount,qcomdsds
+persist.radio.multisim.config=none
+
+#
+# WiFi
+#
+wifi.interface=wlan0
+

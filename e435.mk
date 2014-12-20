@@ -29,8 +29,6 @@ DEVICE_PACKAGE_OVERLAYS += device/lge/e435/overlay
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
-PRODUCT_LOCALES := pt_BR
-PRODUCT_LOCALES += ldpi
 PRODUCT_AAPT_CONFIG := normal mdpi ldpi
 PRODUCT_AAPT_PREF_CONFIG := ldpi
 
@@ -67,17 +65,6 @@ PRODUCT_PACKAGES += \
     hostapd.deny \
     hostapd_default.conf
 
-# Wlan
-PRODUCT_PACKAGES += \
-    WCN1314_qcom_wlan_nv.bin \
-    WCN1314_qcom_fw.bin \
-    WCN1314_cfg.dat \
-    WCN1314_qcom_cfg.ini
-
-# Wifi
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/wlan.ko:system/lib/modules/wlan.ko
-
 # Permission files
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
@@ -100,18 +87,13 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    audio.a2dp.default \
-    audio.primary.msm7x27a \
-    audio_policy.conf \
     audio_policy.msm7x27a \
-    audio.r_submix.default \
+    audio_policy.conf \
+    audio.primary.msm7x27a \
+    audio.a2dp.default \
     audio.usb.default \
-    libaudioparameter \
     libaudio-resampler \
-    libtinyalsa \
-    tinycap \
-    tinymix \
-    tinyplay
+    audio.r_submix.default
 
 # Video
 PRODUCT_PACKAGES += \
@@ -160,14 +142,20 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.msm7x27a
+    camera.msm7x27a \
+    libcamera \
+    libmmcamera_interface2
+    libmmjpeg_interface
 
-# Omx
+# OMX
 PRODUCT_PACKAGES += \
+    libstagefrighthw \
+    libdivxdrmdecrypt \
+    libOmxVdec \
+    libOmxVenc \
     libmm-omxcore \
     libOmxCore \
-    libstagefrighthw \
-    libdashplayer
+    libOmxAacEnc
 
 # off-mode charging
 PRODUCT_PACKAGES += \
