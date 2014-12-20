@@ -144,7 +144,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     camera.msm7x27a \
     libcamera \
-    libmmcamera_interface2
+    libmmcamera_interface2 \
     libmmjpeg_interface
 
 # OMX
