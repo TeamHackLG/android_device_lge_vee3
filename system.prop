@@ -163,3 +163,7 @@ persist.radio.multisim.config=none
 #
 wifi.interface=wlan0
 
+#
+# Brightness
+#
+ro.lge.lcd_auto_brightness_mode=false

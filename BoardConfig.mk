@@ -25,8 +25,8 @@ TARGET_SPECIFIC_HEADER_PATH := device/lge/e435/include
 # Compiler flags
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_ABI_HACK -DUSE_MDP3
 COMMON_GLOBAL_CFLAGS += -DLPA_DEFAULT_BUFFER_SIZE=480
-TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
+TARGET_GLOBAL_CFLAGS += -mtune=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=softfp
 
 TARGET_NO_RADIOIMAGE := true
 TARGET_NO_BOOTLOADER := true
@@ -48,7 +48,7 @@ ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 # Try to build the kernel
 
 TARGET_KERNEL_SOURCE := kernel/lge/p715
-TARGET_KERNEL_CONFIG := cyanogenmod_vee3ds_defconfig
+TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
 
 # Kernel commands
 BOARD_KERNEL_BASE := 0x00200000
@@ -82,6 +82,7 @@ BOARD_USES_QCOM_HARDWARE := true
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 # TARGET_USES_QCOM_BSP := true
+# COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP
 TARGET_ARCH_LOWMEM := true
 
 # FM
@@ -102,6 +103,7 @@ COMMON_GLOBAL_CFLAGS += -DQCOM_NO_SECURE_PLAYBACK
 TARGET_QCOM_AUDIO_VARIANT := caf
 TARGET_PROVIDES_LIBAUDIO := true
 BOARD_QCOM_VOIP_ENABLED := true
+BOARD_USES_ALSA_AUDIO:= true
 BOARD_USES_LEGACY_ALSA_AUDIO := true
 TARGET_HAS_QACT := true
 
@@ -156,9 +158,9 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
 BOARD_HOSTAPD_DRIVER             := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
 WIFI_EXT_MODULE_PATH             := "/system/lib/modules/librasdioif.ko"
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlan.ko"
 WIFI_EXT_MODULE_NAME             := "librasdioif"
+WIFI_DRIVER_MODULE_NAME          := "wlan"
 WIFI_DRIVER_FW_PATH_STA          := "sta"
 WIFI_DRIVER_FW_PATH_AP           := "ap"
 WIFI_DRIVER_FW_PATH_P2P          := "p2p"
-WIFI_DRIVER_FW_PATH_PARAM        := "/data/misc/wifi/fwpath"
-BOARD_LEGACY_NL80211_STA_EVENTS  := true
