@@ -16,7 +16,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),e435)
+ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),7x27)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 

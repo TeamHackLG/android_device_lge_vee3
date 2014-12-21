@@ -27,14 +27,14 @@ TARGET_SCREEN_HEIGHT := 320
 TARGET_SCREEN_WIDTH := 240
 
 # Inherit device configuration
-$(call inherit-product, device/lge/e435/e435.mk)
+$(call inherit-product, device/lge/vee3/vee3.mk)
 
 # Release name
 PRODUCT_RELEASE_NAME := OptimusL3II
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := e435
-PRODUCT_NAME := cm_e435
+PRODUCT_DEVICE := vee3
+PRODUCT_NAME := cm_vee3
 PRODUCT_BRAND := LGE
 PRODUCT_MODEL := VEE3
 PRODUCT_MANUFACTURER := LGE

@@ -15,12 +15,12 @@
 #
 
 # inherit from the proprietary version
--include vendor/lge/e435/BoardConfigVendor.mk
+-include vendor/lge/vee3/BoardConfigVendor.mk
 
 # inherit from the common proprietary version
 -include vendor/lge/msm7x27a-common//BoardConfigVendor.mk
 
-TARGET_SPECIFIC_HEADER_PATH := device/lge/e435/include
+TARGET_SPECIFIC_HEADER_PATH := device/lge/vee3/include
 
 # Compiler flags
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_ABI_HACK -DUSE_MDP3
@@ -68,7 +68,7 @@ BOARD_VOLD_MAX_PARTITIONS := 26
 # Recovery
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_FSTAB_VERSION := 2
-TARGET_RECOVERY_FSTAB := device/lge/e435/rootdir/etc/fstab.vee3
+TARGET_RECOVERY_FSTAB := device/lge/vee3/rootdir/etc/fstab.vee3
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := "<font_7x16.h>"
@@ -114,14 +114,14 @@ TARGET_USES_ION := true
 BOARD_ADRENO_DECIDE_TEXTURE_TARGET := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 TARGET_DISPLAY_USE_RETIRE_FENCE := true
-BOARD_EGL_CFG := device/lge/e435/egl.cfg
+BOARD_EGL_CFG := device/lge/vee3/egl.cfg
 TARGET_NO_INITLOGO := true
 BOARD_USE_MHEAP_SCREENSHOT := true
 HWUI_COMPILE_FOR_PERF := true
 
 # BT
 BOARD_HAVE_BLUETOOTH := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/e435/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/vee3/bluetooth
 
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
@@ -131,7 +131,7 @@ TARGET_PROVIDES_LIBLIGHT := true
 
 # SEPolicy
 BOARD_SEPOLICY_DIRS := \
-       device/lge/e435/sepolicy
+       device/lge/vee3/sepolicy
 
 BOARD_SEPOLICY_UNION := \
        device.te \
@@ -149,18 +149,16 @@ BOARD_UMS_LUNFILE := /sys/class/android_usb/android0/f_mass_storage/lun/file
 DEVICE_RESOLUTION := 240x320
 
 # Wlan
-BOARD_HAS_QCOM_WLAN              := true
-BOARD_HAS_QCOM_WLAN_SDK          := true
-BOARD_WLAN_DEVICE                := qcwcn
-WPA_SUPPLICANT_VERSION           := VER_0_8_X
-BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+BOARD_HAS_QCOM_WLAN := true
+BOARD_WLAN_DEVICE := qcwcn
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
-BOARD_HOSTAPD_DRIVER             := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_qcwcn
 WIFI_EXT_MODULE_PATH             := "/system/lib/modules/librasdioif.ko"
 WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlan.ko"
 WIFI_EXT_MODULE_NAME             := "librasdioif"
 WIFI_DRIVER_MODULE_NAME          := "wlan"
 WIFI_DRIVER_FW_PATH_STA          := "sta"
 WIFI_DRIVER_FW_PATH_AP           := "ap"
-WIFI_DRIVER_FW_PATH_P2P          := "p2p"

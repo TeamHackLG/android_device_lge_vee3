@@ -1,5 +1,5 @@
 #
-# system.prop for L3 II
+# system.prop for vee3
 #
 rild.libpath=/system/lib/libril-qc-1.so
 rild.libargs=-d /dev/smd0
