@@ -89,6 +89,9 @@ enum {
      */
     GRALLOC_USAGE_PRIVATE_ADSP_HEAP       =       0x0,
     GRALLOC_USAGE_PRIVATE_SMI_HEAP        =       0x0,
+
+    /* This flag is used for SECURE display usecase */
+    GRALLOC_USAGE_PRIVATE_SECURE_DISPLAY  =       0x00800000,
 };
 
 enum {
