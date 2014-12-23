@@ -68,6 +68,7 @@ on fs
     mkdir /persist 0771 system system
     mkdir /persist-lg 0771 system system
     mkdir /mpt 0771 system system
+    mkdir /cust 0771 system system
 
     wait /dev/block/platform/msm_sdcc.3/by-num/p15
     exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p15
@@ -81,9 +82,11 @@ on fs
     exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p23
     mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p23 /mpt nosuid nodev barrier=1
 
-on init
-    mkdir /cust 0771 system system
+    wait /dev/block/platform/msm_sdcc.3/by-num/p25
+    exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p25
+    mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p25 /cust nosuid nodev barrier=1
 
+on init
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
     mkdir /data/misc/bluetoothd 0770 bluetooth bluetooth
 
