@@ -115,6 +115,9 @@ on boot
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
 
+    chmod 0660 /dev/ttyHS2
+    chown bluetooth bluetooth /dev/ttyHS2
+
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
@@ -128,8 +131,9 @@ on boot
     # Allow QMUX daemon to assign port open wait time
     chown radio radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
 
-    #donghyub.cho 121129 BT a2dp frequency issue
-    setprop af.resampler.quality 255
+    setprop wifi.interface wlan0
+
+    setprop ro.telephony.call_ring.multiple false
 
     #Set SUID bit for usbhub
     chmod 4755 /system/bin/usbhub
@@ -147,6 +151,9 @@ on boot
     chown bluetooth bluetooth /dev/smd7
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
+
+    # create symlink for fb1 as HDMI
+    symlink /dev/graphics/fb1 /dev/graphics/hdmi
 
     # setup permissions for fb1 related nodes
     chown system graphics /sys/class/graphics/fb1/hpd
@@ -216,7 +223,7 @@ on post-fs
 # msm specific files that need to be created on /data
 on post-fs-data
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
-    mkdir /data/media 0770 media_rw media_rw
+    mkdir /data/media 0775 media_rw media_rw
     chown media_rw media_rw /data/media
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
@@ -321,10 +328,10 @@ on post-fs-data
 
 # Export GPIO56 for fusion targets to enable/disable hub
 service usbhub_init /system/bin/usbhub_init
-    class late_start
-    user root
-    disabled
-    oneshot
+   class late_start
+   user root
+   disabled
+   oneshot
 
 on property:init.svc.surfaceflinger=stopped
     stop ppd
@@ -341,11 +348,11 @@ service qcom-c_main-sh /system/bin/sh /init.qcom.class_main.sh
 
 on property:vold.decrypt=trigger_restart_framework
     start qcom-c_main-sh
+    start config_bluetooth
 
 service cnd /system/bin/cnd
     class late_start
     socket cnd stream 666 root radio
-    disabled
 
 service rmt_storage /system/bin/rmt_storage
     class core
@@ -569,6 +576,12 @@ service wifi-sdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh
 on property:sys.boot_completed=1
     start qcom-post-boot
 
+service atfwd /system/bin/ATFWD-daemon
+    class late_start
+    user system
+    group system radio
+    onrestart /system/bin/log -t RIL-ATFWD -p w "ATFWD daemon restarted"
+
 service hdmid /system/bin/hdmid
     class late_start
     socket hdmid stream 0660 root system graphics
@@ -745,6 +758,11 @@ service ril-daemon1 /system/bin/rild -c 1
     user root
     disabled
     group radio cache inet misc audio sdcard_rw qcom_oncrpc diag
+
+service ril-qmi /system/bin/sh /init.qcom.ril.path.sh
+    class main
+    user root
+    oneshot
 
 on property:bluetooth.hciattach=true
     start hciattach

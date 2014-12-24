@@ -40,12 +40,12 @@ PRODUCT_PACKAGES += \
     ueventd.vee3.rc \
     init.qcom.usb.sh \
     init.qcom.class_main.sh \
+    init.qcom.ril.path.sh \
     init.qcom.sh
 
 # Configs
 PRODUCT_PACKAGES += \
     7k_handset.kl \
-    7x27a_kp.kl \
     touch_mcs8000.kl \
     vee3_keypad.kl
 
@@ -125,8 +125,7 @@ PRODUCT_PACKAGES += \
     libqdMetaData
 
 # Light
-PRODUCT_PACKAGES += \
-    lights.msm7x27a
+PRODUCT_PACKAGES += lights.msm7x27a
 
 # FM Radio
 PRODUCT_PACKAGES += \
@@ -136,8 +135,7 @@ PRODUCT_PACKAGES += \
     qcom.fmradio
 
 # Power Hal
-PRODUCT_PACKAGES += \
-    power.msm7x27a
+PRODUCT_PACKAGES += power.msm7x27a
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -169,18 +167,14 @@ PRODUCT_PACKAGES += \
     setup_fs
 
 # Misc
-PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
+PRODUCT_PACKAGES += com.android.future.usb.accessory
 
 # Build.prop Properties
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += persist.sys.usb.config=mtp
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=/system/lib/libqc-opt.so
+PRODUCT_PROPERTY_OVERRIDES += ro.vendor.extension_library=/system/lib/libqc-opt.so
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=120
+PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=120
 
 # Voice processing
 PRODUCT_PACKAGES += libqcomvoiceprocessing
@@ -189,8 +183,8 @@ PRODUCT_PACKAGES += libQWiFiSoftApCfg
 
 # For userdebug builds
 ADDITIONAL_DEFAULT_PROPERTIES += \
-	ro.secure=0 \
-	ro.adb.secure=0
+    ro.secure=0 \
+    ro.adb.secure=0
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_NAME := full_vee3

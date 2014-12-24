@@ -1,4 +1,5 @@
-# Copyright (c) 2011, Code Aurora Forum. All rights reserved.
+#!/system/bin/sh
+# Copyright (c) 2012 Code Aurora Forum. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -24,6 +25,39 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-key 226   HEADSETHOOK       WAKE
-key 116   POWER             WAKE
-key 107   POWER             WAKE
+
+#
+# set rild-libpath using modem build_id
+#
+PATH=/sbin:/system/sbin:/system/bin:/system/xbin
+export PATH
+buildid=`cat /sys/devices/system/soc/soc0/build_id`
+offset_1=0
+offset_2=5
+offset_3=4
+length=1
+is_strider=8
+is_qmi_enabled=1
+is_unicorn=7
+is_unicorn_strider='S'
+dsds=`getprop persist.multisim.config`
+modemid_1=${buildid:$offset_1:$length}
+modemid_2=${buildid:$offset_2:$length}
+modemid_3=${buildid:$offset_3:$length}
+if ([ "$modemid_1" = "$is_strider" ] && [ "$modemid_2" -gt "$is_qmi_enabled" ]) ||
+       ([ "$modemid_1" = "$is_unicorn" ] && [ "$modemid_3" = "$is_unicorn_strider" ]); then
+    setprop rild.libpath "/system/lib/libril-qc-qmi-1.so"
+    if [ "$dsds" = "dsds" ]; then
+        setprop ro.multi.rild true
+        stop ril-daemon
+        start ril-daemon
+        start ril-daemon1
+    else
+        stop ril-daemon
+        start ril-daemon
+    fi
+fi
+
+echo $modemid_1
+echo $modemid_2
+echo $modemid_3
