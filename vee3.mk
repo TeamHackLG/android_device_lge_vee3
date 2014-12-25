@@ -137,6 +137,9 @@ PRODUCT_PACKAGES += \
 # Power Hal
 PRODUCT_PACKAGES += power.msm7x27a
 
+# BT
+PRODUCT_PACKAGES += libbt-vendor
+
 # Camera
 PRODUCT_PACKAGES += \
     camera.msm7x27a \

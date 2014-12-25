@@ -54,9 +54,6 @@ enum {
      * cannot be used with noncontiguous heaps */
     GRALLOC_USAGE_PRIVATE_UNCACHED        =       0x02000000,
 
-    /* Buffer content should be displayed on an primary display only */
-    GRALLOC_USAGE_PRIVATE_INTERNAL_ONLY   =       0x04000000,
-
     /* This flag can be set to disable genlock synchronization
      * for the gralloc buffer. If this flag is set the caller
      * is required to perform explicit synchronization.
@@ -89,9 +86,6 @@ enum {
      */
     GRALLOC_USAGE_PRIVATE_ADSP_HEAP       =       0x0,
     GRALLOC_USAGE_PRIVATE_SMI_HEAP        =       0x0,
-
-    /* This flag is used for SECURE display usecase */
-    GRALLOC_USAGE_PRIVATE_SECURE_DISPLAY  =       0x00800000,
 };
 
 enum {
@@ -277,4 +271,3 @@ struct private_handle_t : public native_handle {
     };
 
 #endif /* GRALLOC_PRIV_H_ */
-
