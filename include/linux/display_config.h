@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
- * Copyright (c) 2011-2012, Code Aurora Forum. All rights reserved.
+ * Copyright (c) 2011-2013, The Linux Foundation. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,20 +47,15 @@ enum {
     GRALLOC_USAGE_PRIVATE_IOMMU_HEAP      =       GRALLOC_USAGE_PRIVATE_2,
     /* MM heap is a carveout heap for video, can be secured*/
     GRALLOC_USAGE_PRIVATE_MM_HEAP         =       GRALLOC_USAGE_PRIVATE_3,
-    /* CAMERA heap is a carveout heap for camera, is not secured*/
-    GRALLOC_USAGE_PRIVATE_CAMERA_HEAP     =       0x01000000,
+    /* ADSP heap is a carveout heap, is not secured*/
+    GRALLOC_USAGE_PRIVATE_ADSP_HEAP       =       0x01000000,
 
     /* Set this for allocating uncached memory (using O_DSYNC)
      * cannot be used with noncontiguous heaps */
     GRALLOC_USAGE_PRIVATE_UNCACHED        =       0x02000000,
 
-    /* This flag can be set to disable genlock synchronization
-     * for the gralloc buffer. If this flag is set the caller
-     * is required to perform explicit synchronization.
-     * WARNING - flag is outside the standard PRIVATE region
-     * and may need to be moved if the gralloc API changes
-     */
-    GRALLOC_USAGE_PRIVATE_UNSYNCHRONIZED  =       0X04000000,
+    /* Buffer content should be displayed on an primary display only */
+    GRALLOC_USAGE_PRIVATE_INTERNAL_ONLY   =       0x04000000,
 
     /* Buffer content should be displayed on an external display only */
     GRALLOC_USAGE_PRIVATE_EXTERNAL_ONLY   =       0x08000000,
@@ -73,37 +68,34 @@ enum {
     /* Close Caption displayed on an external display only */
     GRALLOC_USAGE_PRIVATE_EXTERNAL_CC     =       0x00200000,
 
-    /* Use this flag to request content protected buffers. Please note
-     * that this flag is different from the GRALLOC_USAGE_PROTECTED flag
-     * which can be used for buffers that are not secured for DRM
-     * but still need to be protected from screen captures
-     */
-    GRALLOC_USAGE_PRIVATE_CP_BUFFER       =       0x00400000,
+    /* CAMERA heap is a carveout heap for camera, is not secured*/
+    GRALLOC_USAGE_PRIVATE_CAMERA_HEAP     =       0x00400000,
 
-    /* Legacy heaps - these heaps are no-ops so we are making them zero
-     * The flags need to be around to compile certain HALs which have
-     * not cleaned up the code
-     */
-    GRALLOC_USAGE_PRIVATE_ADSP_HEAP       =       0x0,
-    GRALLOC_USAGE_PRIVATE_SMI_HEAP        =       0x0,
+    /* This flag is used for SECURE display usecase */
+    GRALLOC_USAGE_PRIVATE_SECURE_DISPLAY  =       0x00800000,
 };
 
 enum {
     /* Gralloc perform enums
     */
-    GRALLOC_MODULE_PERFORM_CREATE_HANDLE_FROM_BUFFER = 0x080000001,
+    GRALLOC_MODULE_PERFORM_CREATE_HANDLE_FROM_BUFFER = 1,
+    GRALLOC_MODULE_PERFORM_GET_STRIDE,
+    GRALLOC_MODULE_PERFORM_GET_CUSTOM_STRIDE_FROM_HANDLE,
 };
 
 #define GRALLOC_HEAP_MASK   (GRALLOC_USAGE_PRIVATE_UI_CONTIG_HEAP |\
                              GRALLOC_USAGE_PRIVATE_SYSTEM_HEAP    |\
                              GRALLOC_USAGE_PRIVATE_IOMMU_HEAP     |\
                              GRALLOC_USAGE_PRIVATE_MM_HEAP        |\
-                             GRALLOC_USAGE_PRIVATE_CAMERA_HEAP)
+                             GRALLOC_USAGE_PRIVATE_ADSP_HEAP)
 
+#define INTERLACE_MASK 0x80
+#define S3D_FORMAT_MASK 0xFF000
 /*****************************************************************************/
 enum {
     /* OEM specific HAL formats */
     HAL_PIXEL_FORMAT_NV12_ENCODEABLE        = 0x102,
+    HAL_PIXEL_FORMAT_YCbCr_420_SP_VENUS     = 0x7FA30C04,
     HAL_PIXEL_FORMAT_YCbCr_420_SP_TILED     = 0x7FA30C03,
     HAL_PIXEL_FORMAT_YCbCr_420_SP           = 0x109,
     HAL_PIXEL_FORMAT_YCrCb_420_SP_ADRENO    = 0x7FA30C01,
@@ -112,6 +104,8 @@ enum {
     HAL_PIXEL_FORMAT_RG_88                  = 0x10E,
     HAL_PIXEL_FORMAT_YCbCr_444_SP           = 0x10F,
     HAL_PIXEL_FORMAT_YCrCb_444_SP           = 0x110,
+    HAL_PIXEL_FORMAT_YCrCb_422_I            = 0x111,
+    HAL_PIXEL_FORMAT_NV21_ZSL               = 0x112,
     HAL_PIXEL_FORMAT_INTERLACE              = 0x180,
 
 };
@@ -135,21 +129,6 @@ enum {
 };
 
 /*****************************************************************************/
-
-typedef struct {
-    int32_t hue;
-    float   saturation;
-    int32_t intensity;
-    float   contrast;
-} HSICData_t;
-
-typedef struct {
-    int32_t operation;
-    int32_t interlaced;
-    HSICData_t hsicData;
-    int32_t sharpness;
-    int32_t video_interface;
-} MetaData_t;
 
 #ifdef __cplusplus
 struct private_handle_t : public native_handle {
@@ -180,44 +159,83 @@ struct private_handle_t : public native_handle {
             PRIV_FLAGS_EXTERNAL_BLOCK     = 0x00004000,
             // Display this buffer on external as close caption
             PRIV_FLAGS_EXTERNAL_CC        = 0x00008000,
+            PRIV_FLAGS_VIDEO_ENCODER      = 0x00010000,
+            PRIV_FLAGS_CAMERA_WRITE       = 0x00020000,
+            PRIV_FLAGS_CAMERA_READ        = 0x00040000,
+            PRIV_FLAGS_HW_COMPOSER        = 0x00080000,
+            PRIV_FLAGS_HW_TEXTURE         = 0x00100000,
+            PRIV_FLAGS_ITU_R_601          = 0x00200000,
+            PRIV_FLAGS_ITU_R_601_FR       = 0x00400000,
+            PRIV_FLAGS_ITU_R_709          = 0x00800000,
+            PRIV_FLAGS_SECURE_DISPLAY     = 0x01000000,
         };
 
         // file-descriptors
         int     fd;
-        // genlock handle to be dup'd by the binder
+#ifdef QCOM_BSP_ABI_HACK
         int     genlockHandle;
+#endif
         int     fd_metadata;          // fd for the meta-data
         // ints
         int     magic;
         int     flags;
+#ifdef QCOM_BSP_CAMERA_ABI_HACK
+        int     bufferType;
+#endif
         int     size;
         int     offset;
+#ifndef QCOM_BSP_CAMERA_ABI_HACK
         int     bufferType;
+#endif
         int     base;
         int     offset_metadata;
         // The gpu address mapped into the mmu.
-        // If using ashmem, set to 0, they don't care
         int     gpuaddr;
+#ifdef QCOM_BSP_ABI_HACK
         int     pid;
+#endif
         int     format;
         int     width;
         int     height;
-        // local fd of the genlock device.
+#ifdef QCOM_BSP_ABI_HACK
         int     genlockPrivFd;
+#endif
         int     base_metadata;
 
 #ifdef __cplusplus
+#ifdef QCOM_BSP_ABI_HACK
         static const int sNumInts = 14;
         static const int sNumFds = 3;
+#else
+        static const int sNumInts = 12;
+        static const int sNumFds = 2;
+#endif
         static const int sMagic = 'gmsm';
 
         private_handle_t(int fd, int size, int flags, int bufferType,
                          int format,int width, int height, int eFd = -1,
                          int eOffset = 0, int eBase = 0) :
-            fd(fd), genlockHandle(-1), fd_metadata(eFd), magic(sMagic),
-            flags(flags), size(size), offset(0), bufferType(bufferType),
-            base(0), offset_metadata(eOffset), gpuaddr(0), pid(getpid()),
-            format(format), width(width), height(height), genlockPrivFd(-1),
+            fd(fd),
+#ifdef QCOM_BSP_ABI_HACK
+            genlockHandle(0),
+#endif
+            fd_metadata(eFd), magic(sMagic),
+            flags(flags),
+#ifdef QCOM_BSP_CAMERA_ABI_HACK
+            bufferType(bufferType),
+#endif
+            size(size), offset(0),
+#ifndef QCOM_BSP_CAMERA_ABI_HACK
+            bufferType(bufferType),
+#endif
+            base(0), offset_metadata(eOffset), gpuaddr(0),
+#ifdef QCOM_BSP_ABI_HACK
+            pid(getpid()),
+#endif
+            format(format), width(width), height(height),
+#ifdef QCOM_BSP_ABI_HACK
+            genlockPrivFd(0),
+#endif
             base_metadata(eBase)
         {
             version = sizeof(native_handle);
