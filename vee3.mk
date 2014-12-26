@@ -29,7 +29,7 @@ DEVICE_PACKAGE_OVERLAYS += device/lge/vee3/overlay
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
-PRODUCT_AAPT_CONFIG := normal mdpi ldpi
+PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
 PRODUCT_AAPT_PREF_CONFIG := ldpi
 
 # Rootdir
