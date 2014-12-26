@@ -125,7 +125,8 @@ PRODUCT_PACKAGES += \
     libqdMetaData
 
 # Light
-PRODUCT_PACKAGES += lights.msm7x27a
+PRODUCT_PACKAGES += \
+    lights.msm7x27a
 
 # FM Radio
 PRODUCT_PACKAGES += \
@@ -135,10 +136,12 @@ PRODUCT_PACKAGES += \
     qcom.fmradio
 
 # Power Hal
-PRODUCT_PACKAGES += power.msm7x27a
+PRODUCT_PACKAGES += \
+    power.msm7x27a
 
 # BT
-PRODUCT_PACKAGES += libbt-vendor
+PRODUCT_PACKAGES += \
+    libbt-vendor
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -170,19 +173,23 @@ PRODUCT_PACKAGES += \
     setup_fs
 
 # Misc
-PRODUCT_PACKAGES += com.android.future.usb.accessory
-
-# Build.prop Properties
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += persist.sys.usb.config=mtp
-
-PRODUCT_PROPERTY_OVERRIDES += ro.vendor.extension_library=/system/lib/libqc-opt.so
-
-PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density=120
+PRODUCT_PACKAGES += \
+    com.android.future.usb.accessory
 
 # Voice processing
-PRODUCT_PACKAGES += libqcomvoiceprocessing
+PRODUCT_PACKAGES += \
+    libqcomvoiceprocessing
 
-PRODUCT_PACKAGES += libQWiFiSoftApCfg
+PRODUCT_PACKAGES += \
+    libQWiFiSoftApCfg
+
+# Build.prop Properties
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=mtp
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.extension_library=/system/lib/libqc-opt.so \
+    ro.sf.lcd_density=120
 
 # For userdebug builds
 ADDITIONAL_DEFAULT_PROPERTIES += \
