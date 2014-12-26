@@ -25,8 +25,8 @@ TARGET_SPECIFIC_HEADER_PATH := device/lge/vee3/include
 # Compiler flags
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_ABI_HACK -DUSE_MDP3
 COMMON_GLOBAL_CFLAGS += -DLPA_DEFAULT_BUFFER_SIZE=480
-TARGET_GLOBAL_CFLAGS += -mtune=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a5 -mfpu=neon-vfpv4 -mfloat-abi=softfp
+TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 
 TARGET_NO_RADIOIMAGE := true
 TARGET_NO_BOOTLOADER := true
@@ -88,6 +88,7 @@ BOARD_HAVE_QCOM_FM := true
 COMMON_GLOBAL_CFLAGS += -DQCOM_FM_ENABLED
 
 # GPS
+QCOM_GPS_PATH := hardware/qcom/gps
 BOARD_USES_QCOM_LIBRPC := true
 BOARD_USES_QCOM_GPS := true
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
@@ -122,7 +123,8 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/vee3/bluetooth
 
 # Camera
-USE_DEVICE_SPECIFIC_CAMERA := true
+USE_CAMERA_STUB := true
+COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_WITH_GENLOCK -DNEEDS_VECTORIMPL_SYMBOLS
 
 # Light
 TARGET_PROVIDES_LIBLIGHT := true
@@ -140,7 +142,7 @@ BOARD_SEPOLICY_UNION := \
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 
-## Mass Storage
+# Mass Storage
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun/file
 BOARD_UMS_LUNFILE := /sys/class/android_usb/android0/f_mass_storage/lun/file
 

@@ -63,10 +63,6 @@ enum ion_heap_type {
  * Id's are spaced by purpose to allow new Id's to be inserted in-between (for
  * possible fallbacks)
  */
-#define ION_FLAG_CACHED 1		/* mappings of this buffer should be
-					   cached, ion will do cache
-					   maintenance when the buffer is
-					   mapped for dma */
 
 enum ion_heap_ids {
 	INVALID_HEAP_ID = -1,
@@ -74,7 +70,6 @@ enum ion_heap_ids {
 	ION_CP_MFC_HEAP_ID = 12,
 	ION_CP_WB_HEAP_ID = 16, /* 8660 only */
 	ION_CAMERA_HEAP_ID = 20, /* 8660 only */
-	ION_SYSTEM_CONTIG_HEAP_ID = 21,
 	ION_SF_HEAP_ID = 24,
 	ION_IOMMU_HEAP_ID = 25,
 	ION_QSECOM_HEAP_ID = 26,
