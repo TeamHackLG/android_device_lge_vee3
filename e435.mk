@@ -88,16 +88,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.primary.msm7x27a \
-    audio_policy.conf \
-    audio_policy.msm7x27a \
-    audio.r_submix.default \
     audio.usb.default \
-    libaudioparameter \
-    libaudio-resampler \
-    libtinyalsa \
-    tinycap \
-    tinymix \
-    tinyplay
+    audio_policy.msm7x27a \
+    libaudioutils
 
 # Video
 PRODUCT_PACKAGES += \
