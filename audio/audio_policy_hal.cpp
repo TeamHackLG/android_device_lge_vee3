@@ -1,7 +1,6 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
- * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
- * Not a Contribution.
+ * Copyright (c) 2012, Code Aurora Forum. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +15,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "qcom_audio_policy_hal"
+#define LOG_TAG "audio_policy.msm7x27a"
 //#define LOG_NDEBUG 0
 
 #include <stdint.h>
@@ -92,6 +91,7 @@ static void ap_set_phone_state(struct audio_policy *pol, audio_mode_t state)
     qap->apm->setPhoneState((int) state);
 }
 
+    /* indicate a change in ringer mode */
     /* force using a specific device category for the specified usage */
 static void ap_set_force_use(struct audio_policy *pol,
                           audio_policy_force_use_t usage,
@@ -127,21 +127,20 @@ static int ap_init_check(const struct audio_policy *pol)
     return qap->apm->initCheck();
 }
 
-
 static audio_io_handle_t ap_get_output(struct audio_policy *pol,
                                        audio_stream_type_t stream,
                                        uint32_t sampling_rate,
                                        audio_format_t format,
-                                       uint32_t channels,
+                                       audio_channel_mask_t channelMask,
                                        audio_output_flags_t flags,
-                                       const audio_offload_info_t *offloadInfo)
+                                       const audio_offload_info_t *info)
 {
     struct qcom_audio_policy *qap = to_qap(pol);
 
     ALOGV("%s: tid %d", __func__, gettid());
     return qap->apm->getOutput((AudioSystem::stream_type)stream,
-                               sampling_rate, format, channels,
-                               (AudioSystem::output_flags)flags);
+                               sampling_rate,(int)  format, channelMask,
+                               (AudioSystem::output_flags)flags, info);
 }
 
 static int ap_start_output(struct audio_policy *pol, audio_io_handle_t output,
@@ -170,11 +169,11 @@ static void ap_release_output(struct audio_policy *pol,
 static audio_io_handle_t ap_get_input(struct audio_policy *pol, audio_source_t inputSource,
                                       uint32_t sampling_rate,
                                       audio_format_t format,
-                                      uint32_t channels,
+                                      audio_channel_mask_t channelMask,
                                       audio_in_acoustics_t acoustics)
 {
     struct qcom_audio_policy *qap = to_qap(pol);
-    return qap->apm->getInput((int) inputSource, sampling_rate, format, channels,
+    return qap->apm->getInput((int) inputSource, sampling_rate,(int) format, channelMask,
                               (AudioSystem::audio_in_acoustics)acoustics);
 }
 
@@ -262,7 +261,7 @@ static audio_devices_t ap_get_devices_for_stream(const struct audio_policy *pol,
 }
 
 static audio_io_handle_t ap_get_output_for_effect(struct audio_policy *pol,
-                                            const struct effect_descriptor_s *desc)
+                                           const struct effect_descriptor_s *desc)
 {
     struct qcom_audio_policy *qap = to_qap(pol);
     return qap->apm->getOutputForEffect(desc);
@@ -296,14 +295,14 @@ static bool ap_is_stream_active(const struct audio_policy *pol,
                                 uint32_t in_past_ms)
 {
     const struct qcom_audio_policy *qap = to_cqap(pol);
-    return qap->apm->isStreamActive(stream, in_past_ms);
+    return qap->apm->isStreamActive((int) stream, in_past_ms);
 }
 
 static bool ap_is_stream_active_remotely(const struct audio_policy *pol, audio_stream_type_t stream,
                                 uint32_t in_past_ms)
 {
     const struct qcom_audio_policy *qap = to_cqap(pol);
-    return qap->apm->isStreamActiveRemotely(stream, in_past_ms);
+    return qap->apm->isStreamActiveRemotely((int) stream, in_past_ms);
 }
 
 static bool ap_is_source_active(const struct audio_policy *pol, audio_source_t source)
@@ -458,7 +457,7 @@ struct qcom_ap_module HAL_MODULE_INFO_SYM = {
             version_minor: 0,
             id: AUDIO_POLICY_HARDWARE_MODULE_ID,
             name: "QCOM Audio Policy HAL",
-            author: "The Linux Foundation",
+            author: "Code Aurora Forum",
             methods: &qcom_ap_module_methods,
             dso : NULL,
             reserved : {0},

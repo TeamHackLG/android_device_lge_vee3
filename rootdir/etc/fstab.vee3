@@ -11,6 +11,3 @@
 
 # External-SD
 /devices/platform/msm_sdcc.1/mmc_host	auto	vfat	defaults	wait,voldmanaged=sdcard1:auto
-
-# zRAM
-/dev/block/zram0	none	swap	defaults	zramsize=67108864

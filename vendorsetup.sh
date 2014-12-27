@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-add_lunch_combo cm_vee3-userdebug
-add_lunch_combo cm_vee3-eng
+add_lunch_combo cm_e435-userdebug
+add_lunch_combo cm_e435-eng
 
-sh device/lge/vee3/patches/apply.sh
+sh device/lge/e435/patches/apply.sh

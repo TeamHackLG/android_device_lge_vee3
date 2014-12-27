@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-LOCAL_PATH := device/lge/vee3
+LOCAL_PATH := device/lge/e435
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
@@ -25,7 +25,7 @@ $(call inherit-product-if-exists, vendor/lge/vee3/vee3-vendor.mk)
 
 $(call inherit-product-if-exists, vendor/lge/msm7x27a-common/msm7x27a-common-vendor.mk)
 
-DEVICE_PACKAGE_OVERLAYS += device/lge/vee3/overlay
+DEVICE_PACKAGE_OVERLAYS += device/lge/e435/overlay
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
@@ -86,13 +86,18 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    audio_policy.msm7x27a \
-    audio_policy.conf \
-    audio.primary.msm7x27a \
     audio.a2dp.default \
+    audio.primary.msm7x27a \
+    audio_policy.conf \
+    audio_policy.msm7x27a \
+    audio.r_submix.default \
     audio.usb.default \
+    libaudioparameter \
     libaudio-resampler \
-    audio.r_submix.default
+    libtinyalsa \
+    tinycap \
+    tinymix \
+    tinyplay
 
 # Video
 PRODUCT_PACKAGES += \
@@ -139,26 +144,16 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     power.msm7x27a
 
-# BT
-PRODUCT_PACKAGES += \
-    libbt-vendor
-
 # Camera
 PRODUCT_PACKAGES += \
-    camera.msm7x27a \
-    libcamera \
-    libmmcamera_interface2 \
-    libmmjpeg_interface
+    camera.msm7x27a
 
-# OMX
+# Omx
 PRODUCT_PACKAGES += \
-    libstagefrighthw \
-    libdivxdrmdecrypt \
-    libOmxVdec \
-    libOmxVenc \
     libmm-omxcore \
     libOmxCore \
-    libOmxAacEnc
+    libstagefrighthw \
+    libdashplayer
 
 # off-mode charging
 PRODUCT_PACKAGES += \
@@ -197,5 +192,5 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.adb.secure=0
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
-PRODUCT_NAME := full_vee3
-PRODUCT_DEVICE := vee3
+PRODUCT_NAME := full_e435
+PRODUCT_DEVICE := e435

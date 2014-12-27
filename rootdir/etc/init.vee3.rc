@@ -62,7 +62,6 @@ on init
 
 on fs
     mount_all fstab.vee3
-    swapon_all fstab.vee3
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -115,9 +114,6 @@ on boot
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
 
-    chmod 0660 /dev/ttyHS2
-    chown bluetooth bluetooth /dev/ttyHS2
-
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
@@ -147,8 +143,8 @@ on boot
     chown system system /dev/smd0
 
     #BT DUN port-bridge
-    chmod 0660 /dev/smd7
-    chown bluetooth bluetooth /dev/smd7
+#    chmod 0660 /dev/smd7
+#    chown bluetooth bluetooth /dev/smd7
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
@@ -314,14 +310,14 @@ on post-fs-data
 
     setprop vold.post_fs_data_done 1
 
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/led_pattern
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/led_blink
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/R/brightness
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/G/brightness
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/B/brightness
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/R/led_current
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/G/led_current
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/B/led_current
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/led_pattern
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/led_blink
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/R/brightness
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/G/brightness
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/B/brightness
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/R/led_current
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/G/led_current
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/B/led_current
 
     chmod 660 /sys/class/input/input2/tap_enable
     chown system system /sys/class/input/input2/tap_enable
@@ -353,6 +349,7 @@ on property:vold.decrypt=trigger_restart_framework
 service cnd /system/bin/cnd
     class late_start
     socket cnd stream 666 root radio
+    disabled
 
 service rmt_storage /system/bin/rmt_storage
     class core
@@ -479,14 +476,6 @@ service wiperiface /system/bin/wiperiface
     group gps system net_raw
     oneshot
 
-service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard0 /storage/sdcard0
-    class late_start
-    disabled
-
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
-    class late_start
-    disabled
-
 service gpsone_daemon /system/bin/gpsone_daemon
     class late_start
     user gps
@@ -575,12 +564,6 @@ service wifi-sdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh
 
 on property:sys.boot_completed=1
     start qcom-post-boot
-
-service atfwd /system/bin/ATFWD-daemon
-    class late_start
-    user system
-    group system radio
-    onrestart /system/bin/log -t RIL-ATFWD -p w "ATFWD daemon restarted"
 
 service hdmid /system/bin/hdmid
     class late_start
@@ -713,9 +696,6 @@ service hcidump /system/bin/sh /system/etc/hcidump.sh
 service charger /charger
     class charger
 
-on charger
-    class_start charger
-
 # Restart adbd so it can run as root
 on property:service.adb.root=1
     write /sys/class/android_usb/android0/enable 0
@@ -727,16 +707,19 @@ service sensord /system/bin/sensord
     oneshot
 
 service sdread /system/bin/sh /system/etc/improve_sd_read_performance.sh
-    class late_start
-    user root
-    group system
-    disabled
+   class late_start
+   user root
+   group system
+   disabled
 
 on property:vold.sdcard_mount=1
-    start sdread
+   start sdread
 
 on property:vold.sdcard_mount=0
-    stop sdread
+   stop sdread
+
+service ftm_ptt /system/bin/ftm_ptt -d
+    class late_start
 
 # RIL permissions fix
 # by Weritos
@@ -764,8 +747,8 @@ service ril-qmi /system/bin/sh /init.qcom.ril.path.sh
     user root
     oneshot
 
-on property:bluetooth.hciattach=true
-    start hciattach
+on property:hw.ftm_ptt_start=1
+    start ftm_ptt
 
-on property:bluetooth.hciattach=false
-    setprop bluetooth.status off
+on property:hw.ftm_ptt_start=0
+    stop ftm_ptt

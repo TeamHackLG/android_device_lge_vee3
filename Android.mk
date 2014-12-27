@@ -13,6 +13,6 @@
 # limitations under the License.
 
 LOCAL_PATH := $(call my-dir)
-ifeq ($(TARGET_DEVICE),vee3)
+ifeq ($(TARGET_DEVICE),e435)
 include $(call all-makefiles-under,$(LOCAL_PATH))
 endif
