@@ -14,13 +14,15 @@
 # limitations under the License.
 #
 
+LOCAL_PATH := device/lge/e435
+
 # inherit from the proprietary version
 -include vendor/lge/vee3/BoardConfigVendor.mk
 
 # inherit from the common proprietary version
 -include vendor/lge/msm7x27a-common//BoardConfigVendor.mk
 
-TARGET_SPECIFIC_HEADER_PATH := device/lge/e435/include
+TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 # Compiler flags
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_ABI_HACK -DUSE_MDP3
@@ -68,7 +70,7 @@ BOARD_VOLD_MAX_PARTITIONS := 26
 # Recovery
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_FSTAB_VERSION := 2
-TARGET_RECOVERY_FSTAB := device/lge/e435/rootdir/etc/fstab.vee3
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.vee3
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := "<font_7x16.h>"
@@ -85,6 +87,7 @@ TARGET_ARCH_LOWMEM := true
 
 # FM
 BOARD_HAVE_QCOM_FM := true
+COMMON_GLOBAL_CFLAGS += -DQCOM_FM_ENABLED
 
 # GPS
 BOARD_USES_QCOM_LIBRPC := true
@@ -94,6 +97,7 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
 
 # Media
 TARGET_QCOM_MEDIA_VARIANT := caf
+COMMON_GLOBAL_CFLAGS += -DQCOM_NO_SECURE_PLAYBACK
 
 # Audio
 TARGET_QCOM_AUDIO_VARIANT := caf
@@ -117,14 +121,17 @@ HWUI_COMPILE_FOR_PERF := true
 
 # BT
 BOARD_HAVE_BLUETOOTH := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/e435/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
+
+# Camera
+USE_CAMERA_STUB := true
 
 # Light
 TARGET_PROVIDES_LIBLIGHT := true
 
 # SEPolicy
 BOARD_SEPOLICY_DIRS := \
-       device/lge/e435/sepolicy
+       $(LOCAL_PATH)/sepolicy
 
 BOARD_SEPOLICY_UNION := \
        device.te \
@@ -146,12 +153,14 @@ BOARD_HAS_QCOM_WLAN := true
 BOARD_WLAN_DEVICE := qcwcn
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 BOARD_HOSTAPD_DRIVER := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_qcwcn
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 WIFI_EXT_MODULE_PATH := "/system/lib/modules/librasdioif.ko"
 WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
 WIFI_EXT_MODULE_NAME := "librasdioif"
 WIFI_DRIVER_MODULE_NAME := "wlan"
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WIFI_DRIVER_FW_PATH_AP := "ap"
+WIFI_DRIVER_FW_PATH_P2P := "p2p"
+WIFI_DRIVER_FW_PATH_PARAM := "/data/misc/wifi/fwpath"

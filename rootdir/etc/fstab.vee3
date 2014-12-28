@@ -11,3 +11,6 @@
 
 # External-SD
 /devices/platform/msm_sdcc.1/mmc_host	auto	vfat	defaults	wait,voldmanaged=sdcard1:auto
+
+# SD-Ext
+/dev/block/mmcblk1p2	/sd-ext	auto	defaults	defaults

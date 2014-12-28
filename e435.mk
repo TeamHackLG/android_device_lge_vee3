@@ -57,7 +57,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/etc/p2p_supplicant.conf:system/etc/p2p_supplicant.conf \
     $(LOCAL_PATH)/configs/etc/p2p_supplicant_overlay.conf:system/etc/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/configs/etc/wpa_supplicant.conf:system/etc/wpa_supplicant.conf \
-    $(LOCAL_PATH)/configs/etc/wpa_supplicant_overlay.conf:system/etc/wpa_supplicant_overlay.conf \
+    $(LOCAL_PATH)/configs/etc/wpa_supplicant_overlay.conf:system/etc/wpa_supplicant_overlay.conf
 
 # SoftAP files
 PRODUCT_PACKAGES += \
@@ -84,62 +84,19 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
 
-# Audio
+# Display HALS
 PRODUCT_PACKAGES += \
-    audio.a2dp.default \
-    audio.primary.msm7x27a \
-    audio.usb.default \
-    audio_policy.msm7x27a \
-    libaudioutils
-
-# Video
-PRODUCT_PACKAGES += \
-    libI420colorconvert \
-    libstagefrighthw \
-    libmm-omxcore \
-    libOmxCore
-
-# GPS
-PRODUCT_PACKAGES += \
-    gps.msm7x27a \
-    gps.default \
-    libgps.utils \
-    libloc_adapter \
-    libloc_eng \
-    libloc_api-rpc-qc
-
-# Display
-PRODUCT_PACKAGES += \
-    copybit.msm7x27a \
-    gralloc.msm7x27a \
-    hwcomposer.msm7x27a \
-    memtrack.msm7x27a \
-    libc2dcolorconvert \
-    liboverlay \
-    libmemalloc \
-    libtilerenderer \
     libgenlock \
-    libqdutils \
-    libqdMetaData
+    gralloc.msm7x27a \
+    copybit.msm7x27a \
+    libqdMetaData \
+    memtrack.msm7x27a \
+    hwcomposer.msm7x27a
 
-# Light
+# Off-mode Charging
 PRODUCT_PACKAGES += \
-    lights.msm7x27a
-
-# FM Radio
-PRODUCT_PACKAGES += \
-    FM2 \
-    FMRecord \
-    libqcomfm_jni \
-    qcom.fmradio
-
-# Power Hal
-PRODUCT_PACKAGES += \
-    power.msm7x27a
-
-# Camera
-PRODUCT_PACKAGES += \
-    camera.msm7x27a
+    charger \
+    charger_res_images
 
 # Omx
 PRODUCT_PACKAGES += \
@@ -148,36 +105,73 @@ PRODUCT_PACKAGES += \
     libstagefrighthw \
     libdashplayer
 
-# off-mode charging
+# Gps hal
 PRODUCT_PACKAGES += \
-    charger \
-    charger_res_images
+    gps.msm7x27a
+
+# Power Hal
+PRODUCT_PACKAGES += \
+    power.msm7x27a
+
+# Camera Hal
+PRODUCT_PACKAGES += \
+    camera.msm7x27a
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
     make_ext4fs \
     e2fsck \
-    resize2fs \
     setup_fs
+
+# FM Radio
+PRODUCT_PACKAGES += \
+    FM2 \
+    FMRecord \
+    libqcomfm_jni \
+    qcom.fmradio
 
 # Misc
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
-# Voice processing
+# Audio
 PRODUCT_PACKAGES += \
-    libqcomvoiceprocessing
+    libaudioutils \
+    audio.a2dp.default \
+    audio.usb.default \
+    audio.primary.msm7x27a \
+    audio_policy.msm7x27a \
+    libaudio-resampler
 
+# Light HAL
 PRODUCT_PACKAGES += \
-    libQWiFiSoftApCfg
+    lights.msm7x27a
+
+# Misc
+PRODUCT_PACKAGES += \
+    com.android.future.usb.accessory
 
 # Build.prop Properties
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
+# Qcom properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.hwc.mdpcomp.enable=false \
+    debug.mdpcomp.logs=0 \
+    com.qc.hardware=true \
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    audio.gapless.playback.disable=true \
+    ro.sys.fw.bg_apps_limit=16 \
+    ro.config.max_starting_bg=8
+
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/system/lib/libqc-opt.so \
     ro.sf.lcd_density=120
+
+# Voice processing
+PRODUCT_PACKAGES += libqcomvoiceprocessing
 
 # For userdebug builds
 ADDITIONAL_DEFAULT_PROPERTIES += \
