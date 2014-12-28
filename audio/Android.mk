@@ -4,51 +4,32 @@
 #ENABLE_AUDIO_DUMP := true
 
 LOCAL_PATH := $(call my-dir)
-
-common_cflags := -D_POSIX_SOURCE
-ifneq ($(strip $(QCOM_ANC_HEADSET_ENABLED)),false)
-    common_cflags += -DQCOM_ANC_HEADSET_ENABLED
-endif
-
-ifeq ($(strip $(QCOM_FM_ENABLED)),true)
-    common_cflags += -DQCOM_FM_ENABLED
-endif
-
-ifneq ($(strip $(QCOM_PROXY_DEVICE_ENABLED)),false)
-    common_cflags += -DQCOM_PROXY_DEVICE_ENABLED
-endif
-
-ifneq ($(strip $(QCOM_OUTPUT_FLAGS_ENABLED)),false)
-    common_cflags += -DQCOM_OUTPUT_FLAGS_ENABLED
-endif
-
-ifneq ($(strip $(QCOM_TUNNEL_LPA_ENABLED)),false)
-    common_cflags += -DQCOM_TUNNEL_LPA_ENABLED
-endif
-
-ifneq ($(strip $(BOARD_QCOM_VOIP_ENABLED)),false)
-  common_cflags += -DQCOM_VOIP_ENABLED
-endif
-
-ifeq ($(strip $(BOARD_USES_SRS_TRUEMEDIA)),true)
-  common_cflags += -DSRS_PROCESSING
-endif
-
 include $(CLEAR_VARS)
 
-LOCAL_CFLAGS += $(common_cflags)
-
 LOCAL_SRC_FILES := \
+    AudioHardware.cpp \
     audio_hw_hal.cpp \
     HardwarePinSwitching.c
 
-ifeq ($(strip $(TARGET_HAS_QACT)),true)
-LOCAL_SRC_FILES += \
-    AudioHardware_cad.cpp
-else
-LOCAL_SRC_FILES += \
-    AudioHardware.cpp
+ifeq ($(BOARD_HAVE_BLUETOOTH),true)
+  LOCAL_CFLAGS += -DWITH_A2DP
 endif
+
+ifeq ($(BOARD_HAVE_QCOM_MR1_FM),true)
+  LOCAL_CFLAGS += -DWITH_QCOM_FM
+  LOCAL_CFLAGS += -DQCOM_FM_ENABLED
+endif
+
+ifeq ($(call is-android-codename-in-list,ICECREAM_SANDWICH),true)
+  LOCAL_CFLAGS += -DREG_KERNEL_UPDATE
+endif
+
+ifeq ($(strip $(BOARD_USES_SRS_TRUEMEDIA)),true)
+LOCAL_CFLAGS += -DSRS_PROCESSING
+endif
+
+LOCAL_CFLAGS += -DQCOM_VOIP_ENABLED
+LOCAL_CFLAGS += -DQCOM_TUNNEL_LPA_ENABLED
 
 LOCAL_SHARED_LIBRARIES := \
     libcutils       \
@@ -69,6 +50,8 @@ LOCAL_MODULE_TAGS := optional
 
 LOCAL_CFLAGS += -fno-short-enums
 
+LOCAL_C_INCLUDES := $(TARGET_OUT_HEADERS)/mm-audio/audio-alsa
+LOCAL_C_INCLUDES += $(TARGET_OUT_HEADERS)/mm-audio/audcal
 LOCAL_C_INCLUDES += hardware/libhardware/include
 LOCAL_C_INCLUDES += hardware/libhardware_legacy/include
 LOCAL_C_INCLUDES += frameworks/base/include
@@ -81,8 +64,6 @@ include $(BUILD_SHARED_LIBRARY)
 
 # The audio policy is implemented on top of legacy policy code
 include $(CLEAR_VARS)
-
-LOCAL_CFLAGS += $(common_cflags)
 
 LOCAL_SRC_FILES := \
     AudioPolicyManager.cpp \
@@ -101,6 +82,14 @@ LOCAL_STATIC_LIBRARIES := \
 LOCAL_MODULE := audio_policy.msm7x27a
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 LOCAL_MODULE_TAGS := optional
+
+ifeq ($(BOARD_HAVE_BLUETOOTH),true)
+  LOCAL_CFLAGS += -DWITH_A2DP
+endif
+
+ifeq ($(BOARD_HAVE_QCOM_MR1_FM),true)
+  LOCAL_CFLAGS += -DQCOM_FM_ENABLED
+endif
 
 LOCAL_C_INCLUDES := hardware/libhardware_legacy/audio
 

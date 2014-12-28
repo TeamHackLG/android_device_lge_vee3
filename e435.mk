@@ -123,25 +123,17 @@ PRODUCT_PACKAGES += \
     e2fsck \
     setup_fs
 
-# FM Radio
-PRODUCT_PACKAGES += \
-    FM2 \
-    FMRecord \
-    libqcomfm_jni \
-    qcom.fmradio
-
 # Misc
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
 # Audio
 PRODUCT_PACKAGES += \
-    libaudioutils \
     audio.a2dp.default \
-    audio.usb.default \
     audio.primary.msm7x27a \
+    audio.usb.default \
     audio_policy.msm7x27a \
-    libaudio-resampler
+    libaudioutils
 
 # Light HAL
 PRODUCT_PACKAGES += \
