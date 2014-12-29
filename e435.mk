@@ -93,6 +93,11 @@ PRODUCT_PACKAGES += \
     memtrack.msm7x27a \
     hwcomposer.msm7x27a
 
+# Color Convert
+PRODUCT_PACKAGES += \
+    libI420colorconvert \
+    libc2dcolorconvert
+
 # Off-mode Charging
 PRODUCT_PACKAGES += \
     charger \
@@ -141,7 +146,9 @@ PRODUCT_PACKAGES += \
 
 # Misc
 PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
+    com.android.future.usb.accessory \
+    libQWiFiSoftApCfg \
+    libqcomvoiceprocessing
 
 # Build.prop Properties
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -154,16 +161,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     com.qc.hardware=true \
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    audio.gapless.playback.disable=true \
-    ro.sys.fw.bg_apps_limit=16 \
-    ro.config.max_starting_bg=8
+    audio.gapless.playback.disable=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/system/lib/libqc-opt.so \
     ro.sf.lcd_density=120
-
-# Voice processing
-PRODUCT_PACKAGES += libqcomvoiceprocessing
 
 # For userdebug builds
 ADDITIONAL_DEFAULT_PROPERTIES += \

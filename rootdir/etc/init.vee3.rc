@@ -28,35 +28,35 @@
 import init.vee3.usb.rc
 
 on init
-    # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/shell/emulated 0700 shell shell
-
-    mkdir /storage/emulated 0555 root root
-    mkdir /storage/emulated/legacy 0555 root root
-
-    mkdir /mnt/media_rw/sdcard0 0700 media_rw media_rw
     mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    mkdir /storage/sdcard1 0700 root root
 
-    mkdir /storage/sdcard1 0775 system system
-    mkdir /storage/sdcard0 0775 system system
+    # See storage config details at http://source.android.com/tech/storage/
+    mkdir /storage 0050 system sdcard_r
+    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage/emulated 0555 root root
 
     export EXTERNAL_STORAGE /storage/emulated/legacy
-    export SECONDARY_STORAGE /storage/sdcard1
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
+    export SECONDARY_STORAGE /storage/sdcard1
 
     # Support legacy paths
-    symlink /mnt/shell/emulated /storage/emulated/legacy
-    symlink /storage/emulated/legacy /sdcard0
-    symlink /storage/emulated/legacy /mnt/sdcard0
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /storage/sdcard1 /sdcard1
-    symlink /storage/sdcard1 /mnt/sdcard1
+    symlink /mnt/shell/emulated /storage/emulated/legacy
 
-    start bootlogo
+    mkdir /storage/sdcard1 0000 system system
+
+# USB OTG support
+    mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
+    mkdir /storage/usbdisk 0700 root root
+    symlink /storage/usbdisk /mnt/usbdisk
+    symlink /mnt/usbdisk /usbdisk
 
 on fs
-    mount_all fstab.vee3
+    mount_all ./fstab.vee3
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -79,6 +79,8 @@ on fs
     wait /dev/block/platform/msm_sdcc.3/by-num/p25
     exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p25
     mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p25 /cust nosuid nodev barrier=1
+
+    setprop ro.crypto.fuse_sdcard true
 
 on init
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
@@ -131,6 +133,12 @@ on boot
     setprop wifi.supplicant_scan_interval 20
     setprop dhcp.dlna.using false
     setprop wifi.interface wlan0
+
+    symlink /system/lib/modules/volans/cfg80211.ko /system/lib/modules/cfg80211.ko
+    symlink /system/lib/modules/volans/WCN1314_rf.ko /system/lib/modules/wlan.ko
+
+    symlink /data/hostapd/qcom_cfg.ini /etc/firmware/wlan/qcom_cfg.ini
+    symlink /persist/qcom_wlan_nv.bin /etc/firmware/wlan/qcom_wlan_nv.bin
 
     setprop ro.telephony.call_ring.multiple false
 
@@ -769,8 +777,12 @@ service profiler_daemon /system/bin/profiler_daemon
     disabled
 
 # virtual sdcard daemon running as media_rw (1023)
-service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
+service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
     class late_start
+
+service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
+    class late_start
+    disabled
 
 on property:ro.fuse_sdcard=true
     start sdcard
