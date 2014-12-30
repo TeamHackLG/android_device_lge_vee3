@@ -25,7 +25,7 @@ $(call inherit-product-if-exists, vendor/lge/vee3/vee3-vendor.mk)
 
 $(call inherit-product-if-exists, vendor/lge/msm7x27a-common/msm7x27a-common-vendor.mk)
 
-DEVICE_PACKAGE_OVERLAYS += device/lge/e435/overlay
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
@@ -52,12 +52,16 @@ PRODUCT_PACKAGES += \
 # Config
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/etc/AudioFilter.csv:system/etc/AudioFilter.csv \
+    $(LOCAL_PATH)/configs/etc/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/configs/etc/media_codecs.xml:system/etc/media_codecs.xml \
     $(LOCAL_PATH)/configs/etc/media_profiles.xml:system/etc/media_profiles.xml \
     $(LOCAL_PATH)/configs/etc/p2p_supplicant.conf:system/etc/p2p_supplicant.conf \
     $(LOCAL_PATH)/configs/etc/p2p_supplicant_overlay.conf:system/etc/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/configs/etc/wpa_supplicant.conf:system/etc/wpa_supplicant.conf \
     $(LOCAL_PATH)/configs/etc/wpa_supplicant_overlay.conf:system/etc/wpa_supplicant_overlay.conf
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/wlan.ko:system/lib/modules/wlan.ko
 
 # SoftAP files
 PRODUCT_PACKAGES += \
@@ -98,6 +102,11 @@ PRODUCT_PACKAGES += \
     libI420colorconvert \
     libc2dcolorconvert
 
+PRODUCT_PACKAGES += \
+    libmemalloc \
+    libtilerenderer \
+    libqdutils \
+
 # Off-mode Charging
 PRODUCT_PACKAGES += \
     charger \
@@ -110,9 +119,14 @@ PRODUCT_PACKAGES += \
     libstagefrighthw \
     libdashplayer
 
-# Gps hal
+# Gps
 PRODUCT_PACKAGES += \
-    gps.msm7x27a
+    gps.msm7x27a \
+    gps.default \
+    libgps.utils \
+    libloc_adapter \
+    libloc_eng \
+    libloc_api-rpc-qc
 
 # Power Hal
 PRODUCT_PACKAGES += \
@@ -120,13 +134,27 @@ PRODUCT_PACKAGES += \
 
 # Camera Hal
 PRODUCT_PACKAGES += \
-    camera.msm7x27a
+    camera.msm7x27a \
+    libcamera \
+    libmmcamera_interface2 \
+    libmmjpeg_interface
+
+# BT
+PRODUCT_PACKAGES += \
+    libbt-vendor
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
     make_ext4fs \
     e2fsck \
     setup_fs
+
+# WallPaper
+PRODUCT_PACKAGES += \
+    librs_jni \
+    LiveWallpapers \
+    LiveWallpapersPicker \
+    VisualizationWallpapers
 
 # Misc
 PRODUCT_PACKAGES += \

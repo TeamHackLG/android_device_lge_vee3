@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
 LOCAL_PATH := device/lge/e435
 
@@ -25,7 +24,7 @@ LOCAL_PATH := device/lge/e435
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 # Compiler flags
-COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_ABI_HACK -DUSE_MDP3
+COMMON_GLOBAL_CFLAGS += -DUSE_MDP3
 COMMON_GLOBAL_CFLAGS += -DLPA_DEFAULT_BUFFER_SIZE=480
 TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
@@ -48,7 +47,6 @@ TARGET_CORTEX_CACHE_LINE_32 := true
 ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 
 # Try to build the kernel
-
 TARGET_KERNEL_SOURCE := kernel/lge/p715
 TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
 
@@ -108,19 +106,18 @@ TARGET_QCOM_LEGACY_OMX := true
 USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
 BOARD_ADRENO_DECIDE_TEXTURE_TARGET := true
-BOARD_EGL_WORKAROUND_BUG_10194508 := true
 TARGET_DISPLAY_USE_RETIRE_FENCE := true
-BOARD_EGL_CFG := device/lge/e435/egl.cfg
 TARGET_NO_INITLOGO := true
 BOARD_USE_MHEAP_SCREENSHOT := true
 HWUI_COMPILE_FOR_PERF := true
 
+# EGL
+BOARD_EGL_WORKAROUND_BUG_10194508 := true
+BOARD_EGL_CFG := device/lge/e435/egl.cfg
+
 # BT
 BOARD_HAVE_BLUETOOTH := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/bluetooth
-
-# Camera
-USE_CAMERA_STUB := true
 
 # Light
 TARGET_PROVIDES_LIBLIGHT := true

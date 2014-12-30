@@ -27,7 +27,6 @@ ro.telephony.default_cdma_sub=0
 ro.ril.hsxpa=1
 ro.ril.gprsclass=10
 
-persist.radio.multisim.config=dsds
 ro.cdma.subscribe_on_ruim_ready=true
 telephony.lteOnGsmDevice=0
 ro.use_data_netmgrd=true
