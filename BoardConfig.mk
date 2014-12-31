@@ -48,7 +48,8 @@ ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 
 # Try to build the kernel
 TARGET_KERNEL_SOURCE := kernel/lge/p715
-TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
+TARGET_KERNEL_CONFIG := cyanogenmod_vee3ds_defconfig
+# TARGET_KERNEL_CONFIG := cyanogenmod_vee3_led_defconfig # L3 II Single LED
 
 # Kernel commands
 BOARD_KERNEL_BASE := 0x00200000

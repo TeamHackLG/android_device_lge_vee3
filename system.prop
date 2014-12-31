@@ -37,8 +37,6 @@ debug.sf.hw=1
 debug.composition.7x27A.type=gpu
 debug.composition.7x25A.type=gpu
 debug.composition.type=dyn
-debug.gralloc.map_fb_memory=1
-debug.hwc.fakevsync=1
 
 #
 # system props for the MM modules
@@ -166,6 +164,7 @@ debug.camcorder.disablemeta=1
 # Simulate sdcard on /data/media
 #
 persist.fuse_sdcard=true
+ro.fuse_sdcard=true
 
 #
 # System prop for using landscape preview layout in camera
@@ -176,8 +175,3 @@ debug.camera.landscape=true
 # WiFi
 #
 wifi.interface=wlan0
-
-#
-# Brightness
-#
-ro.lge.lcd_auto_brightness_mode=false

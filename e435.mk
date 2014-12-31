@@ -36,8 +36,9 @@ PRODUCT_AAPT_PREF_CONFIG := ldpi
 PRODUCT_PACKAGES += \
     fstab.vee3 \
     init.vee3.rc \
-    init.vee3.usb.rc \
     ueventd.vee3.rc \
+    init.target.rc \
+    init.qcom.usb.rc \
     init.qcom.usb.sh \
     init.qcom.class_main.sh \
     init.qcom.ril.path.sh \
@@ -60,8 +61,26 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/etc/wpa_supplicant.conf:system/etc/wpa_supplicant.conf \
     $(LOCAL_PATH)/configs/etc/wpa_supplicant_overlay.conf:system/etc/wpa_supplicant_overlay.conf
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/wlan.ko:system/lib/modules/wlan.ko
+# Charger
+PRODUCT_PACKAGES += \
+    chargerlogo \
+    battery_charging_01.png \
+    battery_charging_02.png \
+    battery_charging_03.png \
+    battery_charging_04.png \
+    battery_charging_05.png \
+    battery_charging_06.png \
+    battery_charging_07.png \
+    battery_charging_08.png \
+    battery_charging_bg.png \
+    battery_charging_complete.png \
+    battery_charging_warning.png \
+    battery_charging_warning_eng_1.png \
+    battery_charging_warning_eng_2.png \
+    battery_trickle_ani_01.png \
+    battery_trickle_ani_02.png \
+    battery_wait_ani_01.png \
+    battery_wait_ani_01.png
 
 # SoftAP files
 PRODUCT_PACKAGES += \
@@ -90,34 +109,30 @@ PRODUCT_COPY_FILES += \
 
 # Display HALS
 PRODUCT_PACKAGES += \
-    libgenlock \
-    gralloc.msm7x27a \
     copybit.msm7x27a \
-    libqdMetaData \
+    gralloc.msm7x27a \
+    hwcomposer.msm7x27a \
     memtrack.msm7x27a \
-    hwcomposer.msm7x27a
-
-# Color Convert
-PRODUCT_PACKAGES += \
-    libI420colorconvert \
-    libc2dcolorconvert
-
-PRODUCT_PACKAGES += \
+    libc2dcolorconvert \
+    liboverlay \
     libmemalloc \
     libtilerenderer \
+    libgenlock \
     libqdutils \
+    libqdMetaData
+
+# Video
+PRODUCT_PACKAGES += \
+    libI420colorconvert \
+    libstagefrighthw \
+    libmm-omxcore \
+    libdashplayer \
+    libOmxCore
 
 # Off-mode Charging
 PRODUCT_PACKAGES += \
     charger \
     charger_res_images
-
-# Omx
-PRODUCT_PACKAGES += \
-    libmm-omxcore \
-    libOmxCore \
-    libstagefrighthw \
-    libdashplayer
 
 # Gps
 PRODUCT_PACKAGES += \
@@ -184,11 +199,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Qcom properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.hwc.mdpcomp.enable=false \
-    debug.mdpcomp.logs=0 \
     com.qc.hardware=true \
-
-PRODUCT_PROPERTY_OVERRIDES += \
     audio.gapless.playback.disable=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
