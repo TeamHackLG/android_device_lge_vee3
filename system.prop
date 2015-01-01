@@ -30,7 +30,7 @@ ro.ril.hsxpa=1
 ro.ril.gprsclass=10
 
 ro.cdma.subscribe_on_ruim_ready=true
-telephony.lteOnGsmDevice=0
+telephony.lteOnCdmaDevice=0
 ro.use_data_netmgrd=true
 persist.data_netmgrd_nint=16
 persist.radio.apm_sim_not_pwdn=1
@@ -38,7 +38,6 @@ persist.radio.apm_sim_not_pwdn=1
 debug.sf.hw=1
 debug.composition.7x27A.type=gpu
 debug.composition.7x25A.type=gpu
-debug.composition.type=dyn
 
 #
 # system props for the MM modules
