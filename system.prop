@@ -1,12 +1,10 @@
 #
 # system.prop for L3 II
 #
-
+# RIL
 #
-# RIL configs
-#
-rild.libpath=/system/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
+rild.libpath=/system/lib/libril-qc-qmi-1.so
 persist.rild.nitz_plmn=
 persist.rild.nitz_long_ons_0=
 persist.rild.nitz_long_ons_1=
@@ -17,24 +15,26 @@ persist.rild.nitz_short_ons_1=
 persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
 ril.subscription.types=NV,RUIM
-DEVICE_PROVISIONED=1
-
+ro.telephony.call_ring.delay=3000
 ro.telephony.ril.v3=skippinpukcount,qcomdsds
-ro.telephony.ril_class=LGEQualcommUiccRIL
-ro.telephony.call_ring.multiple=0
-ro.telephony.call_ring.delay=0
-ro.telephony.default_network=3
-ro.telephony.default_cdma_sub=0
+persist.multisim.config=dsds
+persist.radio.multisim.config=dsds
+ro.multi.rild=true
 
 ro.ril.hsxpa=1
 ro.ril.gprsclass=10
-
+ro.telephony.default_network=3
+ro.telephony.default_cdma_sub=0
 ro.cdma.subscribe_on_ruim_ready=true
 telephony.lteOnCdmaDevice=0
+ro.telephony.call_ring.multiple=false
 ro.use_data_netmgrd=true
 persist.data_netmgrd_nint=16
 persist.radio.apm_sim_not_pwdn=1
 
+#
+# Display Composition
+#
 debug.sf.hw=1
 debug.composition.7x27A.type=gpu
 debug.composition.7x25A.type=gpu
@@ -176,3 +176,8 @@ debug.camera.landscape=true
 # WiFi
 #
 wifi.interface=wlan0
+
+#
+# Factory SIM
+#
+persist.service.factory.enable=0

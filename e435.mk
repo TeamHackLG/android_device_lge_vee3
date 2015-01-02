@@ -50,16 +50,21 @@ PRODUCT_PACKAGES += \
     touch_mcs8000.kl \
     vee3_keypad.kl
 
-# Config
+# Audio Files
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/etc/AudioFilter.csv:system/etc/AudioFilter.csv \
-    $(LOCAL_PATH)/configs/etc/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/configs/audio/AudioFilter.csv:system/etc/AudioFilter.csv \
+    $(LOCAL_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf
+
+# Media Files
+PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/etc/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/configs/etc/media_profiles.xml:system/etc/media_profiles.xml \
-    $(LOCAL_PATH)/configs/etc/p2p_supplicant.conf:system/etc/p2p_supplicant.conf \
-    $(LOCAL_PATH)/configs/etc/p2p_supplicant_overlay.conf:system/etc/p2p_supplicant_overlay.conf \
-    $(LOCAL_PATH)/configs/etc/wpa_supplicant.conf:system/etc/wpa_supplicant.conf \
-    $(LOCAL_PATH)/configs/etc/wpa_supplicant_overlay.conf:system/etc/wpa_supplicant_overlay.conf
+    $(LOCAL_PATH)/configs/etc/media_profiles.xml:system/etc/media_profiles.xml
+
+# SoftAP files
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept \
+    $(LOCAL_PATH)/configs/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny \
+    $(LOCAL_PATH)/configs/hostapd/hostapd_default.conf::system/etc/hostapd/hostapd_default.conf
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -81,12 +86,6 @@ PRODUCT_PACKAGES += \
     battery_trickle_ani_02.png \
     battery_wait_ani_01.png \
     battery_wait_ani_01.png
-
-# SoftAP files
-PRODUCT_PACKAGES += \
-    hostapd.accept \
-    hostapd.deny \
-    hostapd_default.conf
 
 # Permission files
 PRODUCT_COPY_FILES += \

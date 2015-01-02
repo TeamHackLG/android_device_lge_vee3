@@ -207,11 +207,6 @@ on boot
     chown root system /dev/block/mmcblk0p8
     chmod 0770 /dev/block/mmcblk0p8
 
-# import cne init file
-on post-fs
-    export_rc /persist/init.cne.rc
-    start qcom-post-fs
-
 # msm specific files that need to be created on /data
 on post-fs-data
     # we will remap this as /mnt/sdcard with the sdcard fuse tool
@@ -391,10 +386,6 @@ on property:init.svc.surfaceflinger=stopped
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
-on property:bluetooth.isEnabled=true
-    start btwlancoex
-    write /sys/class/bluetooth/hci0/idle_timeout 7000
-
 service qcom-c_main-sh /system/bin/sh /init.qcom.class_main.sh
     class main
     user root
@@ -430,13 +421,6 @@ service rmt_storage /system/bin/rmt_storage
 
 on property:ro.boot.emmc=true
     start rmt_storage
-
-service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
-    class late_start
-    user bluetooth
-    group qcom_oncrpc bluetooth net_bt_admin
-    disabled
-    oneshot
 
 service hciattach_dut /system/bin/hciattach -n /dev/ttyHS0 qualcomm-ibs 3000000
     class late_start
@@ -508,13 +492,6 @@ on property:ro.use_data_netmgrd=false
 # but only if ro.data.large_tcp_window_size property is set.
 on property:ro.data.large_tcp_window_size=true
     write /proc/sys/net/ipv4/tcp_adv_win_scale  1
-
-service btwlancoex /system/bin/sh /system/etc/init.qcom.coex.sh
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin inet net_admin net_raw
-    disabled
-    oneshot
 
 service amp_init /system/bin/amploader -i
     class late_start
@@ -632,13 +609,6 @@ service xtwifi_client /system/bin/xtwifi-client
     group net_admin wifi inet gps
     disabled
 
-service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
-    class late_start
-    user root
-    group system qcom_oncrpc
-    disabled
-    oneshot
-
 on property:crypto.driver.load=1
      insmod /system/lib/modules/qce.ko
      insmod /system/lib/modules/qcedev.ko
@@ -659,21 +629,9 @@ on property:drmdiag.load=1
 on property:drmdiag.load=0
     stop drmdiag
 
-service qcom-post-fs /system/bin/sh /system/etc/init.qcom.post_fs.sh
-    class core
-    user root
-    disabled
-    oneshot
-
 service qcom-sh /system/bin/sh /init.qcom.sh
     class late_start
     user root
-    oneshot
-
-service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
-    class late_start
-    user root
-    disabled
     oneshot
 
 service wifi-sdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh
@@ -685,14 +643,11 @@ service wifi-sdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh
 on property:init.svc.bootanim=running
     start atd
 
-on property:sys.boot_completed=1
-    start qcom-post-boot
-
 service atfwd /system/bin/ATFWD-daemon
     class late_start
     user system
     group system radio
-    onrestart /system/bin/log -t RIL-ATFWD -p w "ATFWD daemon restarted"
+    onrestart -t RIL-ATFWD -p w "ATFWD daemon restarted"
 
 service hdmid /system/bin/hdmid
     class late_start
@@ -813,34 +768,23 @@ service map1 /system/bin/sdptool add --channel=17 MAS1
     disabled
     oneshot
 
-service ril-daemon /system/bin/rild
-    class main
-    socket rild stream 660 root radio
-    socket rild-debug stream 660 radio system
-    user root
-    group radio cache inet misc audio system sdcard_rw log sdcard_r
-
-
 # Add support for dsds
 service ril-daemon1 /system/bin/rild -c 1
     class main
     socket rild1 stream 660 root radio
     socket rild-debug1 stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_rw qcom_oncrpc diag qcom_diag
     disabled
+    group radio cache inet misc audio sdcard_rw qcom_oncrpc diag
+
+on property:ro.multi.rild=true
+    start ril-daemon1
 
 service profiler_daemon /system/bin/profiler_daemon
     class late_start
     user root
     group root
     disabled
-
-service hcidump /system/bin/sh /system/etc/hcidump.sh
-    user bluetooth
-    group bluetooth system net_bt_admin net_admin
-    disabled
-    oneshot
 
 #CAIO99BR_CHANGE[caiooliveirafarias0@gmail.com]20141231:Charger logo changes
 on charger
@@ -870,15 +814,6 @@ on property:service.adb.root=1
 service sensord /system/bin/sensord
     class late_start
     oneshot
-
-service bluetoothd /system/bin/bluetoothd -n -d
-    class late_start
-    socket bluetooth stream 660 bluetooth bluetooth
-    socket dbus_bluetooth stream 660 bluetooth bluetooth
-    # init.rc does not yet support applying capabilities, so run as root and
-    # let bluetoothd drop uid to bluetooth with the right linux capabilities
-    group bluetooth net_bt_admin misc
-    disabled
 
 service sdread /system/bin/sh /system/etc/improve_sd_read_performance.sh
    class late_start
