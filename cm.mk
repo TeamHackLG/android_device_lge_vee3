@@ -26,6 +26,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Boot animation
 TARGET_SCREEN_HEIGHT := 320
 TARGET_SCREEN_WIDTH := 240
+TARGET_BOOTANIMATION_NAME := 240
 
 # Inherit device configuration
 $(call inherit-product, device/lge/e435/e435.mk)

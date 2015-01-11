@@ -37,7 +37,6 @@ PRODUCT_PACKAGES += \
     fstab.vee3 \
     init.vee3.rc \
     ueventd.vee3.rc \
-    init.target.rc \
     init.qcom.usb.rc \
     init.qcom.usb.sh \
     init.qcom.class_main.sh \
@@ -47,6 +46,7 @@ PRODUCT_PACKAGES += \
 # Configs
 PRODUCT_PACKAGES += \
     7k_handset.kl \
+    7x27a_kp.kl \
     touch_mcs8000.kl \
     vee3_keypad.kl
 
@@ -57,8 +57,8 @@ PRODUCT_COPY_FILES += \
 
 # Media Files
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/etc/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/configs/etc/media_profiles.xml:system/etc/media_profiles.xml
+    $(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml \
+    $(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml
 
 # SoftAP files
 PRODUCT_COPY_FILES += \
@@ -89,22 +89,24 @@ PRODUCT_PACKAGES += \
 
 # Permission files
 PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
-    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-    frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/native/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
+    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+    frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
+    frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
+    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
     frameworks/native/data/etc/android.hardware.touchscreen.xml:system/etc/permissions/android.hardware.touchscreen.xml \
-    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
-    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
-    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml
+    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
+    frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
+    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
 
 # Display HALS
 PRODUCT_PACKAGES += \
@@ -113,9 +115,7 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm7x27a \
     memtrack.msm7x27a \
     libc2dcolorconvert \
-    liboverlay \
     libmemalloc \
-    libtilerenderer \
     libgenlock \
     libqdutils \
     libqdMetaData
@@ -135,12 +135,7 @@ PRODUCT_PACKAGES += \
 
 # Gps
 PRODUCT_PACKAGES += \
-    gps.msm7x27a \
-    gps.default \
-    libgps.utils \
-    libloc_adapter \
-    libloc_eng \
-    libloc_api-rpc-qc
+    gps.msm7x27a
 
 # Power Hal
 PRODUCT_PACKAGES += \
@@ -148,10 +143,7 @@ PRODUCT_PACKAGES += \
 
 # Camera Hal
 PRODUCT_PACKAGES += \
-    camera.msm7x27a \
-    libcamera \
-    libmmcamera_interface2 \
-    libmmjpeg_interface
+    camera.msm7x27a
 
 # BT
 PRODUCT_PACKAGES += \
@@ -176,11 +168,12 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
+    libaudioutils \
     audio.a2dp.default \
-    audio.primary.msm7x27a \
     audio.usb.default \
+    audio.primary.msm7x27a \
     audio_policy.msm7x27a \
-    libaudioutils
+    libaudio-resampler
 
 # Light HAL
 PRODUCT_PACKAGES += \
@@ -199,11 +192,44 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # Qcom properties
 PRODUCT_PROPERTY_OVERRIDES += \
     com.qc.hardware=true \
-    audio.gapless.playback.disable=true
+    audio.gapless.playback.disable=true \
+    debug.camcorder.disablemeta=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/system/lib/libqc-opt.so \
     ro.sf.lcd_density=120
+
+# Radio properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.ril_class=LGEQualcommUiccRIL \
+    ro.telephony.ril.v3=skipnullaid,qcomdsds \
+    ro.telephony.default_network=3 \
+    ro.telephony.call_ring.multiple=0 \
+    telephony.lteOnGsmDevice=0 \
+    rild.libpath=/system/lib/libril-qc-1.so \
+    rild.libargs=-d/dev/smd0 \
+    ril.subscription.types=NV,RUIM \
+    DEVICE_PROVISIONED=1 \
+    persist.radio.apm_sim_not_pwdn=1 \
+    persist.rild.nitz_plmn= \
+    persist.rild.nitz_long_ons_0= \
+    persist.rild.nitz_long_ons_1= \
+    persist.rild.nitz_long_ons_2= \
+    persist.rild.nitz_long_ons_3= \
+    persist.rild.nitz_short_ons_0= \
+    persist.rild.nitz_short_ons_1= \
+    persist.rild.nitz_short_ons_2= \
+    persist.rild.nitz_short_ons_3= \
+    keyguard.no_require_sim=1 \
+    ro.ril.hsxpa=1 \
+    ro.ril.gprsclass=10 \
+    ro.ril.transmitpower=true \
+    ro.use_data_netmgrd=true \
+    persist.data_netmgrd_nint=3
+
+# OpenGL
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.opengles.version=131072
 
 # For userdebug builds
 ADDITIONAL_DEFAULT_PROPERTIES += \

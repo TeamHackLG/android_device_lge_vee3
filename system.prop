@@ -1,38 +1,4 @@
 #
-# system.prop for L3 II
-#
-# RIL
-#
-rild.libargs=-d /dev/smd0
-rild.libpath=/system/lib/libril-qc-qmi-1.so
-persist.rild.nitz_plmn=
-persist.rild.nitz_long_ons_0=
-persist.rild.nitz_long_ons_1=
-persist.rild.nitz_long_ons_2=
-persist.rild.nitz_long_ons_3=
-persist.rild.nitz_short_ons_0=
-persist.rild.nitz_short_ons_1=
-persist.rild.nitz_short_ons_2=
-persist.rild.nitz_short_ons_3=
-ril.subscription.types=NV,RUIM
-ro.telephony.call_ring.delay=3000
-ro.telephony.ril.v3=skippinpukcount,qcomdsds
-persist.multisim.config=dsds
-persist.radio.multisim.config=dsds
-ro.multi.rild=true
-
-ro.ril.hsxpa=1
-ro.ril.gprsclass=10
-ro.telephony.default_network=3
-ro.telephony.default_cdma_sub=0
-ro.cdma.subscribe_on_ruim_ready=true
-telephony.lteOnCdmaDevice=0
-ro.telephony.call_ring.multiple=false
-ro.use_data_netmgrd=true
-persist.data_netmgrd_nint=16
-persist.radio.apm_sim_not_pwdn=1
-
-#
 # Display Composition
 #
 debug.sf.hw=1
@@ -56,11 +22,6 @@ media.stagefright.enable-qcp=true
 audio.legacy.postproc=true
 
 #
-# system prop for opengles version
-#
-ro.opengles.version=131072
-
-#
 # system props for the data modules
 #
 ro.use_data_netmgrd=true
@@ -70,36 +31,6 @@ persist.data.ds_fmc_app.mode=0
 # system props for IMS module
 #
 persist.ims.regmanager.mode=0
-
-#
-# system prop for requesting Master role in incoming Bluetooth connection.
-#
-ro.bluetooth.request.master=false
-
-#
-# system prop for Bluetooth FTP profile
-#
-ro.qualcomm.bluetooth.ftp=true
-
-#
-# system prop for Bluetooth SAP profile
-#
-ro.qualcomm.bluetooth.sap=false
-
-#
-# system prop for Bluetooth DUN profile
-#
-ro.qualcomm.bluetooth.dun=false
-
-#
-# system prop for Bluetooth PAN profile
-#
-ro.bluetooth.PANenable = 1
-
-#
-# system prop for Bluetooth Auto connect for remote initated connections
-#
-ro.bluetooth.remote.autoconnect=true
 
 #
 # System prop to disable strict mode flash on display
@@ -127,8 +58,7 @@ ro.qualcomm.cabl=0
 ro.ril.transmitpower=true
 
 #
-#
-#System prop to determine availability of analog fm path
+# System prop to determine availability of analog fm path
 #
 ro.fm.analogpath.supported=true
 
@@ -152,20 +82,15 @@ ro.emmc.sdcard.partition=20
 #
 ro.screen.layout=normal
 
+#
 #System prop for setting the pixel format
 #
 ro.staticwallpaper.pixelformat=RGB_565
 
 #
-#System prop for disabling the meta data mode for encoder
-#
-debug.camcorder.disablemeta=1
-
-#
 # Simulate sdcard on /data/media
 #
 persist.fuse_sdcard=true
-ro.fuse_sdcard=true
 
 #
 # System prop for using landscape preview layout in camera
@@ -181,3 +106,13 @@ wifi.interface=wlan0
 # Factory SIM
 #
 persist.service.factory.enable=0
+
+#
+# Baseband GSM Version
+#
+gsm.version.baseband=v10
+
+#
+# On Strider below period is found to improve power numbers for AAC MP4
+#
+dev.pm.dyn_sample_period=700000
