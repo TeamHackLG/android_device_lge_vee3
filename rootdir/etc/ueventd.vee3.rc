@@ -111,10 +111,6 @@
 /dev/msm_vidc_enc         0660   system     audio
 /dev/msm_rotator          0660   system     graphics
 /dev/hw_random            0660   root       root
-/dev/oncrpc/*             0666   root       qcom_oncrpc
-
-/dev/usb_autorun          0660   root       usb
-
 # Permissions for audio
 /dev/msm_qcelp            0660   system     audio
 /dev/msm_evrc             0660   system     audio
@@ -149,11 +145,4 @@
 /dev/tty_sdio_00          0660   system     system
 /dev/ttyGS0               0660   system     system
 /dev/i2c-5                0660   media      media
-
 /dev/secclk               0600   system     system
-
-# GPS
-/dev/oncrpc/00000000:0    0660   system     qcom_oncrpc
-/dev/oncrpc/3000008c:00050000 0660   system     qcom_oncrpc
-
-/dev/oncrpc/300000ba:00010000 0660   system     drmrpc

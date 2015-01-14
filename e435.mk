@@ -115,7 +115,9 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm7x27a \
     memtrack.msm7x27a \
     libc2dcolorconvert \
+    liboverlay \
     libmemalloc \
+    libtilerenderer \
     libgenlock \
     libqdutils \
     libqdMetaData
@@ -124,9 +126,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libI420colorconvert \
     libstagefrighthw \
-    libmm-omxcore \
-    libdashplayer \
-    libOmxCore
+    libdashplayer
 
 # Off-mode Charging
 PRODUCT_PACKAGES += \
@@ -175,6 +175,13 @@ PRODUCT_PACKAGES += \
     audio_policy.msm7x27a \
     libaudio-resampler
 
+# FM Radio
+PRODUCT_PACKAGES += \
+    FM2 \
+    FMRecord \
+    libqcomfm_jni \
+    qcom.fmradio
+
 # Light HAL
 PRODUCT_PACKAGES += \
     lights.msm7x27a
@@ -201,13 +208,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Radio properties
 PRODUCT_PROPERTY_OVERRIDES += \
+    rild.libpath=/system/lib/libril-qc-1.so \
+    ro.telephony.default_network=3 \
+    telephony.lteOnGsmDevice=0 \
     ro.telephony.ril_class=LGEQualcommUiccRIL \
     ro.telephony.ril.v3=skipnullaid,qcomdsds \
-    ro.telephony.default_network=3 \
     ro.telephony.call_ring.multiple=0 \
-    telephony.lteOnGsmDevice=0 \
-    rild.libpath=/system/lib/libril-qc-1.so \
-    rild.libargs=-d/dev/smd0 \
     ril.subscription.types=NV,RUIM \
     DEVICE_PROVISIONED=1 \
     persist.radio.apm_sim_not_pwdn=1 \
