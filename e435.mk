@@ -46,9 +46,9 @@ PRODUCT_PACKAGES += \
 # Configs
 PRODUCT_PACKAGES += \
     7k_handset.kl \
-    7x27a_kp.kl \
     touch_mcs8000.kl \
-    vee3_keypad.kl
+    vee3_keypad.kl \
+    vee3_keypad.kcm
 
 # Audio Files
 PRODUCT_COPY_FILES += \
@@ -141,10 +141,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     power.msm7x27a
 
-# Camera Hal
-PRODUCT_PACKAGES += \
-    camera.msm7x27a
-
 # BT
 PRODUCT_PACKAGES += \
     libbt-vendor
@@ -208,7 +204,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Radio properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/system/lib/libril-qc-1.so \
     ro.telephony.default_network=3 \
     telephony.lteOnGsmDevice=0 \
     ro.telephony.ril_class=LGEQualcommUiccRIL \
@@ -217,15 +212,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ril.subscription.types=NV,RUIM \
     DEVICE_PROVISIONED=1 \
     persist.radio.apm_sim_not_pwdn=1 \
-    persist.rild.nitz_plmn= \
-    persist.rild.nitz_long_ons_0= \
-    persist.rild.nitz_long_ons_1= \
-    persist.rild.nitz_long_ons_2= \
-    persist.rild.nitz_long_ons_3= \
-    persist.rild.nitz_short_ons_0= \
-    persist.rild.nitz_short_ons_1= \
-    persist.rild.nitz_short_ons_2= \
-    persist.rild.nitz_short_ons_3= \
     keyguard.no_require_sim=1 \
     ro.ril.hsxpa=1 \
     ro.ril.gprsclass=10 \

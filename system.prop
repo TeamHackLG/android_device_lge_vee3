@@ -1,4 +1,18 @@
 #
+# RILD
+#
+rild.libpath=/system/lib/libril-qc-1.so
+persist.rild.nitz_plmn=
+persist.rild.nitz_long_ons_0=
+persist.rild.nitz_long_ons_1=
+persist.rild.nitz_long_ons_2=
+persist.rild.nitz_long_ons_3=
+persist.rild.nitz_short_ons_0=
+persist.rild.nitz_short_ons_1=
+persist.rild.nitz_short_ons_2=
+persist.rild.nitz_short_ons_3=
+
+#
 # Display Composition
 #
 debug.sf.hw=1
@@ -91,11 +105,6 @@ ro.staticwallpaper.pixelformat=RGB_565
 # Simulate sdcard on /data/media
 #
 persist.fuse_sdcard=true
-
-#
-# System prop for using landscape preview layout in camera
-#
-debug.camera.landscape=true
 
 #
 # WiFi
