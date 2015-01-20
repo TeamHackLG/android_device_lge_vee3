@@ -777,11 +777,6 @@ service map1 /system/bin/sdptool add --channel=17 MAS1
     disabled
     oneshot
 
-service ril-qmi /system/bin/sh /init.qcom.ril.path.sh
-    class main
-    user root
-    oneshot
-
 service ril-daemon1 /system/bin/rild -c 1
     class main
     socket rild1 stream 660 root radio

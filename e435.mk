@@ -40,7 +40,6 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     init.qcom.usb.sh \
     init.qcom.class_main.sh \
-    init.qcom.ril.path.sh \
     init.qcom.sh
 
 # Configs
