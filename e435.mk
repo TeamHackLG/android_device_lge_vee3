@@ -65,27 +65,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny \
     $(LOCAL_PATH)/configs/hostapd/hostapd_default.conf::system/etc/hostapd/hostapd_default.conf
 
-# Charger
-PRODUCT_PACKAGES += \
-    chargerlogo \
-    battery_charging_01.png \
-    battery_charging_02.png \
-    battery_charging_03.png \
-    battery_charging_04.png \
-    battery_charging_05.png \
-    battery_charging_06.png \
-    battery_charging_07.png \
-    battery_charging_08.png \
-    battery_charging_bg.png \
-    battery_charging_complete.png \
-    battery_charging_warning.png \
-    battery_charging_warning_eng_1.png \
-    battery_charging_warning_eng_2.png \
-    battery_trickle_ani_01.png \
-    battery_trickle_ani_02.png \
-    battery_wait_ani_01.png \
-    battery_wait_ani_01.png
-
 # Permission files
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \

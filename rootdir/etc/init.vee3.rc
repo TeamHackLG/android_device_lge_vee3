@@ -811,7 +811,7 @@ on charger
     write /sys/module/pm2/modes/cpu0/power_collapse/suspend_enabled 1
     write /sys/module/pm2/modes/cpu0/power_collapse/idle_enabled 1
     setprop sys.usb.state $(sys.usb.config)
-    exec /sbin/chargerlogo
+    exec /charger
 #CAIO99BR_CHANGE[caiooliveirafarias0@gmail.com]20141231
 
 # Restart adbd so it can run as root
