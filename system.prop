@@ -1,7 +1,7 @@
 #
 # RILD
 #
-rild.libpath=/system/lib/libril-qc-1.so
+rild.libpath=/system/lib/libril-qc-qmi-1.so
 persist.rild.nitz_plmn=
 persist.rild.nitz_long_ons_0=
 persist.rild.nitz_long_ons_1=
@@ -105,11 +105,6 @@ ro.staticwallpaper.pixelformat=RGB_565
 # Simulate sdcard on /data/media
 #
 persist.fuse_sdcard=true
-
-#
-# WiFi
-#
-wifi.interface=wlan0
 
 #
 # Factory SIM

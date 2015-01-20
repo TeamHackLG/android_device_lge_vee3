@@ -47,8 +47,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     7k_handset.kl \
     touch_mcs8000.kl \
-    vee3_keypad.kl \
-    vee3_keypad.kcm
+    vee3_keypad.kl
 
 # Audio Files
 PRODUCT_COPY_FILES += \
@@ -126,7 +125,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libI420colorconvert \
     libstagefrighthw \
-    libdashplayer
+    libmm-omxcore \
+    libOmxCore \
+    libdashplayer \
+    libOmxVdec \
+    libOmxVenc \
+    qcmediaplayer
+
 
 # Off-mode Charging
 PRODUCT_PACKAGES += \
@@ -206,7 +211,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_network=3 \
     telephony.lteOnGsmDevice=0 \
-    ro.telephony.ril_class=LGEQualcommUiccRIL \
     ro.telephony.ril.v3=skipnullaid,qcomdsds \
     ro.telephony.call_ring.multiple=0 \
     ril.subscription.types=NV,RUIM \
@@ -222,6 +226,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # OpenGL
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072
+
+# WLAN
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0 \
+    wifi.supplicant_scan_interval=15
 
 # For userdebug builds
 ADDITIONAL_DEFAULT_PROPERTIES += \

@@ -48,7 +48,7 @@ TARGET_CORTEX_CACHE_LINE_32 := true
 ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 
 # Try to build the kernel
-TARGET_KERNEL_SOURCE := kernel/lge/p715
+TARGET_KERNEL_SOURCE := kernel/lge/lproj-4.3
 TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
 
 # Kernel commands
@@ -151,7 +151,6 @@ DEVICE_RESOLUTION := 240x320
 
 # Wlan
 BOARD_HAS_QCOM_WLAN := true
-BOARD_HAS_QCOM_WLAN_SDK := true
 BOARD_WLAN_DEVICE := qcwcn
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
@@ -159,10 +158,8 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 BOARD_HOSTAPD_DRIVER := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 WIFI_EXT_MODULE_PATH := "/system/lib/modules/librasdioif.ko"
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
 WIFI_EXT_MODULE_NAME := "librasdioif"
+WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME := "wlan"
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WIFI_DRIVER_FW_PATH_AP := "ap"
-WIFI_DRIVER_FW_PATH_P2P := "p2p"
-BOARD_LEGACY_NL80211_STA_EVENTS := true

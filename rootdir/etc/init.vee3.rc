@@ -206,6 +206,12 @@ on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
+    # RILD
+    chmod 777 /dev/oncrpc/30000000:f4fc28c3
+    chmod 777 /dev/oncrpc/3000000e:00090000
+    chmod 777 /dev/oncrpc/30000003:86572c7c
+    chmod 777 /dev/oncrpc/30000012:00040000
+
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
     # accel,compass //eee3114.lee@lge.com
     chown system system /sys/class/input/input3/range
@@ -257,8 +263,8 @@ on post-fs-data
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
 
-    symlink /system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini /data/misc/wifi
-    symlink /system/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin /data/misc/wifi
+    symlink /system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini /data/misc/wifi/WCN1314_qcom_cfg.ini
+    symlink /system/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin /data/misc/wifi/WCN1314_qcom_wlan_nv.bin
     # Dummy file, to keep the API happy. The default firmware does both modes
     write /data/misc/wifi/fwpath ""
     chmod 0666 /data/misc/wifi/fwpath
@@ -513,12 +519,12 @@ service amp_unload /system/bin/amploader -u
     disabled
     oneshot
 
-service p2p_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
+service p2p_supplicant /system/bin/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
     -I/system/etc/wifi/p2p_supplicant_overlay.conf -N \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf \
-    -O/data/misc/wifi/sockets -puse_p2p_group_interface=1 -dddd \
+    -O/data/misc/wifi/sockets -puse_p2p_group_interface=1 \
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
     #   we will start as root and wpa_supplicant will switch to user wifi
     #   after setting up the capabilities required for WEXT
@@ -532,7 +538,7 @@ service p2p_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
 service wpa_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf -O\
     -I/system/etc/wifi/wpa_supplicant_overlay.conf \
-    -O/data/misc/wifi/sockets -dddd \
+    -O/data/misc/wifi/sockets \
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
     #   we will start as root and wpa_supplicant will switch to user wifi
     #   after setting up the capabilities required for WEXT
@@ -553,7 +559,7 @@ on property:init.svc.wpa_supplicant=stopped
 # L : remove DHCPCD_IPV4LL
 # G : DHCPCD_GATEWAY
 # a : avoid_routes = 1
-service dhcpcd_wlan0 /system/bin/dhcpcd -aBKAL
+service dhcpcd_wlan0 /system/bin/dhcpcd -ABKLG
     class late_start
     disabled
     oneshot
@@ -771,6 +777,11 @@ service map1 /system/bin/sdptool add --channel=17 MAS1
     disabled
     oneshot
 
+service ril-qmi /system/bin/sh /init.qcom.ril.path.sh
+    class main
+    user root
+    oneshot
+
 service ril-daemon1 /system/bin/rild -c 1
     class main
     socket rild1 stream 660 root radio
@@ -778,9 +789,6 @@ service ril-daemon1 /system/bin/rild -c 1
     user root
     disabled
     group radio cache inet misc audio system sdcard_rw qcom_oncrpc diag log
-
-on property:persist.radio.multisim.config=dsds
-    start ril-daemon1
 
 service profiler_daemon /system/bin/profiler_daemon
     class late_start
@@ -802,7 +810,7 @@ on charger
     write /sys/module/pm2/modes/cpu0/standalone_power_collapse/suspend_enabled 1
     write /sys/module/pm2/modes/cpu0/power_collapse/suspend_enabled 1
     write /sys/module/pm2/modes/cpu0/power_collapse/idle_enabled 1
-    setprop sys.usb.state ${name}
+    setprop sys.usb.state $(sys.usb.config)
     exec /sbin/chargerlogo
 #CAIO99BR_CHANGE[caiooliveirafarias0@gmail.com]20141231
 
@@ -837,8 +845,8 @@ service ftm_ptt /system/bin/ftm_ptt -d
    disabled
    oneshot
 
-on property:hw.ftm_ptt_start=1
+on property:ftm_ptt_start=1
    start ftm_ptt
 
-on property:hw.ftm_ptt_start=0
+on property:ftm_ptt_start=0
    stop ftm_ptt
