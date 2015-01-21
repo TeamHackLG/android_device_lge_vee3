@@ -1,7 +1,7 @@
 /* include/linux/msm_mdp.h
  *
  * Copyright (C) 2007 Google Incorporated
- * Copyright (c) 2012 Code Aurora Forum. All rights reserved.
+ * Copyright (c) 2013 Code Aurora Forum. All rights reserved.
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -70,8 +70,12 @@
 #define MSMFB_MDP_PP _IOWR(MSMFB_IOCTL_MAGIC, 156, struct msmfb_mdp_pp)
 #define MSMFB_OVERLAY_VSYNC_CTRL _IOW(MSMFB_IOCTL_MAGIC, 160, unsigned int)
 #define MSMFB_VSYNC_CTRL  _IOW(MSMFB_IOCTL_MAGIC, 161, unsigned int)
-#define MSMFB_METADATA_SET  _IOW(MSMFB_IOCTL_MAGIC, 165, struct msmfb_metadata)
+#define MSMFB_BUFFER_SYNC  _IOW(MSMFB_IOCTL_MAGIC, 162, struct mdp_buf_sync)
+#define MSMFB_METADATA_SET  _IOW(MSMFB_IOCTL_MAGIC, 162, struct msmfb_metadata)
+#define MSMFB_DISPLAY_COMMIT      _IOW(MSMFB_IOCTL_MAGIC, 164, \
+						struct mdp_display_commit)
 #define MSMFB_METADATA_GET  _IOW(MSMFB_IOCTL_MAGIC, 166, struct msmfb_metadata)
+
 #define FB_TYPE_3D_PANEL 0x10101010
 #define MDP_IMGTYPE2_START 0x10000
 #define MSMFB_DRIVER_VERSION	0xF9E8D701
@@ -91,6 +95,7 @@ enum {
 	MDP_Y_CRCB_H2V2,  /* Y and CrCb, pseudo planer w/ Cr is in MSB */
 	MDP_YCBYCR_H2V1,  /* YCbYCr interleave */
 	MDP_YCRYCB_H2V1,  /* YCrYCb interleave */
+	MDP_CBYCRY_H2V1,  /* CbYCrY interleave */
 	MDP_Y_CRCB_H2V1,  /* Y and CrCb, pseduo planer w/ Cr is in MSB */
 	MDP_Y_CBCR_H2V1,   /* Y and CrCb, pseduo planer w/ Cr is in MSB */
 	MDP_Y_CRCB_H1V2,
@@ -108,6 +113,17 @@ enum {
 	MDP_YCRCB_H1V1,   /* YCrCb interleave */
 	MDP_YCBCR_H1V1,   /* YCbCr interleave */
 	MDP_BGR_565,      /* BGR 565 planer */
+	MDP_BGR_888,      /* BGR 888 */
+	MDP_Y_CBCR_H2V2_VENUS,
+	MDP_BGRX_8888,   /* BGRX 8888 */
+	MDP_RGBA_8888_TILE,	/* RGBA 8888 in tile format */
+	MDP_ARGB_8888_TILE,	/* ARGB 8888 in tile format */
+	MDP_ABGR_8888_TILE,	/* ABGR 8888 in tile format */
+	MDP_BGRA_8888_TILE,	/* BGRA 8888 in tile format */
+	MDP_RGBX_8888_TILE,	/* RGBX 8888 in tile format */
+	MDP_XRGB_8888_TILE,	/* XRGB 8888 in tile format */
+	MDP_XBGR_8888_TILE,	/* XBGR 8888 in tile format */
+	MDP_BGRX_8888_TILE,	/* BGRX 8888 in tile format */
 	MDP_IMGTYPE_LIMIT,
 	MDP_RGB_BORDERFILL,	/* border fill pipe */
 	MDP_FB_FORMAT = MDP_IMGTYPE2_START,    /* framebuffer format */
@@ -140,14 +156,7 @@ enum {
 #define MDP_DITHER 0x8
 #define MDP_BLUR 0x10
 #define MDP_BLEND_FG_PREMULT 0x20000
-/* vinay.bhooma@lge.com TD Fix issue 261189
- * QUALCOMM Patch for SR#01078394 - Screen flickers on launching opera for 1st time.
- * Target : UO/P700 
- * Screen flickers for target which support MDP Composition.
- * With GPU Composition model e.g. V3 screen flickering issue is not observed.
-*/ 
 #define MDP_IS_FG 0x40000
-/**End of QUALCOMM Patch for SR#01078394 - Screen flickers on launching opera for 1st time */
 #define MDP_DEINTERLACE 0x80000000
 #define MDP_SHARPENING  0x40000000
 #define MDP_NO_DMA_BARRIER_START	0x20000000
@@ -291,6 +300,14 @@ struct dpp_ctrl {
 	int8_t hsic_params[NUM_HSIC_PARAM];
 };
 
+enum {
+	BLEND_OP_NOT_DEFINED = 0,
+	BLEND_OP_OPAQUE,
+	BLEND_OP_PREMULTIPLIED,
+	BLEND_OP_COVERAGE,
+	BLEND_OP_MAX,
+};
+
 struct mdp_overlay {
 	struct msmfb_img src;
 	struct mdp_rect src_rect;
@@ -299,6 +316,7 @@ struct mdp_overlay {
 	uint32_t is_fg;		/* control alpha & transp */
 	uint32_t alpha;
 	uint32_t transp_mask;
+	uint32_t blend_op;
 	uint32_t flags;
 	uint32_t id;
 	uint32_t user_data[8];
@@ -330,10 +348,16 @@ struct mdp_histogram {
 
 
 /*
-	mdp_block_type defines the identifiers for each of pipes in MDP 4.3
+
+	mdp_block_type defines the identifiers for pipes in MDP 4.3 and up
+
 	MDP_BLOCK_RESERVED is provided for backward compatibility and is
 	deprecated. It corresponds to DMA_P. So MDP_BLOCK_DMA_P should be used
 	instead.
+
+	MDP_LOGICAL_BLOCK_DISP_0 identifies the display pipe which fb0 uses,
+	same for others.
+
 */
 
 enum {
@@ -348,6 +372,9 @@ enum {
 	MDP_BLOCK_DMA_S,
 	MDP_BLOCK_DMA_E,
 	MDP_BLOCK_OVERLAY_2,
+	MDP_LOGICAL_BLOCK_DISP_0 = 0x1000,
+	MDP_LOGICAL_BLOCK_DISP_1,
+	MDP_LOGICAL_BLOCK_DISP_2,
 	MDP_BLOCK_MAX,
 };
 
@@ -468,12 +495,19 @@ struct mdp_bl_scale_data {
 	uint32_t scale;
 };
 
+struct mdp_calib_config_data {
+	uint32_t ops;
+	uint32_t addr;
+	uint32_t data;
+};
+
 enum {
 	mdp_op_pcc_cfg,
 	mdp_op_csc_cfg,
 	mdp_op_lut_cfg,
 	mdp_op_qseed_cfg,
 	mdp_bl_scale_cfg,
+	mdp_op_calib_cfg,
 	mdp_op_max,
 };
 
@@ -485,6 +519,7 @@ struct msmfb_mdp_pp {
 		struct mdp_lut_cfg_data lut_cfg_data;
 		struct mdp_qseed_cfg_data qseed_cfg_data;
 		struct mdp_bl_scale_data bl_scale_data;
+		struct mdp_calib_config_data calib_cfg;
 	} data;
 };
 
@@ -499,24 +534,37 @@ struct mdp_blend_cfg {
 	uint32_t is_premultiplied;
 };
 
-struct mdp_mixer_cfg {
-	uint32_t writeback_format;
-	uint32_t alpha;
-};
-
 struct msmfb_metadata {
 	uint32_t op;
 	uint32_t flags;
 	union {
 		struct mdp_blend_cfg blend_cfg;
-		uint32_t panel_frame_rate;
+                uint32_t panel_frame_rate;
 	} data;
+};
+
+#define MDP_MAX_FENCE_FD	10
+#define MDP_BUF_SYNC_FLAG_WAIT	1
+
+struct mdp_buf_sync {
+	uint32_t flags;
+	uint32_t acq_fen_fd_cnt;
+	int *acq_fen_fd;
+	int *rel_fen_fd;
+	int *retire_fen_fd;
+};
+
+#define MDP_DISPLAY_COMMIT_OVERLAY 0x00000001
+
+struct mdp_display_commit {
+	uint32_t flags;
+	uint32_t wait_for_finish;
+	struct fb_var_screeninfo var;
 };
 
 struct mdp_page_protection {
 	uint32_t page_protection;
 };
-
 
 struct mdp_mixer_info {
 	int pndx;
