@@ -1,7 +1,7 @@
 #
 # RILD
 #
-rild.libpath=/system/lib/libril-qc-qmi-1.so
+rild.libpath=/system/lib/libril-qc-1.so
 persist.rild.nitz_plmn=
 persist.rild.nitz_long_ons_0=
 persist.rild.nitz_long_ons_1=
