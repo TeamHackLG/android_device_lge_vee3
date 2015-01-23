@@ -14,5 +14,5 @@
 # limitations under the License.
 #
 
-add_lunch_combo cm_e435-userdebug
-add_lunch_combo cm_e435-eng
+add_lunch_combo cm_vee3-userdebug
+add_lunch_combo cm_vee3-eng

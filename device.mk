@@ -18,7 +18,7 @@
 #
 # Everything in this directory will become public
 
-LOCAL_PATH := device/lge/e435
+LOCAL_PATH := device/lge/vee3
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 

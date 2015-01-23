@@ -15,12 +15,12 @@
 #
 
 # Inherit device configuration
-$(call inherit-product, device/lge/e435/device.mk)
+$(call inherit-product, device/lge/vee3/device.mk)
 
 # Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := e435
-PRODUCT_NAME := full_e435
-PRODUCT_BRAND := lge
+PRODUCT_DEVICE := vee3
+PRODUCT_NAME := full_vee3
+PRODUCT_BRAND := LGE
 PRODUCT_MODEL := VEE3
 PRODUCT_MANUFACTURER := LGE
 PRODUCT_CHARACTERISTICS := phone

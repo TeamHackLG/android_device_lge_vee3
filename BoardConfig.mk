@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH := device/lge/e435
+LOCAL_PATH := device/lge/vee3
 
 # inherit from the proprietary version
 -include vendor/lge/vee3/BoardConfigVendor.mk
