@@ -72,7 +72,6 @@ BOARD_VOLD_MAX_PARTITIONS := 26
 # Recovery
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_FSTAB_VERSION := 2
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.vee3
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := "<font_7x16.h>"
@@ -80,6 +79,13 @@ BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
+
+# FSTAB
+ifeq ($(RECOVERY_VARIANT),twrp)
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/twrp.fstab
+else
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.vee3
+endif
 
 # QCom
 BOARD_USES_QCOM_HARDWARE := true
@@ -152,8 +158,6 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun/file
 BOARD_UMS_LUNFILE := /sys/class/android_usb/android0/f_mass_storage/lun/file
 
-DEVICE_RESOLUTION := 240x320
-
 # RIL for DualSim - Test
 BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril/
 
@@ -171,3 +175,18 @@ WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/wlan.ko"
 WIFI_DRIVER_MODULE_NAME := "wlan"
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WIFI_DRIVER_FW_PATH_AP := "ap"
+
+# TWRP
+ifeq ($(RECOVERY_VARIANT),twrp)
+DEVICE_RESOLUTION := 240x240
+TW_INTERNAL_STORAGE_PATH := "/data/media"
+TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
+TW_EXTERNAL_STORAGE_PATH := "/external sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_FLASH_FROM_STORAGE := true
+TW_MAX_BRIGHTNESS := 255
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+else
+DEVICE_RESOLUTION := 240x320
+endif

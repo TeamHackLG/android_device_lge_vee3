@@ -36,6 +36,11 @@ $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
 PRODUCT_AAPT_PREF_CONFIG := ldpi
 
+ifeq ($(RECOVERY_VARIANT),twrp)
+PRODUCTY_COPY_FILES += \
+    $(LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
+endif
+
 # Rootdir
 PRODUCT_PACKAGES += \
     fstab.vee3 \
