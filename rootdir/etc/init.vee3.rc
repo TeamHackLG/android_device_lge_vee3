@@ -40,12 +40,11 @@ on init
     mkdir /mpt 0771 system system
     mkdir /cust 0771 system system
 
-    mkdir /storage/sdcard1 0700 root root
-    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
-    # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage/sdcard1 0775 system system
     mkdir /storage/emulated 0555 root root
     mkdir /storage/emulated/legacy 0555 root root
+    mkdir /mnt/media_rw/sdcard1 0555 root root
+    mkdir /mnt/shell/emulated 0700 shell shell
 
     export EXTERNAL_STORAGE /storage/emulated/legacy
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
@@ -91,7 +90,7 @@ on early-boot
 
 on boot
     # Permission for /proc/cmdline
-    chmod 0666 /proc/cmdline
+    chmod 666 /proc/cmdline
 
     exec system/bin/btnvtool -O
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -263,18 +262,18 @@ on post-fs-data
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
 
-    symlink /system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini /data/misc/wifi/WCN1314_qcom_cfg.ini
-    symlink /system/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin /data/misc/wifi/WCN1314_qcom_wlan_nv.bin
-    # Dummy file, to keep the API happy. The default firmware does both modes
-    write /data/misc/wifi/fwpath ""
-    chmod 0666 /data/misc/wifi/fwpath
-
     # Create the directory used by CnE subsystem
     mkdir /data/connectivity 0771 system system
     chown system system /data/connectivity
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
+
+    symlink /system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini /data/misc/wifi/WCN1314_qcom_cfg.ini
+    symlink /system/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin /data/misc/wifi/WCN1314_qcom_wlan_nv.bin
+    # Dummy file, to keep the API happy. The default firmware does both modes
+    write /data/misc/wifi/fwpath ""
+    chmod 0666 /data/misc/wifi/fwpath
 
     ## Sensors daemon stuff
     mkdir /data/misc/sensor 2755 system compass
@@ -561,6 +560,12 @@ on property:init.svc.wpa_supplicant=stopped
 # L : remove DHCPCD_IPV4LL
 # G : DHCPCD_GATEWAY
 # a : avoid_routes = 1
+
+service dhcpcd_bt-pan /system/bin/dhcpcd -BKLG
+    class late_start
+    disabled
+    oneshot
+
 service dhcpcd_wlan0 /system/bin/dhcpcd -ABKLG
     class late_start
     disabled
@@ -571,17 +576,18 @@ service dhcpcd_p2p /system/bin/dhcpcd -ABKLG
     disabled
     oneshot
 
-service iprenew_wlan0 /system/bin/dhcpcd -nK
+service iprenew_wlan0 /system/bin/dhcpcd -n
     class late_start
     disabled
     oneshot
 
-service iprenew_p2p /system/bin/dhcpcd -nK
+service iprenew_p2p /system/bin/dhcpcd -n
     class late_start
     disabled
     oneshot
 
-service dhcpcd_bnep0 /system/bin/dhcpcd -BKLG
+service iprenew_bt-pan /system/bin/dhcpcd -n
+    class late_start
     disabled
     oneshot
 
@@ -636,7 +642,7 @@ on property:crypto.driver.load=0
      exec /system/bin/rmmod qce.ko
 
 service drmdiag /system/bin/drmdiagapp
-    class late_start
+     class late_start
      user root
      disabled
      oneshot
@@ -672,9 +678,10 @@ service ppd /system/bin/mm-pp-daemon
     socket pps stream 0660 system system graphics
     group system graphics
 
-service hostapd /system/bin/hostapd -dddd /data/misc/wifi/hostapd.conf
-    socket hostapd_wlan0 dgram 660 wifi wifi
-    group wifi inet
+service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
+    class late_start
+    user root
+    group root
     oneshot
     disabled
 

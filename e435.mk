@@ -165,6 +165,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     lights.msm7x27a
 
+# Camera Hal
+PRODUCT_PACKAGES += \
+    camera.msm7x27a
+
 # Misc
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
@@ -199,7 +203,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.gprsclass=10 \
     ro.ril.transmitpower=true \
     ro.use_data_netmgrd=true \
-    persist.data_netmgrd_nint=3
+    persist.data_netmgrd_nint=3 \
+    debug.camcorder.disablemeta=1
 
 # OpenGL
 PRODUCT_PROPERTY_OVERRIDES += \
