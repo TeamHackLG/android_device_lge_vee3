@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2015 The CyanogenMod Project
+# Copyright 2015 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,22 +14,16 @@
 # limitations under the License.
 #
 
-# Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
-
-# Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-
 # Inherit device configuration
-$(call inherit-product, device/lge/e435/full_e435.mk)
-
-TARGET_SCREEN_HEIGHT := 320
-TARGET_SCREEN_WIDTH := 240
+$(call inherit-product, device/lge/e435/device.mk)
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := e435
-PRODUCT_NAME := cm_e435
-PRODUCT_BRAND := LGE
+PRODUCT_NAME := full_e435
+PRODUCT_BRAND := lge
 PRODUCT_MODEL := VEE3
 PRODUCT_MANUFACTURER := LGE
 PRODUCT_CHARACTERISTICS := phone
+
+# Release name and versioning
+PRODUCT_RELEASE_NAME := OptimusL3II
