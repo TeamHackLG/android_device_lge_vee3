@@ -190,7 +190,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Qcom properties
 PRODUCT_PROPERTY_OVERRIDES += \
-    com.qc.hardware=true \
+    com.qc.hardware=1 \
     audio.gapless.playback.disable=true \
 
 PRODUCT_PROPERTY_OVERRIDES += \
