@@ -40,7 +40,7 @@ case "$baseband" in
 esac
 
 case "$baseband" in
-    "msm" | "csfb" | "svlte2a" | "mdm" | "sglte" | "sglte2" | "dsda2" | "unknown")
+    "msm" | "csfb" | "svlte2a" | "mdm" | "sglte" | "sglte2" | "unknown")
     start qmuxd
     case "$baseband" in
         "svlte2a" | "csfb")
@@ -53,17 +53,13 @@ case "$baseband" in
               setprop persist.radio.voice.modem.index 0
           fi
         ;;
-        "dsda2")
-          setprop persist.radio.multisim.config dsda
     esac
 
     multisim=`getprop persist.radio.multisim.config`
 
-    if [ "$multisim" = "dsds" ] || [ "$multisim" = "dsda" ]; then
+    if [ "$multisim" = "dsds" ]; then
+        setprop ro.multi.rild true
         start ril-daemon1
-    elif [ "$multisim" = "tsts" ]; then
-        start ril-daemon1
-        start ril-daemon2
     fi
 
     case "$netmgr" in
