@@ -271,6 +271,10 @@ on post-fs-data
 
     symlink /system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini /data/misc/wifi/WCN1314_qcom_cfg.ini
     symlink /system/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin /data/misc/wifi/WCN1314_qcom_wlan_nv.bin
+
+    symlink /system/lib/modules/volans/WCN1314_rf.ko /system/lib/modules/wlan.ko
+    symlink /system/lib/modules/volans/cfg80211.ko /system/lib/modules/cfg80211.ko
+
     # Dummy file, to keep the API happy. The default firmware does both modes
     write /data/misc/wifi/fwpath ""
     chmod 0666 /data/misc/wifi/fwpath
