@@ -197,19 +197,23 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/system/lib/libqc-opt.so \
     ro.sf.lcd_density=120 \
 
-# Radio properties
+# RIL
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_network=3 \
-    telephony.lteOnGsmDevice=0 \
-    ro.telephony.ril.v3=qcomdsds \
-    ro.telephony.call_ring.multiple=0 \
+    ro.telephony.ril.v3=skippinpukcount,qcomdsds \
+    ro.telephony.call_ring.multiple=false \
+    ro.telephony.call_ring.delay=0 \
     ril.subscription.types=NV,RUIM \
+    ro.ril.transmitpower=true \
+    ro.ril.hsxpa=1 \
+    ro.ril.gprsclass=10 \
+
+# Properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    telephony.lteOnGsmDevice=0 \
     DEVICE_PROVISIONED=1 \
     persist.radio.apm_sim_not_pwdn=1 \
     keyguard.no_require_sim=1 \
-    ro.ril.hsxpa=1 \
-    ro.ril.gprsclass=10 \
-    ro.ril.transmitpower=true \
     ro.use_data_netmgrd=true \
     persist.data_netmgrd_nint=3 \
     debug.camcorder.disablemeta=0 \
