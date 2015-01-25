@@ -21,7 +21,7 @@ debug.composition.7x27A.type=gpu
 debug.composition.7x25A.type=gpu
 
 #
-# system props for the MM modules
+# The MM modules
 #
 media.stagefright.enable-player=true
 media.stagefright.enable-meta=false
@@ -32,38 +32,38 @@ media.stagefright.enable-aac=true
 media.stagefright.enable-qcp=true
 
 #
-# system prop for audio post processing
+# Audio post processing
 #
 audio.legacy.postproc=true
 
 #
-# system props for the data modules
+# Data modules
 #
 ro.use_data_netmgrd=true
 persist.data.ds_fmc_app.mode=0
 
 #
-# system props for IMS module
+# IMS module
 #
 persist.ims.regmanager.mode=0
 
 #
-# System prop to disable strict mode flash on display
+# Disable strict mode flash on display
 #
 persist.sys.strictmode.visual=false
 
 #
-# System prop to enable/disable OMH. Enabled by default
+# Enable/Disable OMH. Enabled by default
 #
 persist.omh.enabled=1
 
 #
-# System prop to enable ehrpd capability
+# Enable ehrpd capability
 #
 ro.config.ehrpd=true
 
 #
-# System property for cabl
+# Cabl
 #
 ro.qualcomm.cabl=0
 
@@ -73,32 +73,32 @@ ro.qualcomm.cabl=0
 ro.ril.transmitpower=true
 
 #
-# System prop to determine availability of analog fm path
+# Determine availability of analog fm path
 #
 ro.fm.analogpath.supported=true
 
 #
-#System property for FM transmitter
+# FM transmitter
 #
 ro.fm.transmitter=false
 
 #
-#System property for single instance recording
+# Single instance recording
 #
 ro.fm.mulinst.recording.support=false
 
 #
-# system props for SD card emulation of emmc partition
+# SD card emulation of emmc partition
 #
 ro.emmc.sdcard.partition=20
 
 #
-# system property to enforce Phone Mode view
+# Enforce Phone Mode view
 #
 ro.screen.layout=normal
 
 #
-#System prop for setting the pixel format
+# Setting the pixel format
 #
 ro.staticwallpaper.pixelformat=RGB_565
 

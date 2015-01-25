@@ -38,7 +38,7 @@ PRODUCT_AAPT_PREF_CONFIG := ldpi
 
 ifeq ($(RECOVERY_VARIANT),twrp)
 PRODUCTY_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
+    $(LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab \
 endif
 
 # Rootdir
@@ -49,29 +49,29 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     init.qcom.usb.sh \
     init.qcom.class_main.sh \
-    init.qcom.sh
+    init.qcom.sh \
 
 # Configs
 PRODUCT_PACKAGES += \
     7k_handset.kl \
     touch_mcs8000.kl \
-    vee3_keypad.kl
+    vee3_keypad.kl \
 
 # Audio Files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/AudioFilter.csv:system/etc/AudioFilter.csv \
-    $(LOCAL_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf
+    $(LOCAL_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf \
 
 # Media Files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml
+    $(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml \
 
 # SoftAP files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept \
     $(LOCAL_PATH)/configs/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny \
-    $(LOCAL_PATH)/configs/hostapd/hostapd_default.conf::system/etc/hostapd/hostapd_default.conf
+    $(LOCAL_PATH)/configs/hostapd/hostapd_default.conf::system/etc/hostapd/hostapd_default.conf \
 
 # Permission files
 PRODUCT_COPY_FILES += \
@@ -92,7 +92,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml
+    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
 
 # Display HALS
 PRODUCT_PACKAGES += \
@@ -106,7 +106,7 @@ PRODUCT_PACKAGES += \
     libtilerenderer \
     libgenlock \
     libqdutils \
-    libqdMetaData
+    libqdMetaData \
 
 # Video
 PRODUCT_PACKAGES += \
@@ -117,42 +117,42 @@ PRODUCT_PACKAGES += \
     libdashplayer \
     libOmxVdec \
     libOmxVenc \
-    qcmediaplayer
+    qcmediaplayer \
 
 
 # Off-mode Charging
 PRODUCT_PACKAGES += \
     charger \
-    charger_res_images
+    charger_res_images \
 
 # Gps
 PRODUCT_PACKAGES += \
-    gps.msm7x27a
+    gps.msm7x27a \
 
 # Power Hal
 PRODUCT_PACKAGES += \
-    power.msm7x27a
+    power.msm7x27a \
 
 # BT
 PRODUCT_PACKAGES += \
-    libbt-vendor
+    libbt-vendor \
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
     make_ext4fs \
     e2fsck \
-    setup_fs
+    setup_fs \
 
 # WallPaper
 PRODUCT_PACKAGES += \
     librs_jni \
     LiveWallpapers \
     LiveWallpapersPicker \
-    VisualizationWallpapers
+    VisualizationWallpapers \
 
 # Misc
 PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
+    com.android.future.usb.accessory \
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -161,42 +161,41 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     audio.primary.msm7x27a \
     audio_policy.msm7x27a \
-    libaudio-resampler
+    libaudio-resampler \
 
 # FM Radio
 PRODUCT_PACKAGES += \
     FM2 \
     FMRecord \
     libqcomfm_jni \
-    qcom.fmradio
+    qcom.fmradio \
 
 # Light HAL
 PRODUCT_PACKAGES += \
-    lights.msm7x27a
+    lights.msm7x27a \
 
 # Camera Hal
 PRODUCT_PACKAGES += \
-    camera.msm7x27a
+    camera.msm7x27a \
 
 # Misc
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
     libQWiFiSoftApCfg \
-    libqcomvoiceprocessing
+    libqcomvoiceprocessing \
 
 # Build.prop Properties
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
+    persist.sys.usb.config=mtp,adb \
 
 # Qcom properties
 PRODUCT_PROPERTY_OVERRIDES += \
     com.qc.hardware=true \
     audio.gapless.playback.disable=true \
-    debug.camcorder.disablemeta=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/system/lib/libqc-opt.so \
-    ro.sf.lcd_density=120
+    ro.sf.lcd_density=120 \
 
 # Radio properties
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -213,18 +212,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.transmitpower=true \
     ro.use_data_netmgrd=true \
     persist.data_netmgrd_nint=3 \
-    debug.camcorder.disablemeta=1
+    debug.camcorder.disablemeta=0 \
 
 # OpenGL
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=131072
+    ro.opengles.version=131072 \
 
 # WLAN
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=15
+    wifi.supplicant_scan_interval=20 \
 
 # For userdebug builds
 ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.secure=0 \
-    ro.adb.secure=0
+    ro.adb.secure=0 \

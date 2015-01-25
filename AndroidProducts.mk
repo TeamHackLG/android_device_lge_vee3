@@ -15,4 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_vee3.mk
+    $(LOCAL_DIR)/full_vee3.mk \

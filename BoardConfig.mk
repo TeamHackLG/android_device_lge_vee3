@@ -143,8 +143,7 @@ TARGET_PROVIDES_LIBLIGHT := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # SEPolicy
-BOARD_SEPOLICY_DIRS := \
-       $(LOCAL_PATH)/sepolicy
+BOARD_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
 
 BOARD_SEPOLICY_UNION := \
        device.te \
@@ -152,7 +151,7 @@ BOARD_SEPOLICY_UNION := \
        file_contexts \
        untrusted_app.te \
        vold.te \
-       zygote.te
+       zygote.te \
 
 # Bootanimation
 TARGET_BOOTANIMATION_PRELOAD := true
