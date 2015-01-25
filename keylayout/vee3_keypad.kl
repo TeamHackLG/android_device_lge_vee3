@@ -109,4 +109,4 @@ key 139   MENU              WAKE
 #SEND Key Mapping
 key 231   CALL              WAKE_DROPPED
 # R+ Mapping
-key 172   HOME              WAKE
+key 172   HOME              WAKE_DROPPED
