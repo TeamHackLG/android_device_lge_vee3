@@ -38,7 +38,7 @@ PRODUCT_AAPT_PREF_CONFIG := ldpi
 
 ifeq ($(RECOVERY_VARIANT),twrp)
 PRODUCTY_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab \
+    $(LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
 endif
 
 # Rootdir
