@@ -186,7 +186,7 @@ PRODUCT_PACKAGES += \
 
 # Build.prop Properties
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp,adb \
+    persist.sys.usb.config=mtp \
 
 # Qcom properties
 PRODUCT_PROPERTY_OVERRIDES += \

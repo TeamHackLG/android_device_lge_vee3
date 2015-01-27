@@ -276,7 +276,7 @@ on post-fs-data
     write /data/misc/wifi/fwpath ""
     chmod 0666 /data/misc/wifi/fwpath
 
-    ## Sensors daemon stuff
+    # Sensors daemon stuff
     mkdir /data/misc/sensor 2755 system compass
 
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
