@@ -161,9 +161,6 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/class/android_usb/android0/f_mass_storage/lun/file
 BOARD_UMS_LUNFILE := /sys/class/android_usb/android0/f_mass_storage/lun/file
 
-# RIL for DualSim - Test
-BOARD_RIL_CLASS := ../../../$(LOCAL_PATH)/ril/
-
 # Wlan
 BOARD_HAS_QCOM_WLAN := true
 BOARD_HAS_QCOM_WLAN_SDK := true
