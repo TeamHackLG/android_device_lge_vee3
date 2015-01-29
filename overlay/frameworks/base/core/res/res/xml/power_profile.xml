@@ -29,6 +29,9 @@
       <value>1056000</value>
       <value>1113600</value>
       <value>1190400</value>
+      <value>1228800</value>
+      <value>1267200</value>
+      <value>1300000</value>
   </array>
 
   <!-- This is the battery capacity in mAh (measured at nominal voltage) -->
