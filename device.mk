@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-# This file includes all definitions that apply to ALL Vee3 devices.
+# This file includes all definitions that apply to ALL L3 II devices.
 #
 # Everything in this directory will become public
 
@@ -42,7 +42,6 @@ PRODUCTY_COPY_FILES += \
 endif
 
 # Stock Charger
-ifeq ($(PRODUCT_MANUFACTURER),LGE)
 PRODUCT_PACKAGES += \
     chargerlogo \
     battery_charging_01.png \
@@ -61,8 +60,7 @@ PRODUCT_PACKAGES += \
     battery_trickle_ani_01.png \
     battery_trickle_ani_02.png \
     battery_wait_ani_01.png \
-    battery_wait_ani_01.png
-endif
+    battery_wait_ani_01.png \
 
 # Rootdir
 PRODUCT_PACKAGES += \
@@ -141,7 +139,6 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVenc \
     qcmediaplayer \
-
 
 # Off-mode Charging
 PRODUCT_PACKAGES += \
