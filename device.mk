@@ -41,6 +41,29 @@ PRODUCTY_COPY_FILES += \
     $(LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
 endif
 
+# Stock Charger
+ifeq ($(PRODUCT_MANUFACTURER),LGE)
+PRODUCT_PACKAGES += \
+    chargerlogo \
+    battery_charging_01.png \
+    battery_charging_02.png \
+    battery_charging_03.png \
+    battery_charging_04.png \
+    battery_charging_05.png \
+    battery_charging_06.png \
+    battery_charging_07.png \
+    battery_charging_08.png \
+    battery_charging_bg.png \
+    battery_charging_complete.png \
+    battery_charging_warning.png \
+    battery_charging_warning_eng_1.png \
+    battery_charging_warning_eng_2.png \
+    battery_trickle_ani_01.png \
+    battery_trickle_ani_02.png \
+    battery_wait_ani_01.png \
+    battery_wait_ani_01.png
+endif
+
 # Rootdir
 PRODUCT_PACKAGES += \
     fstab.vee3 \
