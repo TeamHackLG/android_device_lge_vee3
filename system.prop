@@ -116,3 +116,8 @@ gsm.version.baseband=v10
 # On Strider below period is found to improve power numbers for AAC MP4
 #
 dev.pm.dyn_sample_period=700000
+
+#
+# KSM
+#
+ro.ksm.default=1
