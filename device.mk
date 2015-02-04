@@ -163,13 +163,6 @@ PRODUCT_PACKAGES += \
     e2fsck \
     setup_fs \
 
-# WallPaper
-PRODUCT_PACKAGES += \
-    librs_jni \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    VisualizationWallpapers \
-
 # Misc
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
@@ -186,7 +179,6 @@ PRODUCT_PACKAGES += \
 # FM Radio
 PRODUCT_PACKAGES += \
     FM2 \
-    FMRecord \
     libqcomfm_jni \
     qcom.fmradio \
 
