@@ -1,8 +1,8 @@
 #
 # RILD
 #
-rild.libargs=-d /dev/smd0
 rild.libpath=/system/lib/libril-qc-qmi-1.so
+rild.libargs=-d /dev/smd0
 persist.rild.nitz_plmn=
 persist.rild.nitz_long_ons_0=
 persist.rild.nitz_long_ons_1=
@@ -12,6 +12,8 @@ persist.rild.nitz_short_ons_0=
 persist.rild.nitz_short_ons_1=
 persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
+DEVICE_PROVISIONED=1
+ro.telephony.ril.v3=skippinpukcount,signalstrength,qcomdsds
 
 #
 # Display Composition
@@ -68,19 +70,9 @@ ro.config.ehrpd=true
 ro.qualcomm.cabl=0
 
 #
-# Determine availability of analog fm path
+# Transmit power request to RIL during WiFi hotspot on/off
 #
-ro.fm.analogpath.supported=true
-
-#
-# FM transmitter
-#
-ro.fm.transmitter=false
-
-#
-# Single instance recording
-#
-ro.fm.mulinst.recording.support=false
+ro.ril.transmitpower=true
 
 #
 # SD card emulation of emmc partition
@@ -121,3 +113,10 @@ dev.pm.dyn_sample_period=700000
 # KSM
 #
 ro.ksm.default=1
+
+#
+# FM Radio
+#
+ro.fm.analogpath.supported=true
+ro.fm.transmitter=false
+ro.fm.mulinst.recording.support=false
