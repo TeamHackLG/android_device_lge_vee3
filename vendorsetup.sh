@@ -16,3 +16,5 @@
 
 add_lunch_combo cm_vee3-userdebug
 add_lunch_combo cm_vee3-eng
+
+sh vendor/cm/get-prebuilts
