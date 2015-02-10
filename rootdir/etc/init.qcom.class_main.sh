@@ -29,6 +29,8 @@
 #
 # start ril-daemon only for targets on which radio is present
 #
+PATH=/sbin:/system/sbin:/system/bin:/system/xbin
+export PATH
 baseband=`getprop ro.baseband`
 netmgr=`getprop ro.use_data_netmgrd`
 sgltecsfb=`getprop persist.radio.sglte_csfb`

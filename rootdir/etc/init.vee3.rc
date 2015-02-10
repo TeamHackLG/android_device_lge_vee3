@@ -865,3 +865,18 @@ on property:ftm_ptt_start=1
 
 on property:ftm_ptt_start=0
    stop ftm_ptt
+
+service lgsecclk /system/bin/lgsecclkserver
+   class main
+   user system
+   group system sdcard_rw media_rw
+
+service lgdrm /system/bin/lgdrmserver
+   class main
+   user system
+   group sdcard_rw media_rw system radio media
+
+# restart when servicemanager is restarted
+on property:init.svc.servicemanager=restarting
+   restart lgdrm
+   restart lgsecclk
