@@ -249,6 +249,9 @@ on post-fs-data
     chown system system /sys/devices/platform/i2c-gpio.5/i2c-5/5-0039/pdata
     chmod 0660 /sys/devices/platform/i2c-gpio.5/i2c-5/5-0039/pdata
 
+    write /sys/block/mmcblk0/queue/read_ahead_kb 1024
+    write /sys/block/mmcblk1/queue/read_ahead_kb 1024
+
     chown system system /dev/atcmd-tty0
     chmod 0660 /dev/atcmd-tty0
     chown system system /dev/atcmd-tty1
