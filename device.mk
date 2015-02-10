@@ -203,8 +203,23 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 # Qcom properties
 PRODUCT_PROPERTY_OVERRIDES += \
     com.qc.hardware=1 \
+    qcom.hw.aac.encoder=true \
     audio.gapless.playback.disable=true \
     ro.vendor.extension_library=/system/lib/libqc-opt.so \
+    ro.qc.sdk.audio.fluencetype=none \
+
+# Media
+PRODUCT_PROPERTY_OVERRIDES += \
+    lpa.decode=false \
+    tunnel.decode=false \
+    lpa.use-stagefright=false \
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    af.resampler.quality=255 \
+
+# Persist
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.call_recording.enabled=1 \
 
 # Lcd Density
 PRODUCT_PROPERTY_OVERRIDES += \
