@@ -678,11 +678,6 @@ service wifi-sdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh
 on property:init.svc.bootanim=running
     start atd
 
-service hdmid /system/bin/hdmid
-    class late_start
-    socket hdmid stream 0660 root system graphics
-    disabled
-
 service ppd /system/bin/mm-pp-daemon
     class late_start
     user system
