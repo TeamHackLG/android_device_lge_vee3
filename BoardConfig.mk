@@ -143,9 +143,9 @@ TARGET_PROVIDES_LIBLIGHT := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # SEPolicy
-BOARD_SEPOLICY_DIRS := $(LOCAL_PATH)/sepolicy
+BOARD_SEPOLICY_DIRS += $(LOCAL_PATH)/sepolicy
 
-BOARD_SEPOLICY_UNION := \
+BOARD_SEPOLICY_UNION += \
        device.te \
        app.te \
        file_contexts \
