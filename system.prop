@@ -14,14 +14,13 @@ persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
 ril.subscription.types=NV,RUIM
 DEVICE_PROVISIONED=1
-ro.telephony.ril.v3=skippinpukcount,signalstrength,qcomdsds
+ro.telephony.ril.v3=skippinpukcount,qcomdsds
 
 #
 # Display Composition
 #
 debug.sf.hw=1
-debug.composition.7x27A.type=gpu
-debug.composition.7x25A.type=gpu
+debug.composition.type=gpu
 
 #
 # The MM modules
@@ -103,7 +102,7 @@ persist.service.factory.enable=0
 #
 # Baseband GSM Version
 #
-gsm.version.baseband=v10
+gsm.version.baseband=MSM7225A-0-AB
 
 #
 # On Strider below period is found to improve power numbers for AAC MP4

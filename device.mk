@@ -204,9 +204,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
-    lpa.decode=false \
-    tunnel.decode=false \
-    lpa.use-stagefright=false \
+    video.accelerate.hw=1 \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     af.resampler.quality=255 \
@@ -227,7 +225,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.apm_sim_not_pwdn=1 \
     keyguard.no_require_sim=1 \
     ro.use_data_netmgrd=true \
+
+# Debug
+PRODUCT_PROPERTY_OVERRIDES += \
     debug.camcorder.disablemeta=0 \
+    debug.gralloc.map_fb_memory=1 \
+    debug.hwc.fakevsync=1 \
 
 # OpenGL
 PRODUCT_PROPERTY_OVERRIDES += \
