@@ -176,12 +176,6 @@ PRODUCT_PACKAGES += \
     audio_policy.msm7x27a \
     libaudio-resampler \
 
-# FM Radio
-PRODUCT_PACKAGES += \
-    FM2 \
-    libqcomfm_jni \
-    qcom.fmradio \
-
 # Light HAL
 PRODUCT_PACKAGES += \
     lights.msm7x27a \

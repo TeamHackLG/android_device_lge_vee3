@@ -114,10 +114,3 @@ dev.pm.dyn_sample_period=700000
 # KSM
 #
 ro.ksm.default=1
-
-#
-# FM Radio
-#
-ro.fm.analogpath.supported=true
-ro.fm.transmitter=false
-ro.fm.mulinst.recording.support=false
