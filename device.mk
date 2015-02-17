@@ -190,6 +190,10 @@ PRODUCT_PACKAGES += \
     libQWiFiSoftApCfg \
     libqcomvoiceprocessing \
 
+# Build Sim ToolKit
+PRODUCT_PACKAGES += \
+    Stk \
+
 # Build.prop Properties
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp \
