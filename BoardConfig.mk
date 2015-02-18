@@ -144,12 +144,13 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_SEPOLICY_DIRS += $(LOCAL_PATH)/sepolicy
 
 BOARD_SEPOLICY_UNION += \
-       device.te \
-       app.te \
-       file_contexts \
-       untrusted_app.te \
-       vold.te \
-       zygote.te \
+	app.te \
+	device.te \
+	file_contexts \
+	rild.te \
+	untrusted_app.te \
+	vold.te \
+	zygote.te \
 
 # Bootanimation
 TARGET_BOOTANIMATION_PRELOAD := true
