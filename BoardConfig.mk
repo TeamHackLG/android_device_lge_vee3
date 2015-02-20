@@ -32,6 +32,10 @@ COMMON_GLOBAL_CFLAGS += -DLPA_DEFAULT_BUFFER_SIZE=480
 TARGET_GLOBAL_CFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4 -mtune=cortex-a5
 TARGET_GLOBAL_CPPFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4 -mtune=cortex-a5
 
+# Compiler Optimization
+ARCH_ARM_HIGH_OPTIMIZATION := true
+ARCH_ARM_HIGH_OPTIMIZATION_COMPAT := true
+
 TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := 7x27
 TARGET_BOARD_PLATFORM := msm7x27a
