@@ -175,14 +175,14 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_RECOVERY_SWIPE := true
 
 # FSTAB
-ifeq ($(RECOVERY_VARIANT),twrp)
+ifeq ($(RECOVERY_VARIANT),omni)
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/twrp.fstab
 else
 TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.vee3
 endif
 
 # TWRP
-ifeq ($(RECOVERY_VARIANT),twrp)
+ifeq ($(RECOVERY_VARIANT),omni)
 DEVICE_RESOLUTION := 240x240
 TW_INTERNAL_STORAGE_PATH := "/data/media"
 TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
