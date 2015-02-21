@@ -102,6 +102,9 @@ TARGET_HAS_QACT := true
 TARGET_QCOM_MEDIA_VARIANT := legacy
 TARGET_QCOM_DISPLAY_VARIANT := legacy
 
+# Don't generate block mode update zips
+BLOCK_BASED_OTA := false
+
 # FM
 BOARD_HAVE_QCOM_FM := true
 QCOM_FM_ENABLED := true
