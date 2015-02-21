@@ -129,6 +129,17 @@ TARGET_PROVIDES_LIBLIGHT := true
 
 # Camera
 
+
+# Add h/w acceleration in browser
+ENABLE_WEBGL := true
+WITH_JIT := true
+ENABLE_JSC_JIT := true
+JS_ENGINE := v8
+HTTP := chrome
+
+# Use Cpu Upload path (webkit)
+TARGET_FORCE_CPU_UPLOAD := true
+
 # SEPolicy
 BOARD_SEPOLICY_DIRS += $(LOCAL_PATH)/sepolicy
 
