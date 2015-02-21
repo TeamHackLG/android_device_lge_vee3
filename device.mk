@@ -120,24 +120,17 @@ PRODUCT_PACKAGES += \
     gralloc.msm7x27a \
     hwcomposer.msm7x27a \
     memtrack.msm7x27a \
-    libc2dcolorconvert \
     liboverlay \
-    libmemalloc \
     libtilerenderer \
     libgenlock \
-    libqdutils \
     libqdMetaData \
 
 # Video
 PRODUCT_PACKAGES += \
-    libI420colorconvert \
     libstagefrighthw \
     libmm-omxcore \
     libOmxCore \
     libdashplayer \
-    libOmxVdec \
-    libOmxVenc \
-    qcmediaplayer \
 
 # Off-mode Charging
 PRODUCT_PACKAGES += \
