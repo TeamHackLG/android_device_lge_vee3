@@ -26,7 +26,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.telephony.default_network=3 \
 	ro.telephony.call_ring.delay=0 \
-	ro.telephony.call_ring.multiple=0 \
+	ro.telephony.call_ring.multiple=false \
 	ro.use_data_netmgrd=true \
 
 # SIM
@@ -124,6 +124,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	wifi.interface=wlan0 \
 	wifi.supplicant_scan_interval=20 \
+
+# WLan
+PRODUCT_PROPERTY_OVERRIDES += \
+	wlan.driver.ath=0 \
+	wlan.chip.vendor=qcom \
+
+# DHCP
+PRODUCT_PROPERTY_OVERRIDES += \
+	dhcp.dlna.using=false \
 
 # OpenGL
 PRODUCT_PROPERTY_OVERRIDES += \
