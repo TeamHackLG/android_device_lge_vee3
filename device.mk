@@ -185,3 +185,12 @@ PRODUCT_PACKAGES += \
 # Build Sim ToolKit
 PRODUCT_PACKAGES += \
     Stk \
+
+# For userdebug builds
+ADDITIONAL_DEFAULT_PROPERTIES += \
+	ro.secure=0 \
+	ro.adb.secure=0 \
+
+# Build.prop Properties
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+	persist.sys.usb.config=mtp \

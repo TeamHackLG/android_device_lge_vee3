@@ -21,9 +21,6 @@ LOCAL_PATH := device/lge/vee3
 # inherit from the common proprietary version
 -include vendor/lge/msm7x27a-common//BoardConfigVendor.mk
 
-# System properties
--include $(LOCAL_PATH)/system_prop.mk
-
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
 BOARD_VENDOR := lge
