@@ -393,6 +393,11 @@ service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/usbdisk /s
     class late_start
     disabled
 
+# Binding fuse mount point to /storage/emulated/legacy
+on property:init.svc.fuse_sdcard=running
+    wait /mnt/shell/emulated/0
+    mount none /mnt/shell/emulated/0 /storage/emulated/legacy bind
+
 service cnd /system/bin/cnd
     class late_start
     socket cnd stream 666 root radio
