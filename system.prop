@@ -83,7 +83,6 @@ dev.pm.dyn_sample_period=700000
 
 # RAM
 ro.ksm.default=1
-ro.config.low_ram=true
 
 # Lcd Density
 ro.sf.lcd_density=120
@@ -111,7 +110,3 @@ dhcp.dlna.using=false
 
 # OpenGL
 ro.opengles.version=131072
-
-# BG Apps
-ro.sys.fw.bg_apps_limit=20
-ro.config.max_starting_bg=8
