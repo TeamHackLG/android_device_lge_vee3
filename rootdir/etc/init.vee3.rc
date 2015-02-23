@@ -173,22 +173,36 @@ on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
-    # Accel,compass
-    chown system system /sys/class/input/input3/range
-    chown system system /sys/class/input/input3/bandwidth
-    chown system system /sys/class/input/input3/mode
+    # Accelometer sensor
+    chown system system /sys/class/input/input2/range
+    chown system system /sys/class/input/input2/bandwidth
+    chown system system /sys/class/input/input2/mode
+    chown system system /sys/class/input/input2/value
+    chown system system /sys/class/input/input2/delay
+    chown system system /sys/class/input/input2/update
+    chown system system /sys/class/input/input2/selftest
+    chown system system /sys/class/input/input2/offset_filt_x
+    chown system system /sys/class/input/input2/offset_filt_y
+    chown system system /sys/class/input/input2/offset_filt_z
+    chown system system /sys/class/input/input2/fast_calibration_x
+    chown system system /sys/class/input/input2/fast_calibration_y
+    chown system system /sys/class/input/input2/fast_calibration_z
+    chown system system /sys/class/input/input2/eeprom_writing
+    chown system system /sys/class/input/input2/softreset
+
+    chown system system /sys/class/input/input3/x
+    chown system system /sys/class/input/input3/y
+    chown system system /sys/class/input/input3/z
     chown system system /sys/class/input/input3/value
-    chown system system /sys/class/input/input3/delay
-    chown system system /sys/class/input/input3/update
-    chown system system /sys/class/input/input3/selftest
-    chown system system /sys/class/input/input3/offset_filt_x
-    chown system system /sys/class/input/input3/offset_filt_y
-    chown system system /sys/class/input/input3/offset_filt_z
-    chown system system /sys/class/input/input3/fast_calibration_x
-    chown system system /sys/class/input/input3/fast_calibration_y
-    chown system system /sys/class/input/input3/fast_calibration_z
-    chown system system /sys/class/input/input3/eeprom_writing
-    chown system system /sys/class/input/input3/softreset
+    chown system system /sys/class/input/input3/value_raw
+    chown system system /sys/class/input/input3/op_mode
+    chown system system /sys/class/input/input3/odr
+    chown system system /sys/class/input/input3/enable
+    chown system system /sys/class/input/input3/cnt
+    chown system system /sys/class/input/input3/rept_xy
+    chown system system /sys/class/input/input3/rept_z
+    chown system system /sys/class/input/input3/test
+    chown system system /sys/class/input/input3/diag
 
     # Proxi sensor
     chown system system /sys/devices/platform/i2c-gpio.5/i2c-5/5-0039/enable
