@@ -692,6 +692,9 @@ service ril-daemon1 /system/bin/rild -c 1
     disabled
     group radio cache inet misc audio sdcard_rw qcom_oncrpc diag
 
+on property:ro.multi.rild=true
+    start ril-daemon1
+
 on charger
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 1004
