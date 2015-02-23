@@ -26,8 +26,6 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-target=`getprop ro.board.platform`
-
 #
 # Function to start sensors for DSPS enabled platforms
 #
@@ -49,18 +47,6 @@ start_sensors()
     start sensors
 }
 
-start_battery_monitor()
-{
-	chown root.system /sys/module/pm8921_bms/parameters/*
-	chmod 0660 /sys/module/pm8921_bms/parameters/*
-	mkdir -p /data/bms
-	chown root.system /data/bms
-	chmod 0770 /data/bms
-	start battery_monitor
-}
-
-baseband=`getprop ro.baseband`
-
 #
 # Suppress default route installation during RA for IPV6; user space will take
 # care of this
@@ -69,65 +55,3 @@ for file in /proc/sys/net/ipv6/conf/*
 do
   echo 0 > $file/accept_ra_defrtr
 done
-
-#
-# Start gpsone_daemon for SVLTE Type I & II devices
-#
-case "$target" in
-        "msm7630_fusion")
-        start gpsone_daemon
-esac
-case "$baseband" in
-        "svlte2a")
-        start gpsone_daemon
-        start bridgemgrd
-esac
-case "$target" in
-        "msm7630_surf" | "msm8660" | "msm8960")
-        start quipc_igsn
-esac
-case "$target" in
-        "msm7630_surf" | "msm8660" | "msm8960")
-        start quipc_main
-esac
-
-case "$target" in
-        "msm8960")
-        start location_mq
-        start xtwifi_inet
-        start xtwifi_client
-esac
-
-case "$target" in
-    "msm7630_surf" | "msm7630_1x" | "msm7630_fusion")
-        value=`cat /sys/devices/system/soc/soc0/hw_platform`
-        case "$value" in
-            "Fluid")
-             start profiler_daemon;;
-        esac
-        ;;
-    "msm8660" )
-        platformvalue=`cat /sys/devices/system/soc/soc0/hw_platform`
-        case "$platformvalue" in
-            "Fluid")
-                start_sensors
-                start profiler_daemon;;
-        esac
-        ;;
-    "msm8960")
-        start_sensors
-        case "$baseband" in
-            "msm")
-		start_battery_monitor;;
-        esac
-
-        platformvalue=`cat /sys/devices/system/soc/soc0/hw_platform`
-        case "$platformvalue" in
-             "Fluid")
-                 start profiler_daemon;;
-             "Liquid")
-                 start profiler_daemon;;
-        esac
-        ;;
-
-esac
