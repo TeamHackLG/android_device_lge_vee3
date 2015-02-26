@@ -17,6 +17,7 @@ DEVICE_PROVISIONED=1
 # RIL
 ro.ril.transmitpower=true
 ril.subscription.types=NV,RUIM
+persist.radio.multisim.config dsds
 ro.telephony.ril.v3=skippinpukcount,qcomdsds
 
 # Properties
