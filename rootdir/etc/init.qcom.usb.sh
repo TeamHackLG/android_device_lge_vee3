@@ -51,26 +51,6 @@ chown root.system /sys/devices/platform/msm_hsusb/gadget/wakeup
 chmod 220 /sys/devices/platform/msm_hsusb/gadget/wakeup
 
 #
-# Allow persistent usb charging disabling
-# User needs to set usb charging disabled in persist.usb.chgdisabled
-#
-target=`getprop ro.board.platform`
-usbchgdisabled=`getprop persist.usb.chgdisabled`
-case "$usbchgdisabled" in
-    "") ;; #Do nothing here
-    * )
-    case $target in
-        "msm8660")
-        echo "$usbchgdisabled" > /sys/module/pmic8058_charger/parameters/disabled
-        echo "$usbchgdisabled" > /sys/module/smb137b/parameters/disabled
-	;;
-        "msm8960")
-        echo "$usbchgdisabled" > /sys/module/pm8921_charger/parameters/disabled
-	;;
-    esac
-esac
-
-#
 # Allow USB enumeration with default PID/VID
 #
 setprop sys.usb.config.extra diag
@@ -80,33 +60,11 @@ usb_config=`getprop persist.sys.usb.config`
 case "$usb_config" in
     "" | "adb") #USB persist config not set, select default configuration
         case $target in
-            "msm8974")
-                setprop persist.sys.usb.config diag,adb
-                ;;
-            "msm8960")
-                case "$baseband" in
-                    "mdm")
-                         setprop persist.sys.usb.config diag,diag_mdm,serial_hsic,serial_tty,rmnet_hsic,mass_storage,adb
-                    ;;
-                    "sglte")
-                         setprop persist.sys.usb.config diag,diag_mdm,serial_smd,serial_tty,serial_hsuart,rmnet_hsuart,mass_storage,adb
-                    ;;
-                    *)
-                         setprop persist.sys.usb.config diag,serial_smd,serial_tty,rmnet_bam,mass_storage,adb
-                    ;;
-                esac
-            ;;
-            "msm7627a" | "msm7x27a")
+            "msm7x27a")
                 setprop persist.sys.usb.config diag,serial_smd,serial_tty,rmnet_smd,mass_storage,adb
             ;;
             * )
                 case "$baseband" in
-                    "svlte2a")
-                         setprop persist.sys.usb.config diag,diag_mdm,serial_sdio,serial_smd,rmnet_smd_sdio,mass_storage,adb
-                    ;;
-                    "csfb")
-                         setprop persist.sys.usb.config diag,diag_mdm,serial_sdio,serial_tty,rmnet_sdio,mass_storage,adb
-                    ;;
                     *)
                          setprop persist.sys.usb.config diag,serial_tty,serial_tty,rmnet_smd,mass_storage,adb
                     ;;
