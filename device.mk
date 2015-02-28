@@ -68,7 +68,6 @@ PRODUCT_PACKAGES += \
     ueventd.vee3.rc \
     init.qcom.usb.rc \
     init.qcom.usb.sh \
-    init.qcom.class_main.sh \
     init.qcom.sh \
 
 # Configs

@@ -56,6 +56,9 @@ on init
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
     mkdir /data/misc/bluetoothd 0770 bluetooth bluetooth
 
+    # CM: We use our own ril-daemon service definition, see vee3-ril-daemon
+    stop ril-daemon
+
 on fs
     mount_all ./fstab.vee3
 
@@ -384,13 +387,28 @@ on property:wlan.driver.status=unloaded
 on property:wlan.driver.status=ok
     write /sys/devices/platform/msm_sdcc.2/polling 0
 
-service qcom-c_main-sh /system/bin/sh /init.qcom.class_main.sh
-    class main
-    user root
-    oneshot
+on property:persist.radio.multisim.config=dsds
+    stop ril-daemon
+    start vee3-ril-daemon
+    start vee3-ril-daemon1
 
 on property:vold.decrypt=trigger_restart_framework
-    start qcom-c_main-sh
+    stop rild
+
+service vee3-ril-daemon /system/bin/rild
+    class main
+    socket rild stream 660 root radio
+    socket rild-debug stream 660 radio system
+    user root
+    group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log diag
+
+service vee3-ril-daemon1 /system/bin/rild -c 1
+    class main
+    socket rild1 stream 660 root radio
+    socket rild-debug1 stream 660 radio system
+    user root
+    group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log diag
+    disabled
 
 # fusewrapped external sdcard daemon running as media_rw (1023)
 service fuse_sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
@@ -465,14 +483,11 @@ service qmuxd /system/bin/qmuxd
     class main
     user radio
     group radio audio bluetooth gps qcom_diag
-    disabled
 
 service netmgrd /system/bin/netmgrd
     class main
-    disabled
 
 on property:ro.use_data_netmgrd=false
-    # netmgr not supported on specific target
     stop netmgrd
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
@@ -683,17 +698,6 @@ service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     group system qcom_oncrpc
     disabled
     oneshot
-
-service ril-daemon1 /system/bin/rild -c 1
-    class main
-    socket rild1 stream 660 root radio
-    socket rild-debug1 stream 660 radio system
-    user root
-    disabled
-    group radio cache inet misc audio sdcard_rw qcom_oncrpc diag
-
-on property:ro.multi.rild=true
-    start ril-daemon1
 
 on charger
     write /sys/class/android_usb/android0/enable 0
