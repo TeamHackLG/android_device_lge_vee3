@@ -294,8 +294,13 @@ on post-fs-data
     # Create directory for hostapd
     mkdir /data/hostapd 0770 system wifi
 
+    # Create /data/time folder for time-services
+    mkdir /data/time 0700 system system
+
+    mkdir /data/audio 0770 media audio
+
     # Create directories for wiper services
-    mkdir /data/wpstiles/ 0755 shell
+    mkdir /data/wpstiles 0755 shell
     mkdir /data/wiper 0755 gps qcom_oncrpc
 
     # Create directories for gpsone_daemon services
