@@ -27,7 +27,6 @@ ro.use_data_netmgrd=true
 
 # SIM
 persist.service.factory.enable=0
-keyguard.no_require_sim=1
 persist.radio.apm_sim_not_pwdn=1
 
 # Display Composition
