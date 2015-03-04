@@ -21,7 +21,7 @@ $(call inherit-product, device/lge/vee3/device.mk)
 PRODUCT_DEVICE := vee3
 PRODUCT_NAME := full_vee3
 PRODUCT_BRAND := LGE
-PRODUCT_MODEL := VEE3
+PRODUCT_MODEL := L3 II
 PRODUCT_MANUFACTURER := LGE
 PRODUCT_CHARACTERISTICS := phone
 
