@@ -21,9 +21,13 @@ $(call inherit-product, device/lge/vee3/device.mk)
 PRODUCT_DEVICE := vee3
 PRODUCT_NAME := full_vee3
 PRODUCT_BRAND := LGE
-PRODUCT_MODEL := L3 II
 PRODUCT_MANUFACTURER := LGE
-PRODUCT_CHARACTERISTICS := phone
 
-# Release name and versioning
-PRODUCT_RELEASE_NAME := OptimusL3II
+# Project Vee3
+ifeq ($(PROJECT_VEE3_DUALSIM),true)
+	PRODUCT_MODEL := L3 II Dual
+	PRODUCT_RELEASE_NAME := L3 II Dual
+else
+	PRODUCT_MODEL := L3 II Single
+	PRODUCT_RELEASE_NAME := L3 II Single
+endif

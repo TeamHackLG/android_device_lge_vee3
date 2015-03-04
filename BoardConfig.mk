@@ -13,6 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Project Vee3
+PROJECT_VEE3_DUALSIM := true
+
 LOCAL_PATH := device/lge/vee3
 
 # inherit from the proprietary version
@@ -59,7 +62,13 @@ ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 
 # Try to build the kernel
 TARGET_KERNEL_SOURCE := kernel/lge/lproj-4.3
-TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
+
+# Project Vee3
+ifeq ($(PROJECT_VEE3_DUALSIM),true)
+	TARGET_KERNEL_CONFIG := cyanogenmod_vee3ds_defconfig
+else
+	TARGET_KERNEL_CONFIG := cyanogenmod_vee3e_defconfig
+endif
 
 # Kernel commands
 BOARD_KERNEL_BASE := 0x00200000
