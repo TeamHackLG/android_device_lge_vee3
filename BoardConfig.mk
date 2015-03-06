@@ -14,7 +14,9 @@
 # limitations under the License.
 
 # Project Vee3
-PROJECT_VEE3_DUALSIM := true
+PROJECT_VEE3_COMMON := true
+# Enable this if you are building to L3 II Single
+PROJECT_VEE3_SINGLE := false
 
 LOCAL_PATH := device/lge/vee3
 
@@ -64,10 +66,10 @@ ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 TARGET_KERNEL_SOURCE := kernel/lge/lproj-4.3
 
 # Project Vee3
-ifeq ($(PROJECT_VEE3_DUALSIM),true)
-	TARGET_KERNEL_CONFIG := cyanogenmod_vee3ds_defconfig
-else
+ifeq ($(PROJECT_VEE3_SINGLE),true)
 	TARGET_KERNEL_CONFIG := cyanogenmod_vee3e_defconfig
+else
+	TARGET_KERNEL_CONFIG := cyanogenmod_vee3ds_defconfig
 endif
 
 # Kernel commands
