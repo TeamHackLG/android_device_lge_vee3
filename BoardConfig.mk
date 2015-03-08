@@ -14,7 +14,6 @@
 # limitations under the License.
 
 # Project Vee3
-PROJECT_VEE3_COMMON := true
 # Enable this if you are building to L3 II Single
 PROJECT_VEE3_SINGLE := false
 # Disable this if you are not testing
