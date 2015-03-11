@@ -19,6 +19,12 @@ ro.ril.transmitpower=true
 ril.subscription.types=NV,RUIM
 ro.telephony.ril.v3=skippinpukcount,qcomdsds
 
+# CDMA
+ro.telephony.default_cdma_sub=0
+ro.cdma.factory=china
+ro.cdma.subscribe_on_ruim_ready=true
+telephony.lteOnCdmaDevice=0
+
 # Properties
 ro.telephony.default_network=3
 ro.telephony.call_ring.delay=0
