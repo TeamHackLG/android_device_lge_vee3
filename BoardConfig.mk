@@ -115,7 +115,7 @@ BOARD_USES_LEGACY_ALSA_AUDIO := true
 TARGET_HAS_QACT := true
 
 # RIL
-BOARD_RIL_CLASS := ../../../device/lge/p715/ril/
+BOARD_RIL_CLASS := ../../../device/lge/vee3/ril/
 
 # FM
 BOARD_HAVE_QCOM_FM := true
