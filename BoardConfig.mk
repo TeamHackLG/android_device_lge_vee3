@@ -114,6 +114,9 @@ BOARD_QCOM_VOIP_ENABLED := true
 BOARD_USES_LEGACY_ALSA_AUDIO := true
 TARGET_HAS_QACT := true
 
+# RIL
+BOARD_RIL_CLASS := ../../../device/lge/p715/ril/
+
 # FM
 BOARD_HAVE_QCOM_FM := true
 QCOM_FM_ENABLED := true

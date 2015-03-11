@@ -18,3 +18,4 @@ add_lunch_combo cm_vee3-userdebug
 add_lunch_combo cm_vee3-eng
 
 sh vendor/cm/get-prebuilts
+sh device/lge/vee3/patches/apply.sh

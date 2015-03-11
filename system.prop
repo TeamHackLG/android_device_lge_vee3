@@ -1,6 +1,7 @@
-# RILD
-rild.libpath=/system/lib/libril-qc-qmi-1.so
+# RIL
+#
 rild.libargs=-d /dev/smd0
+rild.libpath=/system/lib/libril-qc-qmi-1.so
 persist.rild.nitz_plmn=
 persist.rild.nitz_long_ons_0=
 persist.rild.nitz_long_ons_1=
@@ -10,102 +11,236 @@ persist.rild.nitz_short_ons_0=
 persist.rild.nitz_short_ons_1=
 persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
-
-# Device
-DEVICE_PROVISIONED=1
-
-# RIL
-ro.ril.transmitpower=true
 ril.subscription.types=NV,RUIM
+ro.telephony.call_ring.delay=3000
 ro.telephony.ril.v3=skippinpukcount,qcomdsds
+persist.multisim.config=dsds
+persist.radio.multisim.config=dsds
+ro.multi.rild=true
 
-# Properties
-ro.telephony.default_network=3
-ro.telephony.call_ring.delay=0
-ro.telephony.call_ring.multiple=false
+#
+# RIL2
+#
+ro.telephony.default_network=3 
+ro.telephony.default_cdma_sub=0 
+ro.cdma.factory=china 
+ro.cdma.subscribe_on_ruim_ready=true 
+telephony.lteOnCdmaDevice=0 
+ro.telephony.call_ring.multiple=false 
+ro.use_data_netmgrd=true 
+persist.data_netmgrd_nint=16 
+persist.radio.apm_sim_not_pwdn=1  
+persist.sys.usb.config=mtp,adb 
+#
+# system props for the MM modules
+#
 ro.use_data_netmgrd=true
-
-# SIM
-persist.service.factory.enable=0
+persist.data_netmgrd_nint=16
 persist.radio.apm_sim_not_pwdn=1
-
-# Display Composition
-debug.sf.hw=1
-debug.composition.type=dyn
-
-# MM modules
-media.stagefright.enable-aac=true
-media.stagefright.enable-fma2dp=true
-media.stagefright.enable-http=true
-media.stagefright.enable-meta=true
 media.stagefright.enable-player=true
-media.stagefright.enable-qcp=true
+media.stagefright.enable-meta=false
 media.stagefright.enable-scan=true
+media.stagefright.enable-http=true
+media.stagefright.enable-fma2dp=true
+media.stagefright.enable-aac=true
+media.stagefright.enable-qcp=true
 
-# Audio
+#
+# system prop for audio post processing
+#
 audio.legacy.postproc=true
-af.resampler.quality=255
-ro.qc.sdk.audio.fluencetype=none
-audio.gapless.playback.disable=true
 
-# Data modules
+#
+# system prop for opengles version
+#
+ro.opengles.version=131072
+
+#
+# system props for the data modules
+#
 ro.use_data_netmgrd=true
 persist.data.ds_fmc_app.mode=0
 
-# IMS module
+#
+# system props for IMS module
+#
 persist.ims.regmanager.mode=0
 
-# Disable strict mode flash on display
+#
+# system prop for requesting Master role in incoming Bluetooth connection.
+#
+# * LG_BTUI_A2DP_SWITCH_MASTER_ROLE suhui.kim@lge.com, fix A2DP chopping by switching to master role (set to true)
+# * QCT_BT_PATCH_SR00643418 suhui.kim@lge.com 111010, fix to fail in connection to turn back after being out of range
+# (with device BlueAnt Q2 and Jawbone Icon and P590) (set to false)
+ro.bluetooth.request.master=false
+
+#
+# system prop for Bluetooth FTP profile
+#
+ro.qualcomm.bluetooth.ftp=true
+
+#
+# system prop for Bluetooth SAP profile
+#
+# * LG_BTUI_SAP_DISABLE suhui.kim@lge.com, disable BT SAP for M3 (true -> false)
+ro.qualcomm.bluetooth.sap=false
+
+#
+# system prop for Bluetooth DUN profile
+#
+# *s LG_BTUI_DUN_DISABLE suhui.kim@lge.com, disable BT DUN for M3, true -> false
+ro.qualcomm.bluetooth.dun=false
+# *e LG_BTUI_DUN_DISABLE
+#
+# system prop for Bluetooth PAN profile
+#
+#LGBT_COMMON_SCENARIO supported Bluetooth PAN profile 2012-05-22
+ro.bluetooth.PANenable = 1
+#LGBT_COMMON_SCENARIO
+
+#
+# system prop for Bluetooth Auto connect for remote initated connections
+#
+ro.bluetooth.remote.autoconnect=true
+
+#
+#system property for Bluetooth discoverability timeout in seconds
+#0: Always discoverable
+#debug.bt.discoverable_time=0
+
+#
+# System prop to disable strict mode flash on display
+#
 persist.sys.strictmode.visual=false
 
-# Enable/Disable OMH. Enabled by default
+#
+# System prop to enable/disable OMH. Enabled by default
+#
 persist.omh.enabled=1
 
-# Enable ehrpd capability
+#System prop to enable ehrpd capability
 ro.config.ehrpd=true
 
-# Cabl
+# System property for cabl
 ro.qualcomm.cabl=0
 
-# SD Card
+#
+# system props for SD card emulation of emmc partition
+#
+
 ro.emmc.sdcard.partition=20
+
+#
+# system property to enforce Phone Mode view
+#
+ro.screen.layout=normal
+#
+# Turn off tiled rendering
+#
+debug.enabletr=false
+#
+
+#System prop for disabling the meta data mode for encoder
+#
+debug.camcorder.disablemeta=0
+
+#
+# Simulate sdcard on /data/media
+#
+
 persist.fuse_sdcard=true
 
-# Enforce Phone Mode view
-ro.screen.layout=normal
+#
+# System prop for using landscape preview layout in camera
+#
+debug.camera.landscape=true
+
+#
+# System prop for disabling the rendering dirty regions
+#
+hwui.render_dirty_regions=false
+
+#
+# System prop for enabling discontinuity for HLS Variant Playlist
+#
+httplive.enable.discontinuity=true
+
+#
+# Enable Dynamic sampling to help with cases like mp3 playback.
+#
+dev.pm.dyn_samplingrate=1
+#
+# On Strider below period is found to improve power numbers for AAC MP4
+#
+dev.pm.dyn_sample_period=700000
+
+#Factory SIM
+persist.service.factory.enable=0
+
+#Defined HW Key led feature
+lge.hw.frontkeyled=true
+
+ro.sys.fw.bg_apps_limit=20
+
+net.dns1=8.8.8.8
+net.dns2-8.8.4.4
+keyguard.no_require_sim=true
+ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html
+ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html
+ro.com.android.wifi-watchlist=GoogleGuest
+ro.setupwizard.enterprise_mode=1
+ro.com.android.dateformat=MM-dd-yyyy
+ro.com.android.dataroaming=false
+ro.build.selinux=1
+persist.sys.dun.override=0
+persist.sys.root_access=1
+ro.cmlegal.url=http://www.cyanogenmod.org/docs/privacy
+persist.sys.recovery_update=false
+headset.hook.delay=500
+ro.bluetooth.remote.autoconnect=true
+ro.bluetooth.request.master=true
+ro.bt.bdaddr_path=/data/misc/bluedroid/bdaddr
+ro.qualcomm.bluetooth.dun=true
+ro.qualcomm.bluetooth.ftp=true
+ro.cwm.enable_key_repeat=true
+debug.composition.type=dyn
+debug.sf.hw=1
+debug.composition.7x27A.type=dyn
+debug.composition.7x25A.type=dyn
+debug.composition.8x25.type=gpu
+debug.composition.n_plus.type=dyn
+debug.hwc.dynThreshold=1.9
+qemu.hw.main_keys=1
+ro.bq.gpu_to_cpu_unsupported=1
+ro.max.fling_velocity=8000
+ro.sf.lcd_density=240
+dalvik.vm.heapgrowthlimit=32m
+ro.staticwallpaper.pixelformat=RGB_565
+dalvik.vm.heapsize=64m
+com.qc.hardware=true
+dev.pm.dyn_sample_period=700000
+dev.pm.dyn_samplingrate=1
+persist.sys.usb.config=mtp,adb
+ro.vold.umsdirtyratio=50
+wifi.interface=wlan0
+persist.sys.thermal.monitor=1
+ro.carrier=unknown
+ro.ril.hsxpa=1
+ro.ril.gprsclass=10
+ro.adb.qemud=1
+dalvik.vm.heapstartsize=8m
+dalvik.vm.heaptargetutilization=0.75
+dalvik.vm.heapminfree=2m
+dalvik.vm.heapmaxfree=8m
+persist.sys.dalvik.vm.lib=libdvm.so
+dalvik.vm.lockprof.threshold=500
+dalvik.vm.dexopt-flags=m=y
+dalvik.vm.stack-trace-file=/data/anr/traces.txt
+persist.fuse_sdcard=true
 
 # Baseband GSM Version
 gsm.version.baseband=MSM7225A-0-AB
-
-# On Strider below period is found to improve power numbers for AAC MP4
-dev.pm.dyn_sample_period=700000
-
-# RAM
-ro.ksm.default=1
-
 # Lcd Density
 ro.sf.lcd_density=120
-
-# Debug
-debug.camcorder.disablemeta=0
-debug.gralloc.map_fb_memory=1
-debug.hwc.fakevsync=1
-
-# QCom
-com.qc.hardware=1
-qcom.hw.aac.encoder=true
-ro.vendor.extension_library=/system/lib/libqc-opt.so
-
-# WiFi
-wifi.interface=wlan0
-wifi.supplicant_scan_interval=20
-
-# WLan
-wlan.driver.ath=0
-wlan.chip.vendor=qcom
-
-# DHCP
-dhcp.dlna.using=false
-
 # OpenGL
 ro.opengles.version=131072
