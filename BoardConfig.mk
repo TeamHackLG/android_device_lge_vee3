@@ -68,7 +68,7 @@ TARGET_CORTEX_CACHE_LINE_32 := true
 ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 
 # Try to build the kernel
-TARGET_KERNEL_SOURCE := kernel/lge/lproj-4.3
+TARGET_KERNEL_SOURCE := kernel/lge/VeeKernel
 
 # Project Vee3
 ifeq ($(PROJECT_VEE3_SINGLE),true)
