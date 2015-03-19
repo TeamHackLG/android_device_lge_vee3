@@ -214,7 +214,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 ifeq ($(RECOVERY_VARIANT),omni)
 	TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/twrp.fstab
 else
-	TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/etc/fstab.vee3
+	TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/rootdir/fstab.vee3
 endif
 
 # TWRP
