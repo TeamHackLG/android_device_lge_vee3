@@ -169,6 +169,9 @@ on boot
     # Enable FSync
     write /sys/kernel/dyn_fsync/Dyn_fsync_active 1
 
+    # QCOM Sdio
+    write /sys/devices/platform/msm_sdcc.2/polling 1
+
 # msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/radio 0770 radio radio
@@ -579,12 +582,6 @@ on property:drmdiag.load=0
 service qcom-sh /system/bin/sh /init.qcom.sh
     class late_start
     user root
-    oneshot
-
-service wifi-sdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh
-    class late_start
-    group wifi inet
-    disabled
     oneshot
 
 service ppd /system/bin/mm-pp-daemon
