@@ -376,6 +376,10 @@ on post-fs-data
     chmod 660 /sys/class/input/input2/tap_enable
     chown system system /sys/class/input/input2/tap_enable
 
+    copy /proc/last_kmsg /data/dontpanic/last_kmsg
+    chown root log /data/dontpanic/last_kmsg
+    chmod 0640 /data/dontpanic/last_kmsg
+
 # Export GPIO56 for fusion targets to enable/disable hub
 service usbhub_init /system/bin/usbhub_init
     class late_start
