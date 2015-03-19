@@ -687,13 +687,6 @@ service map1 /system/bin/sdptool add --channel=17 MAS1
     disabled
     oneshot
 
-service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
-    class late_start
-    user root
-    group system qcom_oncrpc
-    disabled
-    oneshot
-
 on charger
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 1004
