@@ -2991,7 +2991,7 @@ void AudioHardware::AudioSessionOutLPA::bufferAlloc( )
     void *ion_buf; int32_t ion_fd;
     struct msm_audio_ion_info ion_info;
     //1. Open the ion_audio
-    ionfd = open("/dev/ion", O_RDONLY | O_SYNC);
+    ionfd = open("/dev/ion", O_RDONLY);
     if (ionfd < 0) {
         ALOGE("/dev/ion open failed \n");
         return;
