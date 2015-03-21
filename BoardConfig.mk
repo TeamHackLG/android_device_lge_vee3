@@ -16,8 +16,6 @@
 # Project Vee3
 # Enable this if you are building to L3 II Single
 PROJECT_VEE3_SINGLE := false
-# Disable this if you are not testing
-PROJECT_VEE3_TESTZONE := false
 
 LOCAL_PATH := device/lge/vee3
 
@@ -43,9 +41,6 @@ COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
 COMMON_GLOBAL_CFLAGS += -DREFRESH_RATE=60
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_LEGACY
-
-ifeq ($(PROJECT_VEE3_TESTZONE),true)
-endif
 
 # Compiler Optimization
 ARCH_ARM_HIGH_OPTIMIZATION := true
