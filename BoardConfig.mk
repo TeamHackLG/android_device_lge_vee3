@@ -20,10 +20,10 @@ PROJECT_VEE3_SINGLE := false
 LOCAL_PATH := device/lge/vee3
 
 # inherit from the proprietary version
--include vendor/lge/vee3/BoardConfigVendor.mk
+-include vendor/lge-vee3/vee3/BoardConfigVendor.mk
 
 # inherit from the common proprietary version
--include vendor/lge/msm7x27a-common//BoardConfigVendor.mk
+-include vendor/lge-vee3/msm7x27a-common//BoardConfigVendor.mk
 
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
