@@ -15,7 +15,7 @@
 
 # Project Vee3
 # Enable this if you are building to L3 II Single
-PROJECT_VEE3_SINGLE := false
+PROJECT_VEE3_HOME_FIX := false
 
 LOCAL_PATH := device/lge/vee3
 
@@ -23,7 +23,7 @@ LOCAL_PATH := device/lge/vee3
 -include vendor/lge-vee3/vee3/BoardConfigVendor.mk
 
 # inherit from the common proprietary version
--include vendor/lge-vee3/msm7x27a-common//BoardConfigVendor.mk
+-include vendor/lge-vee3/msm7x27a-common/BoardConfigVendor.mk
 
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
@@ -40,7 +40,6 @@ COMMON_GLOBAL_CFLAGS += -DNO_UPDATE_PREVIEW
 COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
 COMMON_GLOBAL_CFLAGS += -DREFRESH_RATE=60
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
-COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_LEGACY
 
 # Compiler Optimization
 ARCH_ARM_HIGH_OPTIMIZATION := true
@@ -62,11 +61,11 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_CORTEX_CACHE_LINE_32 := true
 ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 
-# Try to build the kernel
+# VeeKernel
 TARGET_KERNEL_SOURCE := kernel/lge/VeeKernel
 
 # Project Vee3
-ifeq ($(PROJECT_VEE3_SINGLE),true)
+ifeq ($(PROJECT_VEE3_HOME_FIX),true)
 	TARGET_KERNEL_CONFIG := cyanogenmod_vee3s_defconfig
 else
 	TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
@@ -98,14 +97,11 @@ BOARD_USES_QCOM_GPS := true
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
 
-# Variant
-TARGET_QCOM_AUDIO_VARIANT := caf
+# Media
 TARGET_QCOM_MEDIA_VARIANT := caf
-TARGET_QCOM_DISPLAY_VARIANT := legacy
 
 # Audio
-TARGET_PROVIDES_LIBAUDIO := true
-BOARD_QCOM_VOIP_ENABLED := true
+TARGET_QCOM_AUDIO_VARIANT := caf
 BOARD_USES_LEGACY_ALSA_AUDIO := true
 TARGET_HAS_QACT := true
 
@@ -116,11 +112,15 @@ BOARD_RIL_CLASS := ../../../device/lge/vee3/ril/
 BOARD_HAVE_QCOM_FM := true
 QCOM_FM_ENABLED := true
 
+# Legacy
+TARGET_QCOM_DISPLAY_VARIANT := legacy
+TARGET_USES_QCOM_BSP_LEGACY := true
+COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_LEGACY
+
 # Display
 BOARD_ADRENO_DECIDE_TEXTURE_TARGET := true
 USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
-TARGET_USES_QCOM_BSP_LEGACY := true
 TARGET_DISPLAY_USE_RETIRE_FENCE := true
 TARGET_NO_INITLOGO := true
 
@@ -140,16 +140,6 @@ TARGET_PROVIDES_LIBLIGHT := true
 
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
-
-# Add h/w acceleration in browser
-ENABLE_WEBGL := true
-WITH_JIT := true
-ENABLE_JSC_JIT := true
-JS_ENGINE := v8
-HTTP := chrome
-
-# Use Cpu Upload path (webkit)
-TARGET_FORCE_CPU_UPLOAD := true
 
 # SEPolicy
 BOARD_SEPOLICY_DIRS += $(LOCAL_PATH)/sepolicy
@@ -190,12 +180,7 @@ WIFI_DRIVER_FW_PATH_P2P := "p2p"
 WIFI_DRIVER_FW_PATH_PARAM := "/data/misc/wifi/fwpath"
 
 # Recovery
-ifeq ($(TARGET_USES_QCOM_BSP),true)
-	RECOVERY_VARIANT := omni # Use TWRP if using QCOM_BSP, for now.
-else
-	RECOVERY_VARIANT := philz
-endif
-# Recovery Comands
+RECOVERY_VARIANT := philz
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_FSTAB_VERSION := 2
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
