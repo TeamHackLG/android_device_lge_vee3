@@ -57,7 +57,8 @@ on init
     mkdir /data/misc/bluetoothd 0770 bluetooth bluetooth
 
 on fs
-    mount_all ./fstab.vee3
+    mount_all fstab.vee3
+    swapon_all fstab.vee3
 
     wait /dev/block/platform/msm_sdcc.3/by-num/p15
     exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p15
