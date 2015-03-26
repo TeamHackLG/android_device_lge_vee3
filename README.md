@@ -1,15 +1,15 @@
-Copyright 2015 - The CyanogenMod Project
+© 2015 - The CyanogenMod Project
 
-Caio99BR - Project Vee3
+TeamVee - Project Vee3
 
-Device configuration for LGE L3 II (Vee3)
+Device configuration for LGE Optimus L3 II (Vee3)
 =====================================
 
 Basic   | Spec Sheet
 -------:|:-------------------------
 CPU     | 1 GHz Cortex-A5
 CHIPSET | Qualcomm MSM7225AB Snapdragon
-BOARD   | Qualcomm MSM7627A
+BOARD   | Qualcomm MSM7627A (aka QC MSM7x27a)
 GPU     | Adreno 200
 Memory  | 512MB RAM
 Shipped Android Version | 4.1.2
