@@ -56,7 +56,6 @@ on init
 
 on fs
     mount_all fstab.vee3
-    swapon_all fstab.vee3
 
     wait /dev/block/platform/msm_sdcc.3/by-num/p15
     exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p15
