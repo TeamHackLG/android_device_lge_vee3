@@ -160,9 +160,6 @@ on boot
     chmod 0770 /dev/block/mmcblk0p6
     chmod 0770 /dev/block/mmcblk0p8
 
-    # Enable FSync
-    write /sys/kernel/dyn_fsync/Dyn_fsync_active 1
-
     # QCOM Sdio
     write /sys/devices/platform/msm_sdcc.2/polling 1
 
