@@ -154,7 +154,6 @@ on boot
     chown system system /sys/module/lge_emmc_direct_access/parameters/lcd_k_cal
     chown system system /sys/devices/platform/msm_fb.131073/mdp_kcal
 
-    wait /dev/block/mmcblk0p6
     chown root radio /dev/block/mmcblk0p6
     chown root system /dev/block/mmcblk0p8
     chmod 0770 /dev/block/mmcblk0p6
