@@ -160,6 +160,8 @@ on boot
     # QCOM Sdio
     write /sys/devices/platform/msm_sdcc.2/polling 1
 
+    start qcamerasvr
+
 # msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/radio 0770 radio radio
@@ -464,6 +466,12 @@ service netmgrd /system/bin/netmgrd
 
 on property:ro.use_data_netmgrd=false
     stop netmgrd
+
+# Start camera server as daemon
+service qcamerasvr /system/bin/mm-qcamera-daemon
+    class late_start
+    user camera
+    group camera system inet audio
 
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set.
