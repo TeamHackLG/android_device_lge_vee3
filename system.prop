@@ -74,9 +74,6 @@ persist.fuse_sdcard=true
 # Enforce Phone Mode view
 ro.screen.layout=normal
 
-# Baseband GSM Version
-gsm.version.baseband=MSM7225A-0-AB
-
 # On Strider below period is found to improve power numbers for AAC MP4
 dev.pm.dyn_sample_period=700000
 

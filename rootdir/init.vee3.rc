@@ -479,6 +479,10 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
 on property:ro.data.large_tcp_window_size=true
     write /proc/sys/net/ipv4/tcp_adv_win_scale  1
 
+service bbset /system/bin/sh /system/etc/init.qcom.baseband.sh
+    class late_start
+    oneshot
+
 service p2p_supplicant /system/bin/wpa_supplicant \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
     -I/system/etc/wifi/p2p_supplicant_overlay.conf -N \

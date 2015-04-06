@@ -48,6 +48,7 @@ PRODUCT_PACKAGES += \
 	init.qcom.usb.rc \
 	init.qcom.usb.sh \
 	init.qcom.sh \
+	init.qcom.baseband.sh \
 
 # Configs
 PRODUCT_PACKAGES += \
