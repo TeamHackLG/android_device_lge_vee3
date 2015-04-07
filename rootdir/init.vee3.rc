@@ -246,10 +246,6 @@ on post-fs-data
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
 
-    # Old Symlinks
-    symlink /system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini /data/misc/wifi/WCN1314_qcom_cfg.ini
-    symlink /system/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin /data/misc/wifi/WCN1314_qcom_wlan_nv.bin
-
     # Dummy file, to keep the API happy. The default firmware does both modes
     write /data/misc/wifi/fwpath ""
     chmod 0666 /data/misc/wifi/fwpath
@@ -307,55 +303,17 @@ on post-fs-data
     mkdir /data/misc/location/mq 0770 gps gps
     mkdir /data/misc/location/xtwifi 0770 gps gps
 
-    #Create directory from IMS services
+    # Create directory from IMS services
     mkdir /data/shared 0755
     chown system system /data/shared
 
     chmod 0660 /data/hostapd/hostapd.conf
-
-    # Create /data/time folder for time-services
-    mkdir /data/time/ 0700 system system
 
     setprop vold.post_fs_data_done 1
 
     # Make directories in drm partion
     chown system system /persist-lg
     chmod 0771 /persist-lg
-    mkdir /persist-lg/lgdrm 0770 lgdrm lgdrm_acc
-    chown lgdrm lgdrm_acc /persist-lg/lgdrm
-    chmod 0770 /persist-lg/lgdrm
-
-    mkdir /persist-lg/secclk 0700 system system
-    chown system system /persist-lg/secclk
-    chmod 0700 /persist-lg/secclk
-
-    mkdir /persist-lg/widevine 0770 drm system
-    chown drm system /persist-lg/widevine
-    chmod 0770 /persist-lg/widevine
-
-    mkdir /persist-lg/multimedia 0770 media divxdrm
-    chown media divxdrm /persist-lg/multimedia
-    chmod 0770 /persist-lg/multimedia
-
-    mkdir /persist-lg/multimedia/nx 0770 media divxdrm
-    chown media divxdrm /persist-lg/multimedia/nx
-    chmod 0770 /persist-lg/multimedia/nx
-
-    mkdir /persist-lg/multimedia/uma 0770 media divxdrm
-    chown media divxdrm /persist-lg/multimedia/uma
-    chmod 0770 /persist-lg/multimedia/uma
-
-    mkdir /persist-lg/multimedia/scnt 0770 media divxdrm
-    chown media divxdrm /persist-lg/multimedia/scnt
-    chmod 0770 /persist-lg/multimedia/scnt
-
-    mkdir /persist-lg/multimedia/scnt/sdadf 0770 media divxdrm
-    chown media divxdrm /persist-lg/multimedia/scnt/sdadf
-    chmod 0770 /persist-lg/multimedia/scnt/sdadf
-
-    mkdir /persist-lg/callduration 0770 system radio
-    chown system radio /persist-lg/callduration
-    chmod 0770 /persist-lg/callduration
 
     chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/led_pattern
     chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/led_blink
@@ -418,20 +376,6 @@ service rmt_storage /system/bin/rmt_storage
 on property:ro.boot.emmc=true
     start rmt_storage
 
-service bt-dun /system/bin/dun-server /dev/smd7 /dev/rfcomm0
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin inet
-    disabled
-    oneshot
-
-service bt-sap /system/bin/sapd 15
-    user bluetooth
-    group bluetooth net_bt_admin
-    class late_start
-    disabled
-    oneshot
-
 service bridgemgrd /system/bin/bridgemgrd
     class late_start
     user radio
@@ -471,7 +415,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
 # Adjust socket buffer to enlarge TCP receive window for high bandwidth
 # but only if ro.data.large_tcp_window_size property is set.
 on property:ro.data.large_tcp_window_size=true
-    write /proc/sys/net/ipv4/tcp_adv_win_scale  1
+    write /proc/sys/net/ipv4/tcp_adv_win_scale 1
 
 service bbset /system/bin/sh /system/etc/init.qcom.baseband.sh
     class late_start
@@ -540,39 +484,10 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     disabled
     oneshot
 
-on property:crypto.driver.load=1
-    insmod /system/lib/modules/qce.ko
-    insmod /system/lib/modules/qcedev.ko
-
-on property:crypto.driver.load=0
-    exec /system/bin/rmmod qcedev.ko
-    exec /system/bin/rmmod qce.ko
-
-service drmdiag /system/bin/drmdiagapp
-    class late_start
-    user root
-    disabled
-    oneshot
-
-on property:drmdiag.load=1
-    start drmdiag
-
-on property:drmdiag.load=0
-    stop drmdiag
-
 service qcom-sh /system/bin/sh /init.qcom.sh
     class late_start
     user root
     oneshot
-
-service ppd /system/bin/mm-pp-daemon
-    class late_start
-    user system
-    socket pps stream 0660 system system graphics
-    group system graphics
-
-on property:init.svc.surfaceflinger=stopped
-    stop ppd
 
 service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
     class late_start
@@ -590,10 +505,6 @@ service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
 on property:persist.data.ds_fmc_app.mode=1
     start ds_fmc_appd
 
-on property:ro.data.large_tcp_window_size=true
-    # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
-    write /proc/sys/net/ipv4/tcp_adv_win_scale  1
-
 service time_daemon /system/bin/time_daemon
     class late_start
     user root
@@ -603,70 +514,6 @@ service time_daemon /system/bin/time_daemon
 
 on property:persist.timed.enable=true
     start time_daemon
-
-service bluetoothd /system/bin/bluetoothd -n -d
-    class late_start
-    socket bluetooth stream 660 bluetooth bluetooth
-    socket dbus_bluetooth stream 660 bluetooth bluetooth
-    # init.rc does not yet support applying capabilities, so run as root and
-    # let bluetoothd drop uid to bluetooth with the right linux capabilities
-    group bluetooth net_bt_admin misc
-    disabled
-
-service dbus /system/bin/dbus-daemon --system --nofork
-    class main
-    socket dbus stream 660 bluetooth bluetooth
-    user bluetooth
-    group bluetooth net_bt_admin
-
-service hfag /system/bin/sdptool add --channel=10 HFAG
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service hsag /system/bin/sdptool add --channel=11 HSAG
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service opush /system/bin/sdptool add --psm=5255 --channel=12 OPUSH
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service pbap /system/bin/sdptool add --channel=19 PBAP
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service ftp /system/bin/sdptool add --psm=5257 --channel=20 FTP
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service map0 /system/bin/sdptool add --channel=16 MAS0
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service map1 /system/bin/sdptool add --channel=17 MAS1
-    class late_start
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
 
 service charger /charger
     class charger
@@ -695,31 +542,3 @@ service sensord /system/bin/sensord
     group compass misc input
     class core
     oneshot
-
-service ftm_ptt /system/bin/ftm_ptt -d
-    class late_start
-    user root
-    group radio system
-    disabled
-    oneshot
-
-on property:ftm_ptt_start=1
-    start ftm_ptt
-
-on property:ftm_ptt_start=0
-    stop ftm_ptt
-
-service lgsecclk /system/bin/lgsecclkserver
-    class main
-    user system
-    group system sdcard_rw media_rw
-
-service lgdrm /system/bin/lgdrmserver
-    class main
-    user system
-    group sdcard_rw media_rw system radio media
-
-# restart when servicemanager is restarted
-on property:init.svc.servicemanager=restarting
-    restart lgsecclk
-    restart lgdrm
