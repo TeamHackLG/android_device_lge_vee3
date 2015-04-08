@@ -325,9 +325,6 @@ on post-fs-data
     chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/G/led_current
     chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/B/led_current
 
-    chmod 660 /sys/class/input/input2/tap_enable
-    chown system system /sys/class/input/input2/tap_enable
-
     copy /proc/last_kmsg /data/dontpanic/last_kmsg
     chown root log /data/dontpanic/last_kmsg
     chmod 0640 /data/dontpanic/last_kmsg
@@ -364,10 +361,6 @@ service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1
     class late_start
     disabled
 
-service cnd /system/bin/cnd
-    class late_start
-    socket cnd stream 666 root radio
-
 service rmt_storage /system/bin/rmt_storage
     class core
     user root
@@ -381,16 +374,6 @@ service bridgemgrd /system/bin/bridgemgrd
     user radio
     group radio
     disabled
-
-service atd /system/bin/atd
-    class late_start
-    socket atd stream 0660 system inet
-    user system
-    group input inet
-    disabled
-
-on property:init.svc.bootanim=running
-    start atd
 
 service port-bridge /system/bin/port-bridge /dev/atcmd-tty1 /dev/ttyGS0
     class late_start
@@ -495,25 +478,6 @@ service hostapd /system/bin/hostapd -dddd /data/hostapd/hostapd.conf
     group root
     oneshot
     disabled
-
-service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
-    class late_start
-    group radio wifi inet
-    disabled
-    oneshot
-
-on property:persist.data.ds_fmc_app.mode=1
-    start ds_fmc_appd
-
-service time_daemon /system/bin/time_daemon
-    class late_start
-    user root
-    group root
-    oneshot
-    disabled
-
-on property:persist.timed.enable=true
-    start time_daemon
 
 service charger /charger
     class charger

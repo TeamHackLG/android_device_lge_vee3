@@ -48,29 +48,23 @@ PRODUCT_PACKAGES += \
 	init.qcom.usb.rc \
 	init.qcom.usb.sh \
 	init.qcom.sh \
-	init.qcom.baseband.sh \
 
-# Configs
+# KeyLayouts
 PRODUCT_PACKAGES += \
 	7k_handset.kl \
 	touch_mcs8000.kl \
 	vee3_keypad.kl \
 
-# Audio Files
+# Config Files
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/audio/AudioFilter.csv:system/etc/AudioFilter.csv \
-	$(LOCAL_PATH)/configs/audio/audio_policy.conf:system/etc/audio_policy.conf \
-
-# Media Files
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml \
-	$(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml \
-
-# SoftAP files
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/configs/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept \
-	$(LOCAL_PATH)/configs/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny \
-	$(LOCAL_PATH)/configs/hostapd/hostapd_default.conf::system/etc/hostapd/hostapd_default.conf \
+	$(LOCAL_PATH)/configs/etc/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept \
+	$(LOCAL_PATH)/configs/etc/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny \
+	$(LOCAL_PATH)/configs/etc/hostapd/hostapd_default.conf::system/etc/hostapd/hostapd_default.conf \
+	$(LOCAL_PATH)/configs/etc/AudioFilter.csv:system/etc/AudioFilter.csv \
+	$(LOCAL_PATH)/configs/etc/audio_policy.conf:system/etc/audio_policy.conf \
+	$(LOCAL_PATH)/configs/etc/init.qcom.baseband.sh:system/etc/init.qcom.baseband.sh \
+	$(LOCAL_PATH)/configs/etc/media_codecs.xml:system/etc/media_codecs.xml \
+	$(LOCAL_PATH)/configs/etc/media_profiles.xml:system/etc/media_profiles.xml \
 
 # Permission files
 PRODUCT_COPY_FILES += \
