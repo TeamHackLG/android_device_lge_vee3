@@ -109,3 +109,7 @@ dhcp.dlna.using=false
 
 # OpenGL
 ro.opengles.version=131072
+
+# ETC
+ro.crypto.fuse_sdcard=true
+vold.post_fs_data_done=1

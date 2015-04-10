@@ -53,15 +53,6 @@ on init
 on fs
     mount_all fstab.vee3
 
-    setprop ro.crypto.fuse_sdcard true
-
-on early-boot
-    # set RLIMIT_MEMLOCK to 64MB
-    setrlimit 8 67108864 67108864
-    chmod 0777 /dev/input/event0
-    chmod 0777 /dev/input/event5
-    chmod 0777 /dev/input/event3
-
 on boot
     # Permission for /proc/cmdline
     chmod 666 /proc/cmdline
@@ -89,10 +80,6 @@ on boot
 
     # Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
-
-    # Port-bridge
-    chmod 0660 /dev/smd0
-    chown system system /dev/smd0
 
     # For bridgemgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
@@ -137,8 +124,9 @@ on boot
     chmod 0770 /dev/block/mmcblk0p6
     chmod 0770 /dev/block/mmcblk0p8
 
-    # QCOM Sdio
-    write /sys/devices/platform/msm_sdcc.2/polling 1
+    chmod 0777 /dev/input/event0
+    chmod 0777 /dev/input/event5
+    chmod 0777 /dev/input/event3
 
     start qcamerasvr
 
@@ -151,23 +139,20 @@ on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
     chown media_rw media_rw /data/media
 
-    # Accelometer sensor
+    # Sensors
+    chown system system /mpt/prox_calibration.dat
+    chmod 0660 /mpt/prox_calibration.dat
     chown system system /sys/class/input/input2/range
     chown system system /sys/class/input/input2/bandwidth
     chown system system /sys/class/input/input2/mode
     chown system system /sys/class/input/input2/value
     chown system system /sys/class/input/input2/delay
-    chown system system /sys/class/input/input2/update
     chown system system /sys/class/input/input2/selftest
-    chown system system /sys/class/input/input2/offset_filt_x
-    chown system system /sys/class/input/input2/offset_filt_y
-    chown system system /sys/class/input/input2/offset_filt_z
     chown system system /sys/class/input/input2/fast_calibration_x
     chown system system /sys/class/input/input2/fast_calibration_y
     chown system system /sys/class/input/input2/fast_calibration_z
     chown system system /sys/class/input/input2/eeprom_writing
     chown system system /sys/class/input/input2/softreset
-
     chown system system /sys/class/input/input3/x
     chown system system /sys/class/input/input3/y
     chown system system /sys/class/input/input3/z
@@ -181,18 +166,13 @@ on post-fs-data
     chown system system /sys/class/input/input3/rept_z
     chown system system /sys/class/input/input3/test
     chown system system /sys/class/input/input3/diag
-
-    # Proxi sensor
     chown system system /sys/devices/platform/i2c-gpio.5/i2c-5/5-0039/enable
-    chmod 0660 /sys/devices/platform/i2c-gpio.5/i2c-5/5-0039/enable
-
-    chown system system /mpt/prox_calibration.dat
-    chmod 0660 /mpt/prox_calibration.dat
     chown system system /sys/devices/platform/i2c-gpio.5/i2c-5/5-0039/pilt
     chown system system /sys/devices/platform/i2c-gpio.5/i2c-5/5-0039/piht
     chown system system /sys/devices/platform/i2c-gpio.5/i2c-5/5-0039/run_calibration
     chown system system /sys/devices/platform/i2c-gpio.5/i2c-5/5-0039/prox_cal_data
     chown system system /sys/devices/platform/i2c-gpio.5/i2c-5/5-0039/pdata
+    chmod 0660 /sys/devices/platform/i2c-gpio.5/i2c-5/5-0039/enable
     chmod 0660 /sys/devices/platform/i2c-gpio.5/i2c-5/5-0039/pilt
     chmod 0660 /sys/devices/platform/i2c-gpio.5/i2c-5/5-0039/piht
     chmod 0660 /sys/devices/platform/i2c-gpio.5/i2c-5/5-0039/run_calibration
@@ -237,9 +217,6 @@ on post-fs-data
     # We chown/chmod /persist again so because mount is run as root + defaults
     chown system system /persist
     chmod 0771 /persist
-
-    chown system system /mpt
-    chmod 0771 /mpt
 
     chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
@@ -290,8 +267,6 @@ on post-fs-data
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
 
     chmod 0660 /data/hostapd/hostapd.conf
-
-    setprop vold.post_fs_data_done 1
 
     # Make directories in drm partion
     chown system system /persist-lg
@@ -464,6 +439,12 @@ service charger /charger
     group root
     oneshot
 
+service sensord /system/bin/sensord
+    user system
+    group compass misc input
+    class core
+    oneshot
+
 on property:init.svc.charger=running
     write /sys/class/android_usb/android0/enable 0
     write /sys/class/android_usb/android0/idVendor 1004
@@ -473,15 +454,3 @@ on property:init.svc.charger=running
     write /sys/class/android_usb/android0/bDeviceProtocol 1
     write /sys/class/android_usb/android0/functions charge_only
     write /sys/class/android_usb/android0/enable 1
-
-# Restart adbd so it can run as root
-on property:service.adb.root=1
-    write /sys/class/android_usb/android0/enable 0
-    restart adbd
-    write /sys/class/android_usb/android0/enable 1
-
-service sensord /system/bin/sensord
-    user system
-    group compass misc input
-    class core
-    oneshot
