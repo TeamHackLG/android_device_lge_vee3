@@ -9,4 +9,4 @@
 /dev/block/mmcblk0p16	/cache			ext4	noatime,nosuid,nodev	wait,check
 /dev/block/mmcblk0p15	/persist		ext4	noatime,nosuid,nodev	wait,check
 /dev/block/mmcblk0p18	/persist-lg		ext4	noatime,nosuid,nodev	wait,check
-/devices/platform/msm_sdcc.1/mmc_host	auto	vfat	defaults	voldmanaged=sdcard1:auto,noemulatedsd
+/devices/platform/msm_sdcc.1/mmc_host	auto	auto	defaults	voldmanaged=sdcard1:auto,noemulatedsd
