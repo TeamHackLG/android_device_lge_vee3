@@ -141,6 +141,8 @@ on boot
 
     start qcamerasvr
 
+    start bbset
+
 # msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/radio 0770 radio radio
@@ -377,6 +379,7 @@ on property:ro.data.large_tcp_window_size=true
 
 service bbset /system/bin/sh /system/etc/init.qcom.baseband.sh
     class late_start
+    disabled
     oneshot
 
 service p2p_supplicant /system/bin/wpa_supplicant \
