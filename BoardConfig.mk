@@ -25,8 +25,6 @@ LOCAL_PATH := device/lge/vee3
 # inherit from the common proprietary version
 -include vendor/lge-vee3/msm7x27a-common/BoardConfigVendor.mk
 
-TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
-
 BOARD_VENDOR := lge
 
 # Compiler flags
