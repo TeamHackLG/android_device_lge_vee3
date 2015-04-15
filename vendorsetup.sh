@@ -16,3 +16,5 @@
 
 add_lunch_combo cm_vee3-userdebug
 add_lunch_combo cm_vee3-eng
+
+sh device/lge/vee3/patches/apply.sh
