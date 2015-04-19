@@ -43,6 +43,7 @@ endif
 # Rootdir
 PRODUCT_PACKAGES += \
 	fstab.vee3 \
+	fstab.qcom \
 	init.vee3.rc \
 	ueventd.vee3.rc \
 	init.qcom.usb.rc \

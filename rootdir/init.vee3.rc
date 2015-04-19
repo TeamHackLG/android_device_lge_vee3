@@ -30,6 +30,8 @@ on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
     mkdir /persist-lg 0771 system system
+    mkdir /mpt 0771 system system
+    mkdir /cust 0771 system system
 
     mkdir /storage/sdcard1 0700 root root
     mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
@@ -51,6 +53,7 @@ on init
 
 on fs
     mount_all fstab.vee3
+    mount_all fstab.qcom
 
 on boot
     # Permission for /proc/cmdline
