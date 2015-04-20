@@ -58,9 +58,15 @@ PRODUCT_PACKAGES += \
 
 # Config Files
 PRODUCT_COPY_FILES += \
+	$(LOCAL_PATH)/configs/etc/firmware/wlan/volans/WCN1314_cfg.dat:system/etc/firmware/wlan/volans/WCN1314_cfg.dat \
+	$(LOCAL_PATH)/configs/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini:system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini \
+	$(LOCAL_PATH)/configs/etc/firmware/wlan/volans/WCN1314_qcom_fw.bin:system/etc/firmware/wlan/volans/WCN1314_qcom_fw.bin \
+	$(LOCAL_PATH)/configs/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin:system/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin \
 	$(LOCAL_PATH)/configs/etc/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept \
 	$(LOCAL_PATH)/configs/etc/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny \
-	$(LOCAL_PATH)/configs/etc/hostapd/hostapd_default.conf::system/etc/hostapd/hostapd_default.conf \
+	$(LOCAL_PATH)/configs/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf \
+	$(LOCAL_PATH)/configs/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+	$(LOCAL_PATH)/configs/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
 	$(LOCAL_PATH)/configs/etc/AudioFilter.csv:system/etc/AudioFilter.csv \
 	$(LOCAL_PATH)/configs/etc/audio_policy.conf:system/etc/audio_policy.conf \
 	$(LOCAL_PATH)/configs/etc/init.qcom.baseband.sh:system/etc/init.qcom.baseband.sh \
