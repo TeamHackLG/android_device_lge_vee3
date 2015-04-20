@@ -18,6 +18,7 @@ DEVICE_PROVISIONED=1
 ro.ril.transmitpower=true
 ril.subscription.types=NV,RUIM
 ro.telephony.ril.v3=skippinpukcount,qcomdsds
+telephony.lteOnCdmaDevice=0
 
 # Properties
 ro.telephony.default_network=3
