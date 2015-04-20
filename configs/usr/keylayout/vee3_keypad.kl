@@ -13,15 +13,10 @@
 # limitations under the License.
 #
 
+
 # Volume keys
-key 115   VOLUME_UP         WAKE_DROPPED
 key 114   VOLUME_DOWN       WAKE_DROPPED
+key 115   VOLUME_UP         WAKE_DROPPED
+key 116   POWER             WAKE
 
-# Menu
-key 139   MENU              WAKE
-
-# Back
-key 158   BACK              WAKE_DROPPED
-
-# Home
-key 172   HOME              WAKE_DROPPED
+key 172   HOME              WAKE

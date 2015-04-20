@@ -50,12 +50,6 @@ PRODUCT_PACKAGES += \
 	init.qcom.usb.sh \
 	init.qcom.sh \
 
-# KeyLayouts
-PRODUCT_PACKAGES += \
-	7k_handset.kl \
-	touch_mcs8000.kl \
-	vee3_keypad.kl \
-
 # Config Files
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/etc/firmware/wlan/volans/WCN1314_cfg.dat:system/etc/firmware/wlan/volans/WCN1314_cfg.dat \
@@ -72,6 +66,9 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/etc/init.qcom.baseband.sh:system/etc/init.qcom.baseband.sh \
 	$(LOCAL_PATH)/configs/etc/media_codecs.xml:system/etc/media_codecs.xml \
 	$(LOCAL_PATH)/configs/etc/media_profiles.xml:system/etc/media_profiles.xml \
+	$(LOCAL_PATH)/configs/usr/keylayout/7k_handset.kl:system/usr/keylayout/7k_handset.kl \
+	$(LOCAL_PATH)/configs/usr/keylayout/touch_mcs8000.kl:system/usr/keylayout/touch_mcs8000.kl \
+	$(LOCAL_PATH)/configs/usr/keylayout/vee3_keypad.kl:system/usr/keylayout/vee3_keypad.kl \
 
 # Permission files
 PRODUCT_COPY_FILES += \
