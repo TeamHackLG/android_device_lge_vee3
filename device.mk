@@ -99,6 +99,7 @@ PRODUCT_PACKAGES += \
 	memtrack.msm7x27a \
 	liboverlay \
 	libtilerenderer \
+	libgenlock \
 	libqdMetaData \
 
 # Video
