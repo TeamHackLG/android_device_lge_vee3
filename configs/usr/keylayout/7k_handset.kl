@@ -25,3 +25,5 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 key 226   HEADSETHOOK       WAKE
+key 116   POWER             WAKE
+key 107   POWER             WAKE

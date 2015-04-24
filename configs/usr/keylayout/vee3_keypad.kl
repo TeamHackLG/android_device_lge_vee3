@@ -17,7 +17,4 @@
 # Volume keys
 key 114   VOLUME_DOWN       WAKE_DROPPED
 key 115   VOLUME_UP         WAKE_DROPPED
-key 107   POWER             WAKE
-key 116   POWER             WAKE
-
 key 172   HOME              WAKE
