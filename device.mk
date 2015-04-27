@@ -67,6 +67,7 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/etc/media_codecs.xml:system/etc/media_codecs.xml \
 	$(LOCAL_PATH)/configs/etc/media_profiles.xml:system/etc/media_profiles.xml \
 	$(LOCAL_PATH)/configs/usr/keylayout/7k_handset.kl:system/usr/keylayout/7k_handset.kl \
+	$(LOCAL_PATH)/configs/usr/keylayout/7x27a_kp.kl:system/usr/keylayout/7x27a_kp.kl \
 	$(LOCAL_PATH)/configs/usr/keylayout/touch_mcs8000.kl:system/usr/keylayout/touch_mcs8000.kl \
 	$(LOCAL_PATH)/configs/usr/keylayout/vee3_keypad.kl:system/usr/keylayout/vee3_keypad.kl \
 
