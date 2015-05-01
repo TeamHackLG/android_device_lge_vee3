@@ -63,9 +63,9 @@ TARGET_KERNEL_SOURCE := kernel/lge/VeeKernel
 
 # Project Vee3
 ifeq ($(PROJECT_VEE3_HOME_FIX),true)
-	TARGET_KERNEL_CONFIG := cyanogenmod_vee3s_defconfig
+TARGET_KERNEL_CONFIG := cyanogenmod_vee3s_defconfig
 else
-	TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
+TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
 endif
 
 # Kernel commands
