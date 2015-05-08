@@ -28,15 +28,10 @@ LOCAL_PATH := device/lge/vee3
 BOARD_VENDOR := lge
 
 # Compiler flags
-TARGET_GLOBAL_CFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4 -mtune=cortex-a5
-TARGET_GLOBAL_CPPFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4 -mtune=cortex-a5
+TARGET_GLOBAL_CFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4
+TARGET_GLOBAL_CPPFLAGS += -mfloat-abi=softfp -mfpu=neon-vfpv4
 COMMON_GLOBAL_CFLAGS += -DUSE_MDP3
 COMMON_GLOBAL_CFLAGS += -DLPA_DEFAULT_BUFFER_SIZE=480
-COMMON_GLOBAL_CFLAGS += -DQCOM_NO_SECURE_PLAYBACK
-COMMON_GLOBAL_CFLAGS += -DNO_UPDATE_PREVIEW
-COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
-COMMON_GLOBAL_CFLAGS += -DREFRESH_RATE=60
-COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 
 # Compiler Optimization
 ARCH_ARM_HIGH_OPTIMIZATION := true
@@ -70,7 +65,7 @@ endif
 
 # Kernel commands
 BOARD_KERNEL_BASE := 0x00200000
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=vee3 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := androidboot.hardware=vee3 androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01300000
 BOARD_KERNEL_PAGESIZE := 4096
 
@@ -106,12 +101,8 @@ TARGET_HAS_QACT := true
 BOARD_HAVE_QCOM_FM := true
 QCOM_FM_ENABLED := true
 
-# Legacy
-TARGET_QCOM_DISPLAY_VARIANT := legacy
-TARGET_USES_QCOM_BSP_LEGACY := true
-TARGET_QCOM_LEGACY_OMX := true
-
 # Display
+TARGET_QCOM_DISPLAY_VARIANT := legacy
 BOARD_ADRENO_DECIDE_TEXTURE_TARGET := true
 USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
