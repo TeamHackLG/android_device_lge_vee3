@@ -95,7 +95,6 @@ debug.hwc.fakevsync=1
 
 # QCom
 com.qc.hardware=1
-qcom.hw.aac.encoder=true
 ro.vendor.extension_library=/system/lib/libqc-opt.so
 
 # WiFi
