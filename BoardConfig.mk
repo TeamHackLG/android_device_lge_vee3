@@ -15,7 +15,7 @@
 
 # Project Vee3
 # Enable this if you are building to L3 II Single
-PROJECT_VEE3_HOME_FIX := false
+PROJECT_VEE3_SINGLE := false
 
 LOCAL_PATH := device/lge/vee3
 
@@ -57,7 +57,7 @@ ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 TARGET_KERNEL_SOURCE := kernel/lge/VeeKernel
 
 # Project Vee3
-ifeq ($(PROJECT_VEE3_HOME_FIX),true)
+ifeq ($(PROJECT_VEE3_SINGLE),true)
 TARGET_KERNEL_CONFIG := cyanogenmod_vee3s_defconfig
 else
 TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig

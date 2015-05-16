@@ -5,6 +5,14 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
 	ro.adb.secure=false
 endif
 
+# For Single and Dual Sim devices
+ifeq ($(PROJECT_VEE3_SINGLE),true)
+# Single Sim
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += persist.radio.multisim.config=none
+else
+# Dual Sim
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += persist.radio.multisim.config=dsds
+endif
 # USB
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mtp \
