@@ -323,18 +323,6 @@ service rmt_storage /system/bin/rmt_storage
 on property:ro.boot.emmc=true
     start rmt_storage
 
-service bridgemgrd /system/bin/bridgemgrd
-    class late_start
-    user radio
-    group radio
-    disabled
-
-service port-bridge /system/bin/port-bridge /dev/atcmd-tty1 /dev/ttyGS0
-    class late_start
-    user system
-    group system inet
-    disabled
-
 service qmuxd /system/bin/qmuxd
     class core
     user radio
