@@ -21,7 +21,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # WiFi
 PRODUCT_PROPERTY_OVERRIDES += \
 	wifi.interface=wlan0 \
-	wifi.supplicant_scan_interval=20 \
 
 # KSM
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -34,11 +33,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enforce Phone Mode view
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.screen.layout=normal \
-
-# WiFi
-PRODUCT_PROPERTY_OVERRIDES += \
-	wifi.interface=wlan0 \
-	wifi.supplicant_scan_interval=20 \
 
 # Display Composition
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -64,20 +58,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.telephony.ril.v3=skippinpukcount,qcomdsds,signalstrength \
 	ro.telephony.call_ring.multiple=false \
 	ro.telephony.call_ring=false \
-
-# SD Card
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.emmc.sdcard.partition=20 \
-	persist.fuse_sdcard=true \
-
-# Audio
-PRODUCT_PROPERTY_OVERRIDES += \
-	audio.gapless.playback.disable=true \
-
-# Camera
-PRODUCT_PROPERTY_OVERRIDES += \
-	debug.camcorder.disablemeta=false \
-	debug.camera.landscape=true \
 
 # Debug
 PRODUCT_PROPERTY_OVERRIDES += \
