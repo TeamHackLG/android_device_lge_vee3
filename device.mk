@@ -159,13 +159,4 @@ PRODUCT_PACKAGES += \
 	libQWiFiSoftApCfg \
 	libqcomvoiceprocessing \
 
-# For userdebug builds
-ifeq ($(TARGET_BUILD_VARIANT),userdebug)
-ADDITIONAL_DEFAULT_PROPERTIES += \
-	ro.secure=0 \
-	ro.adb.secure=0
-endif
-
-# Build.prop Properties
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.usb.config=mtp \
+include $(LOCAL_PATH)/system_prop.mk
