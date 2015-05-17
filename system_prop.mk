@@ -41,12 +41,28 @@ PRODUCT_PROPERTY_OVERRIDES += media.stagefright.enable-fma2dp=true
 PRODUCT_PROPERTY_OVERRIDES += media.stagefright.enable-aac=true
 PRODUCT_PROPERTY_OVERRIDES += media.stagefright.enable-qcp=true
 # RIL
-PRODUCT_PROPERTY_OVERRIDES += rild.libpath=/system/lib/libril-qc-qmi-1.so
-PRODUCT_PROPERTY_OVERRIDES += ril.subscription.types=NV,RUIM
-PRODUCT_PROPERTY_OVERRIDES += ro.telephony.ril.v3=skippinpukcount,qcomdsds,signalstrength
-PRODUCT_PROPERTY_OVERRIDES += ro.telephony.call_ring.multiple=false
-PRODUCT_PROPERTY_OVERRIDES += ro.telephony.call_ring=false
+PRODUCT_PROPERTY_OVERRIDES += ril.subscription.types="NV,RUIM"
+PRODUCT_PROPERTY_OVERRIDES += ro.telephony.ril.v3="skippinpukcount,qcomdsds,signalstrength"
+PRODUCT_PROPERTY_OVERRIDES += ro.telephony.call_ring.multiple="false"
+PRODUCT_PROPERTY_OVERRIDES += ro.telephony.call_ring="false"
+# RILD
+PRODUCT_PROPERTY_OVERRIDES += rild.libpath="/system/lib/libril-qc-qmi-1.so"
 PRODUCT_PROPERTY_OVERRIDES += rild.libargs="-d /dev/smd0"
+PRODUCT_PROPERTY_OVERRIDES += persist.rild.nitz_plmn=""
+PRODUCT_PROPERTY_OVERRIDES += persist.rild.nitz_long_ons_0=""
+PRODUCT_PROPERTY_OVERRIDES += persist.rild.nitz_long_ons_1=""
+PRODUCT_PROPERTY_OVERRIDES += persist.rild.nitz_long_ons_2=""
+PRODUCT_PROPERTY_OVERRIDES += persist.rild.nitz_long_ons_3=""
+PRODUCT_PROPERTY_OVERRIDES += persist.rild.nitz_short_ons_0=""
+PRODUCT_PROPERTY_OVERRIDES += persist.rild.nitz_short_ons_1=""
+PRODUCT_PROPERTY_OVERRIDES += persist.rild.nitz_short_ons_2=""
+PRODUCT_PROPERTY_OVERRIDES += persist.rild.nitz_short_ons_3=""
+# Data
+PRODUCT_PROPERTY_OVERRIDES += ro.use_data_netmgrd="true"
+PRODUCT_PROPERTY_OVERRIDES += persist.data.ds_fmc_app.mode="false"
+# SIM
+PRODUCT_PROPERTY_OVERRIDES += persist.service.factory.enable="false"
+PRODUCT_PROPERTY_OVERRIDES += persist.radio.apm_sim_not_pwdn="true"
 # Debug
 PRODUCT_PROPERTY_OVERRIDES += debug.gralloc.map_fb_memory=true
 PRODUCT_PROPERTY_OVERRIDES += debug.hwc.fakevsync=true
