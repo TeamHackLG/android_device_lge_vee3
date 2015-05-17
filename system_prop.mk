@@ -1,15 +1,10 @@
 # For userdebug builds
 ifeq ($(TARGET_BUILD_VARIANT),userdebug)
-# Enable ADB by default
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure="false"
 ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure="false"
 endif
-# For Single and Dual Sim devices
-ifeq ($(PROJECT_VEE3_SINGLE),true)
-# Single Sim
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += persist.radio.multisim.config="none"
-else
-# Dual Sim
+# For Dual Sim devices
+ifeq ($(TARGET_DUAL_SIM),true)
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += persist.radio.multisim.config="dsds"
 endif
 # USB
