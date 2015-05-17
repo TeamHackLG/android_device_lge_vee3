@@ -39,15 +39,20 @@ PRODUCT_AAPT_PREF_CONFIG := ldpi
 # TWRP
 PRODUCTY_COPY_FILES += $(LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
 
-# Rootdir
+# Vee3 Rootdir files
 PRODUCT_PACKAGES += \
 	fstab.vee3 \
-	fstab.qcom \
 	init.vee3.rc \
 	ueventd.vee3.rc \
+
+# QCOM Rootdir files
+PRODUCT_PACKAGES += \
+	fstab.qcom \
+	init.qcom.baseband.sh \
+	init.qcom.sh \
 	init.qcom.usb.rc \
 	init.qcom.usb.sh \
-	init.qcom.sh \
+
 
 # Config Files
 PRODUCT_COPY_FILES += \
@@ -62,7 +67,6 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
 	$(LOCAL_PATH)/configs/etc/AudioFilter.csv:system/etc/AudioFilter.csv \
 	$(LOCAL_PATH)/configs/etc/audio_policy.conf:system/etc/audio_policy.conf \
-	$(LOCAL_PATH)/configs/etc/init.qcom.baseband.sh:system/etc/init.qcom.baseband.sh \
 	$(LOCAL_PATH)/configs/etc/media_codecs.xml:system/etc/media_codecs.xml \
 	$(LOCAL_PATH)/configs/etc/media_profiles.xml:system/etc/media_profiles.xml \
 	$(LOCAL_PATH)/configs/usr/keylayout/7k_handset.kl:system/usr/keylayout/7k_handset.kl \

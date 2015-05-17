@@ -342,7 +342,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
 on property:ro.data.large_tcp_window_size=true
     write /proc/sys/net/ipv4/tcp_adv_win_scale 1
 
-service bbset /system/bin/sh /system/etc/init.qcom.baseband.sh
+service bbset /system/bin/sh /init.qcom.baseband.sh
     class late_start
     disabled
     oneshot
