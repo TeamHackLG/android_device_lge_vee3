@@ -112,10 +112,6 @@ TARGET_NO_INITLOGO := true
 # Screenshot
 BOARD_USE_MHEAP_SCREENSHOT := true
 
-# EGL
-BOARD_EGL_WORKAROUND_BUG_10194508 := true
-BOARD_EGL_CFG := $(LOCAL_PATH)/configs/lib/egl/egl.cfg
-
 # Hardware
 BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw
 
