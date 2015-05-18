@@ -38,7 +38,7 @@ PRODUCT_PROPERTY_OVERRIDES += media.stagefright.enable-aac="true"
 PRODUCT_PROPERTY_OVERRIDES += media.stagefright.enable-qcp="true"
 # RIL
 PRODUCT_PROPERTY_OVERRIDES += ril.subscription.types="NV,RUIM"
-PRODUCT_PROPERTY_OVERRIDES += ro.telephony.ril.v3="skippinpukcount,qcomdsds,signalstrength"
+PRODUCT_PROPERTY_OVERRIDES += ro.telephony.ril.v3="qcomdsds,signalstrength"
 PRODUCT_PROPERTY_OVERRIDES += ro.telephony.call_ring.multiple="false"
 PRODUCT_PROPERTY_OVERRIDES += ro.telephony.call_ring="false"
 # RILD
