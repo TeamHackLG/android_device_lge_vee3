@@ -1,0 +1,89 @@
+From fd44ac9129dc2b833515ca2cde30ace1265e38e0 Mon Sep 17 00:00:00 2001
+From: Caio99BR <caiooliveirafarias0@gmail.com>
+Date: Sun, 17 May 2015 22:50:13 -0300
+Subject: [PATCH] Fix QCOM BSP with Kernel Legacy
+
+Based on commit:
+
+From: dianlujitao <dianlujitao@gmail.com>
+Date: Fri, 18 Jul 2014 17:42:15 +0800
+Subject: [PATCH] Revert "sf: Set view frame of each display using binder"
+
+Change-Id: I58fbd319c7c1ee4326e55997e145b31e0e4d5c92
+---
+ services/surfaceflinger/Android.mk         |  3 ---
+ services/surfaceflinger/SurfaceFlinger.cpp | 23 +----------------------
+ 2 files changed, 1 insertion(+), 25 deletions(-)
+
+diff --git a/services/surfaceflinger/Android.mk b/services/surfaceflinger/Android.mk
+index 0166b89..0665173 100644
+--- a/services/surfaceflinger/Android.mk
++++ b/services/surfaceflinger/Android.mk
+@@ -114,9 +114,6 @@ else
+ endif
+     LOCAL_C_INCLUDES += $(call project-path-for,qcom-display)/$(PLATFORM)/libgralloc
+     LOCAL_C_INCLUDES += $(call project-path-for,qcom-display)/$(PLATFORM)/libqdutils
+-ifeq ($(TARGET_QCOM_DISPLAY_VARIANT),caf-new)
+-    LOCAL_CFLAGS += -DQCOM_B_FAMILY
+-endif
+     LOCAL_SHARED_LIBRARIES += libqdutils
+     LOCAL_CFLAGS += -DQCOM_BSP
+ endif
+diff --git a/services/surfaceflinger/SurfaceFlinger.cpp b/services/surfaceflinger/SurfaceFlinger.cpp
+index 4d6fb82..fd8f6dc 100644
+--- a/services/surfaceflinger/SurfaceFlinger.cpp
++++ b/services/surfaceflinger/SurfaceFlinger.cpp
+@@ -82,10 +82,6 @@
+ #include "SecTVOutService.h"
+ #endif
+ 
+-#ifdef QCOM_BSP
+-#include <display_config.h>
+-#endif
+-
+ #define DISPLAY_COUNT       1
+ 
+ /*
+@@ -1513,15 +1509,12 @@ void SurfaceFlinger::handleTransactionLocked(uint32_t transactionFlags)
+                                 || (state.viewport != draw[i].viewport)
+                                 || (state.frame != draw[i].frame))
+                         {
+-#ifdef QCOM_BSP
+-                            int orient = state.orientation;
+                             // Honor the orientation change after boot
+                             // animation completes and make sure boot
+                             // animation is shown in panel orientation always.
+                             if(mBootFinished){
+                                 disp->setProjection(state.orientation,
+                                         state.viewport, state.frame);
+-                                orient = state.orientation;
+                             }
+                             else{
+                                 char property[PROPERTY_VALUE_MAX];
+@@ -1533,22 +1526,8 @@ void SurfaceFlinger::handleTransactionLocked(uint32_t transactionFlags)
+                                 }
+                                 disp->setProjection(panelOrientation,
+                                         state.viewport, state.frame);
+-                                orient = panelOrientation;
+-                            }
+-#endif
+-#ifdef QCOM_B_FAMILY
+-                            // Set the view frame of each display only of its
+-                            // default orientation.
+-                            if(orient == DisplayState::eOrientationDefault and
+-                                    state.frame.isValid()) {
+-                                qdutils::setViewFrame(disp->getHwcDisplayId(),
+-                                    state.frame.left, state.frame.top,
+-                                    state.frame.right, state.frame.bottom);
++
+                             }
+-#else
+-                            disp->setProjection(state.orientation,
+-                                state.viewport, state.frame);
+-#endif
+                         }
+                     }
+                 }
+-- 
+1.9.1
+
