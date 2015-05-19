@@ -1,0 +1,255 @@
+From 56d28e3e88e50df5b2025a9b692bc64c6ac44030 Mon Sep 17 00:00:00 2001
+From: Caio99BR <caiooliveirafarias0@gmail.com>
+Date: Sun, 17 May 2015 23:12:14 -0300
+Subject: [PATCH] legacy OMX
+
+Change-Id: Iea070ee7b9f21e8541d781b1a3a2043471e05582
+---
+ media/libstagefright/Android.mk                    |  4 ++
+ media/libstagefright/AwesomePlayer.cpp             |  4 ++
+ media/libstagefright/OMXCodec.cpp                  | 21 +++++++++
+ media/libstagefright/colorconversion/Android.mk    |  9 ++++
+ .../colorconversion/SoftwareRenderer.cpp           | 54 +++++++++++++++++++++-
+ media/libstagefright/include/SoftwareRenderer.h    |  3 ++
+ 6 files changed, 94 insertions(+), 1 deletion(-)
+
+diff --git a/media/libstagefright/Android.mk b/media/libstagefright/Android.mk
+index af55235..b660415 100644
+--- a/media/libstagefright/Android.mk
++++ b/media/libstagefright/Android.mk
+@@ -188,6 +188,10 @@ ifeq ($(TARGET_ENABLE_OFFLOAD_ENHANCEMENTS),true)
+ endif
+ endif
+ 
++ifeq ($(TARGET_QCOM_LEGACY_OMX),true)
++    LOCAL_CFLAGS += -DQCOM_LEGACY_OMX
++endif
++
+ ifeq ($(BOARD_HAS_MTK_HARDWARE),true)
+     ifeq ($(BOARD_MTK_OMX_USES_PRIVATE_YUV),true)
+         LOCAL_CFLAGS += -DMTK_OMX_USES_PRIVATE_YUV
+diff --git a/media/libstagefright/AwesomePlayer.cpp b/media/libstagefright/AwesomePlayer.cpp
+index 744f4ce..6f87778 100644
+--- a/media/libstagefright/AwesomePlayer.cpp
++++ b/media/libstagefright/AwesomePlayer.cpp
+@@ -77,7 +77,11 @@
+ 
+ #include <cutils/properties.h>
+ 
++#ifdef QCOM_LEGACY_OMX
++#define USE_SURFACE_ALLOC 0
++#else
+ #define USE_SURFACE_ALLOC 1
++#endif
+ #define FRAME_DROP_FREQ 0
+ #ifdef QCOM_HARDWARE
+ #define LPA_MIN_DURATION_USEC_ALLOWED 30000000
+diff --git a/media/libstagefright/OMXCodec.cpp b/media/libstagefright/OMXCodec.cpp
+index fc58bfd..7f6cad4 100644
+--- a/media/libstagefright/OMXCodec.cpp
++++ b/media/libstagefright/OMXCodec.cpp
+@@ -116,6 +116,11 @@ const static int64_t kBufferFilledEventTimeOutNs = 3000000000LL;
+ // component in question is buggy or not.
+ const static uint32_t kMaxColorFormatSupported = 1000;
+ 
++#ifdef QCOM_LEGACY_OMX
++static const int QOMX_COLOR_FormatYUV420PackedSemiPlanar64x32Tile2m8ka = 0x7FA30C03;
++static const int OMX_QCOM_COLOR_FormatYVU420SemiPlanar = 0x7FA30C00;
++#endif
++
+ #define FACTORY_CREATE(name) \
+ static sp<MediaSource> Make##name(const sp<MediaSource> &source) { \
+     return new name(source); \
+@@ -1271,6 +1276,9 @@ status_t OMXCodec::setVideoInputFormat(
+     success = success && meta->findInt32(kKeyBitRate, &bitRate);
+     success = success && meta->findInt32(kKeyStride, &stride);
+     success = success && meta->findInt32(kKeySliceHeight, &sliceHeight);
++#ifdef QCOM_LEGACY_OMX
++    CODEC_LOGI("setVideoInputFormat width=%ld, height=%ld", width, height);
++#endif
+     CHECK(success);
+     CHECK(stride != 0);
+ 
+@@ -1366,7 +1374,11 @@ status_t OMXCodec::setVideoInputFormat(
+ 
+     video_def->nFrameWidth = width;
+     video_def->nFrameHeight = height;
++#ifdef QCOM_LEGACY_OMX
++    video_def->xFramerate = (frameRate << 16);
++#else
+     video_def->xFramerate = 0;      // No need for output port
++#endif
+     video_def->nBitrate = bitRate;  // Q16 format
+     video_def->eCompressionFormat = compressionFormat;
+     video_def->eColorFormat = OMX_COLOR_FormatUnused;
+@@ -1947,6 +1959,9 @@ OMXCodec::OMXCodec(
+       mPaused(false),
+       mNativeWindow(
+               (!strncmp(componentName, "OMX.google.", 11)
++#ifdef QCOM_LEGACY_OMX
++              || !strncmp(componentName, "OMX.qcom",8)
++#endif
+               || !strncmp(componentName, "OMX.ffmpeg.", 11))
+                         ? NULL : nativeWindow),
+ #ifdef QCOM_HARDWARE
+@@ -6107,6 +6122,12 @@ void OMXCodec::initOutputFormat(const sp<MetaData> &inputFormat) {
+             mOutputFormat->setInt32(kKeyStride, video_def->nStride);
+             mOutputFormat->setInt32(kKeySliceHeight, video_def->nSliceHeight);
+ #endif
++#ifdef QCOM_LEGACY_OMX
++            // With legacy codec we get wrong color format here
++            if (!strncmp(mComponentName, "OMX.qcom.", 9))
++                mOutputFormat->setInt32(kKeyColorFormat, OMX_QCOM_COLOR_FormatYVU420SemiPlanar);
++            else
++#endif
+             mOutputFormat->setInt32(kKeyColorFormat, video_def->eColorFormat);
+ 
+             if (!mIsEncoder) {
+diff --git a/media/libstagefright/colorconversion/Android.mk b/media/libstagefright/colorconversion/Android.mk
+index 38df650..1058bbc 100644
+--- a/media/libstagefright/colorconversion/Android.mk
++++ b/media/libstagefright/colorconversion/Android.mk
+@@ -9,6 +9,15 @@ LOCAL_C_INCLUDES := \
+         $(TOP)/frameworks/native/include/media/openmax \
+         $(TOP)/hardware/msm7k
+ 
++ifeq ($(TARGET_QCOM_LEGACY_OMX),true)
++        LOCAL_CFLAGS += -DQCOM_LEGACY_OMX
++endif
++
++ifneq ($(TARGET_QCOM_DISPLAY_VARIANT),)
++        LOCAL_C_INCLUDES += $(TOP)/hardware/qcom/display-$(TARGET_QCOM_DISPLAY_VARIANT)/libgralloc
++else
++        LOCAL_C_INCLUDES += $(TOP)/hardware/qcom/display/libgralloc
++endif
+ 
+ ifeq ($(BOARD_HAS_MTK_HARDWARE),true)
+     LOCAL_C_INCLUDES += \
+diff --git a/media/libstagefright/colorconversion/SoftwareRenderer.cpp b/media/libstagefright/colorconversion/SoftwareRenderer.cpp
+index 18662d6..9508993 100644
+--- a/media/libstagefright/colorconversion/SoftwareRenderer.cpp
++++ b/media/libstagefright/colorconversion/SoftwareRenderer.cpp
+@@ -26,13 +26,29 @@
+ #include <ui/GraphicBufferMapper.h>
+ #include <gui/IGraphicBufferProducer.h>
+ 
++#ifdef QCOM_LEGACY_OMX
++#include <gralloc_priv.h>
++#endif
++
+ namespace android {
+ 
++#ifdef QCOM_LEGACY_OMX
++static const int QOMX_COLOR_FormatYUV420PackedSemiPlanar64x32Tile2m8ka = 0x7FA30C03;
++static const int OMX_QCOM_COLOR_FormatYVU420SemiPlanar = 0x7FA30C00;
++#endif
++
+ static bool runningInEmulator() {
+     char prop[PROPERTY_VALUE_MAX];
+     return (property_get("ro.kernel.qemu", prop, NULL) > 0);
+ }
+ 
++#ifdef QCOM_LEGACY_OMX
++static int ALIGN(int x, int y) {
++    // y must be a power of 2.
++    return (x + y - 1) & ~(y - 1);
++}
++#endif
++
+ SoftwareRenderer::SoftwareRenderer(
+         const sp<ANativeWindow> &nativeWindow, const sp<MetaData> &meta)
+     : mConverter(NULL),
+@@ -77,6 +93,16 @@ SoftwareRenderer::SoftwareRenderer(
+ 
+             // fall through.
+         }
++#ifdef QCOM_LEGACY_OMX
++        case OMX_QCOM_COLOR_FormatYVU420SemiPlanar:
++        {
++            halFormat = HAL_PIXEL_FORMAT_YCrCb_420_SP;
++            bufWidth = ALIGN(mCropWidth, 16);
++            bufHeight = ALIGN(mCropHeight, 2);
++            mAlign = ALIGN(mWidth, 16) * ALIGN(mHeight, 16);
++            break;
++        }
++#endif
+ 
+         default:
+             halFormat = HAL_PIXEL_FORMAT_RGB_565;
+@@ -89,6 +115,12 @@ SoftwareRenderer::SoftwareRenderer(
+             break;
+     }
+ 
++#ifdef QCOM_LEGACY_OMX
++    ALOGI("Buffer color format: 0x%X", mColorFormat);
++    ALOGI("Video params: mWidth: %d, mHeight: %d, mCropWidth: %d, mCropHeight: %d, mCropTop: %d, mCropLeft: %d",
++         mWidth, mHeight, mCropWidth, mCropHeight, mCropTop, mCropLeft);
++#endif
++
+     CHECK(mNativeWindow != NULL);
+     CHECK(mCropWidth > 0);
+     CHECK(mCropHeight > 0);
+@@ -106,7 +138,11 @@ SoftwareRenderer::SoftwareRenderer(
+             native_window_set_usage(
+             mNativeWindow.get(),
+             GRALLOC_USAGE_SW_READ_NEVER | GRALLOC_USAGE_SW_WRITE_OFTEN
+-            | GRALLOC_USAGE_HW_TEXTURE | GRALLOC_USAGE_EXTERNAL_DISP));
++            | GRALLOC_USAGE_HW_TEXTURE | GRALLOC_USAGE_EXTERNAL_DISP
++#ifdef QCOM_LEGACY_OMX
++            | GRALLOC_USAGE_PRIVATE_ADSP_HEAP | GRALLOC_USAGE_PRIVATE_UNCACHED
++#endif
++            ));
+ #endif
+ 
+     CHECK_EQ(0,
+@@ -141,10 +177,12 @@ SoftwareRenderer::~SoftwareRenderer() {
+     mConverter = NULL;
+ }
+ 
++#ifndef QCOM_LEGACY_OMX
+ static int ALIGN(int x, int y) {
+     // y must be a power of 2.
+     return (x + y - 1) & ~(y - 1);
+ }
++#endif
+ 
+ void SoftwareRenderer::render(
+         const void *data, size_t size, void *platformPrivate) {
+@@ -213,6 +251,20 @@ void SoftwareRenderer::render(
+             dst_u += dst_c_stride;
+             dst_v += dst_c_stride;
+         }
++#ifdef QCOM_LEGACY_OMX
++    } else if (mColorFormat == OMX_QCOM_COLOR_FormatYVU420SemiPlanar) {
++        // Legacy Qualcomm color format
++
++        uint8_t *src_y = (uint8_t *)data;
++        uint8_t *src_u = src_y + mAlign;
++        uint8_t *dst_y = (uint8_t *)dst;
++        uint8_t *dst_u = dst_y + buf->stride * buf->height;
++        size_t bufsz = ALIGN(mCropWidth, 16) * ALIGN(mCropHeight, 2);
++
++        // Legacy codec doesn't return crop params. Ignore it for speedup :)
++        memcpy(dst_y, src_y, bufsz);
++        memcpy(dst_u, src_u, bufsz / 2);
++#endif
+     } else {
+         CHECK_EQ(mColorFormat, OMX_TI_COLOR_FormatYUV420PackedSemiPlanar);
+ 
+diff --git a/media/libstagefright/include/SoftwareRenderer.h b/media/libstagefright/include/SoftwareRenderer.h
+index 7ab0042..27bcf6c 100644
+--- a/media/libstagefright/include/SoftwareRenderer.h
++++ b/media/libstagefright/include/SoftwareRenderer.h
+@@ -48,6 +48,9 @@ private:
+     int32_t mWidth, mHeight;
+     int32_t mCropLeft, mCropTop, mCropRight, mCropBottom;
+     int32_t mCropWidth, mCropHeight;
++#ifdef QCOM_LEGACY_OMX
++    int32_t mAlign;
++#endif
+ 
+     SoftwareRenderer(const SoftwareRenderer &);
+     SoftwareRenderer &operator=(const SoftwareRenderer &);
+-- 
+1.9.1
+
