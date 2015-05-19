@@ -1,3 +1,6 @@
+
+#ifeq ($(call is-board-platform,msm8960),true)
+
 LOCAL_PATH:= $(call my-dir)
 LOCAL_DIR_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
@@ -40,3 +43,5 @@ LOCAL_SHARED_LIBRARIES := libdl libcutils liblog
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
+
+#endif
