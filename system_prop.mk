@@ -43,7 +43,6 @@ PRODUCT_PROPERTY_OVERRIDES += ro.telephony.call_ring.multiple="false"
 PRODUCT_PROPERTY_OVERRIDES += ro.telephony.call_ring="false"
 # RILD
 PRODUCT_PROPERTY_OVERRIDES += rild.libpath="/system/lib/libril-qc-qmi-1.so"
-PRODUCT_PROPERTY_OVERRIDES += rild.libargs="-d /dev/smd0"
 PRODUCT_PROPERTY_OVERRIDES += persist.rild.nitz_plmn=""
 PRODUCT_PROPERTY_OVERRIDES += persist.rild.nitz_long_ons_0=""
 PRODUCT_PROPERTY_OVERRIDES += persist.rild.nitz_long_ons_1=""
