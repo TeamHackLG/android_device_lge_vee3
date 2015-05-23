@@ -41,6 +41,8 @@ PRODUCT_PROPERTY_OVERRIDES += ril.subscription.types="NV,RUIM"
 PRODUCT_PROPERTY_OVERRIDES += ro.telephony.ril.v3="qcomdsds,signalstrength"
 PRODUCT_PROPERTY_OVERRIDES += ro.telephony.call_ring.multiple="false"
 PRODUCT_PROPERTY_OVERRIDES += ro.telephony.call_ring="false"
+# GSM Preferred
+PRODUCT_PROPERTY_OVERRIDES += ro.telephony.default_network="3"
 # RILD
 PRODUCT_PROPERTY_OVERRIDES += rild.libpath="/system/lib/libril-qc-qmi-1.so"
 PRODUCT_PROPERTY_OVERRIDES += persist.rild.nitz_plmn=""
