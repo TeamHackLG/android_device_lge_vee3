@@ -130,6 +130,8 @@ on boot
     chmod 0777 /dev/input/event5
     chmod 0777 /dev/input/event3
 
+    chown system system /sys/class/timed_output/vibrator/voltage
+
     chmod 0777 /sys/class/timed_output/vibrator/voltage
 
     start qcamerasvr
