@@ -134,6 +134,14 @@ on boot
 
     chmod 0777 /sys/class/timed_output/vibrator/voltage
 
+    chown system system /sys/class/misc/backlightnotification/enabled
+    chown system system /sys/class/misc/backlightnotification/blink_control
+    chown system system /sys/class/misc/backlightnotification/notification_led
+
+    chmod 0777 /sys/class/misc/backlightnotification/enabled
+    chmod 0777 /sys/class/misc/backlightnotification/blink_control
+    chmod 0777 /sys/class/misc/backlightnotification/notification_led
+
     start qcamerasvr
 
     start bbset
