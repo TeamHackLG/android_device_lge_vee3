@@ -134,14 +134,6 @@ on boot
 
     chmod 0777 /sys/class/timed_output/vibrator/voltage
 
-    chown system system /sys/class/misc/backlightnotification/enabled
-    chown system system /sys/class/misc/backlightnotification/blink_control
-    chown system system /sys/class/misc/backlightnotification/notification_led
-
-    chmod 0777 /sys/class/misc/backlightnotification/enabled
-    chmod 0777 /sys/class/misc/backlightnotification/blink_control
-    chmod 0777 /sys/class/misc/backlightnotification/notification_led
-
     start qcamerasvr
 
     start bbset
@@ -286,15 +278,20 @@ on post-fs-data
     chown system system /persist-lg
     chmod 0771 /persist-lg
 
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/led_pattern
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/led_blink
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/led_current_index
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/R/brightness
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/G/brightness
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/B/brightness
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/R/led_current
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/G/led_current
-    chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/B/led_current
+# Let's flash some, shall we -> neutrondev03	
+# [LGE_BSP_S][yunmo.yang@lge.com] 2012-09-26  LP5521 RGB Driver
+   mkdir /data/misc/rgb 0664 system system
+   chown system system /data/misc/rgb/lp5521_current.dat
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/led_pattern
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/led_blink
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/led_current_index
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/R/brightness
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/G/brightness
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/B/brightness
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/R/led_current
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/G/led_current
+   chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/B/led_current
+# [LGE_BSP_E][yunmo.yang@lge.com] 2012-09-26 LP5521 RGB Driver
 
 service ril-daemon1 /system/bin/rild -c 1
     class main
