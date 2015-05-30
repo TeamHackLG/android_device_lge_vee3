@@ -37,7 +37,7 @@ PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
 PRODUCT_AAPT_PREF_CONFIG := ldpi
 
 # TWRP
-PRODUCTY_COPY_FILES += $(LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
 
 # Vee3 Rootdir files
 PRODUCT_PACKAGES += \
@@ -130,11 +130,17 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	libbt-vendor \
 
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-	make_ext4fs \
-	e2fsck \
-	setup_fs \
+# EXT4
+PRODUCT_PACKAGES += make_ext4fs
+PRODUCT_PACKAGES += e2fsck
+PRODUCT_PACKAGES += setup_fs
+
+# F2FS
+ifeq ($(TARGET_USERIMAGES_USE_F2FS),true)
+PRODUCT_PACKAGES += mkfs.f2fs
+PRODUCT_PACKAGES += fsck.f2fs
+PRODUCT_PACKAGES += fibmap.f2fs
+endif
 
 # Misc
 PRODUCT_PACKAGES += \

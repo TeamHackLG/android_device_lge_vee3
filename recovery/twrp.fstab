@@ -7,3 +7,6 @@
 /data		ext4	/dev/block/mmcblk0p20	length=-16384
 /cache		ext4	/dev/block/mmcblk0p16
 /external-sd	vfat	/dev/block/mmcblk1p1	/dev/block/mmcblk1	flags=display="Micro SDcard";storage;removable
+
+/cache		f2fs	/dev/block/mmcblk0p16
+/data		f2fs	/dev/block/mmcblk0p20	length=-16384
