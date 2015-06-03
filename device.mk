@@ -37,7 +37,7 @@ PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
 PRODUCT_AAPT_PREF_CONFIG := ldpi
 
 # TWRP
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/recovery/twrp.fstab:root/etc/twrp.fstab
+PRODUCT_COPY_FILES += $(LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
 
 # Vee3 Rootdir files
 PRODUCT_PACKAGES += fstab.vee3
