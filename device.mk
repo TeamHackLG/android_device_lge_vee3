@@ -125,13 +125,6 @@ PRODUCT_PACKAGES += make_ext4fs
 PRODUCT_PACKAGES += e2fsck
 PRODUCT_PACKAGES += setup_fs
 
-# F2FS
-ifeq ($(TARGET_USERIMAGES_USE_F2FS),true)
-PRODUCT_PACKAGES += mkfs.f2fs
-PRODUCT_PACKAGES += fsck.f2fs
-PRODUCT_PACKAGES += fibmap.f2fs
-endif
-
 # Misc
 PRODUCT_PACKAGES += com.android.future.usb.accessory
 
