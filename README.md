@@ -1,6 +1,4 @@
-© 2015 - The CyanogenMod Project
-
-TeamVee - Project Vee3
+TeamVee - Project Vee3 © 2015
 
 Device configuration for LGE Optimus L3 II (Vee3)
 =====================================
