@@ -24,8 +24,8 @@ PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density="120"
 # Enforce Phone Mode view
 PRODUCT_PROPERTY_OVERRIDES += ro.screen.layout="normal"
 # Display Composition
-PRODUCT_PROPERTY_OVERRIDES += debug.composition.type="dyn"
-PRODUCT_PROPERTY_OVERRIDES += persist.hwc.mdpcomp.enable="false"
+PRODUCT_PROPERTY_OVERRIDES += debug.composition.type="mdp"
+PRODUCT_PROPERTY_OVERRIDES += persist.hwc.mdpcomp.enable="true"
 # Use Hardware Rendering
 PRODUCT_PROPERTY_OVERRIDES += debug.sf.hw="true"
 # Media StageFright
