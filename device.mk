@@ -47,7 +47,6 @@ PRODUCT_PACKAGES += ueventd.vee3.rc
 # QCOM Rootdir files
 PRODUCT_PACKAGES += fstab.qcom
 PRODUCT_PACKAGES += init.qcom.baseband.sh
-PRODUCT_PACKAGES += init.qcom.sh
 PRODUCT_PACKAGES += init.qcom.usb.rc
 PRODUCT_PACKAGES += init.qcom.usb.sh
 
