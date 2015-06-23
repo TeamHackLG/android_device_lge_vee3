@@ -38,7 +38,7 @@
 <!ATTLIST Audio sampleRate CDATA #REQUIRED>
 <!ATTLIST Audio channels (1|2) #REQUIRED>
 <!ELEMENT ImageEncoding EMPTY>
-<!ATTLIST ImageEncoding quality (90|80|70|60|50|40) #REQUIRED>
+<!ATTLIST ImageEncoding quality (100|90|80|70|60|50) #REQUIRED>
 <!ELEMENT ImageDecoding EMPTY>
 <!ATTLIST ImageDecoding memCap CDATA #REQUIRED>
 <!ELEMENT Camera EMPTY>
@@ -89,18 +89,17 @@
     <!-- Each camcorder profile defines a set of predefined configuration parameters -->
     <CamcorderProfiles cameraId="0">
 
-        <EncoderProfile quality="qvga" fileFormat="mp4" duration="60">
-            <Video codec="m4v"
-                   bitRate="128000"
-                   width="320"
-                   height="240"
-                   frameRate="15" />
+        <EncoderProfile quality="qcif" fileFormat="mp4" duration="30">
+            <Video codec="h264"
+                   bitRate="192000"
+                   width="176"
+                   height="144"
+                   frameRate="30" />
             <Audio codec="amrnb"
                    bitRate="12200"
                    sampleRate="8000"
                    channels="1" />
         </EncoderProfile>
-
         <EncoderProfile quality="cif" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="1200000"
@@ -112,8 +111,8 @@
                    sampleRate="48000"
                    channels="1" />
         </EncoderProfile>
-
         <EncoderProfile quality="480p" fileFormat="mp4" duration="30">
+            <!-- this is not the real 480p quality -->
             <Video codec="h264"
                    bitRate="2000000"
                    width="480"
@@ -137,7 +136,6 @@
                    sampleRate="8000"
                    channels="1" />
         </EncoderProfile>
-
         <EncoderProfile quality="timelapsecif" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="1200000"
@@ -150,23 +148,22 @@
                    sampleRate="48000"
                    channels="1" />
         </EncoderProfile>
-
         <EncoderProfile quality="timelapse480p" fileFormat="mp4" duration="30">
+            <!-- this is not the real 480p quality -->
             <Video codec="h264"
                    bitRate="2000000"
-                   width="720"
-                   height="480"
+                   width="480"
+                   height="320"
                    frameRate="30" />
-            <!-- audio setting is ignored -->
             <Audio codec="aac"
                    bitRate="96000"
                    sampleRate="48000"
                    channels="1" />
         </EncoderProfile>
 
+        <ImageEncoding quality="100" />
         <ImageEncoding quality="90" />
         <ImageEncoding quality="80" />
-        <ImageEncoding quality="70" />
         <ImageDecoding memCap="20000000" />
 
     </CamcorderProfiles>
@@ -184,7 +181,6 @@
                    sampleRate="8000"
                    channels="1" />
         </EncoderProfile>
-
         <EncoderProfile quality="cif" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="1200000"
@@ -196,7 +192,6 @@
                    sampleRate="48000"
                    channels="1" />
         </EncoderProfile>
-
         <EncoderProfile quality="480p" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="5000000"
@@ -221,7 +216,6 @@
                    sampleRate="8000"
                    channels="1" />
         </EncoderProfile>
-
         <EncoderProfile quality="timelapsecif" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="1200000"
@@ -234,7 +228,6 @@
                    sampleRate="48000"
                    channels="1" />
         </EncoderProfile>
-
         <EncoderProfile quality="timelapse480p" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="5000000"
@@ -248,9 +241,9 @@
                    channels="1" />
         </EncoderProfile>
 
+        <ImageEncoding quality="100" />
         <ImageEncoding quality="90" />
         <ImageEncoding quality="80" />
-        <ImageEncoding quality="70" />
         <ImageDecoding memCap="20000000" />
 
     </CamcorderProfiles>
