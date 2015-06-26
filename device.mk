@@ -48,8 +48,6 @@ PRODUCT_PACKAGES += ueventd.vee3.rc
 PRODUCT_PACKAGES += fstab.qcom
 PRODUCT_PACKAGES += init.qcom.baseband.sh
 PRODUCT_PACKAGES += init.qcom.usb.rc
-PRODUCT_PACKAGES += init.qcom.usb.sh
-
 
 # Config Files
 PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/etc/firmware/wlan/volans/WCN1314_cfg.dat:system/etc/firmware/wlan/volans/WCN1314_cfg.dat
