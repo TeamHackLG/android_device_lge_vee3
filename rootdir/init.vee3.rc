@@ -137,7 +137,7 @@ on boot
 
     start qcamerasvr
 
-    start bbset
+    start qcomset
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -325,7 +325,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     user camera
     group camera system inet audio
 
-service bbset /system/bin/sh /init.qcom.baseband.sh
+service qcomset /system/bin/sh /init.qcom.sh
     class late_start
     disabled
     oneshot
