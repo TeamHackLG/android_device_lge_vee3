@@ -64,7 +64,7 @@ endif
 
 # Kernel commands
 BOARD_KERNEL_BASE := 0x00200000
-BOARD_KERNEL_CMDLINE := androidboot.hardware=vee3
+BOARD_KERNEL_CMDLINE := androidboot.hardware=vee3 androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01300000
 BOARD_KERNEL_PAGESIZE := 4096
 
