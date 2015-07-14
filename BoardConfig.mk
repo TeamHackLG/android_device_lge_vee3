@@ -13,9 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Enable this if you are building to Dual
-TARGET_DUAL_SIM := false
-
 LOCAL_PATH := device/lge/vee3
 
 # inherit from the proprietary version
@@ -55,12 +52,8 @@ ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 # VeeKernel
 TARGET_KERNEL_SOURCE := kernel/lge/VeeKernel
 
-# DualSim
-ifeq ($(TARGET_DUAL_SIM),true)
-TARGET_KERNEL_CONFIG := cyanogenmod_vee3ds_defconfig
-else
-TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
-endif
+# Change this if you are building to L3 II Dual
+TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig #cyanogenmod_vee3ds_defconfig
 
 # Kernel commands
 BOARD_KERNEL_BASE := 0x00200000

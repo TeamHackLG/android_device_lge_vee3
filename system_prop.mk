@@ -3,10 +3,6 @@ ifeq ($(TARGET_BUILD_VARIANT),userdebug)
 ADDITIONAL_DEFAULT_PROPERTIES += ro.secure="false"
 ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure="false"
 endif
-# For Dual Sim devices
-ifeq ($(TARGET_DUAL_SIM),true)
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += persist.radio.multisim.config="dsds"
-endif
 # USB
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += persist.sys.usb.config="mtp"
 # QCOM

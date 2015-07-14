@@ -33,16 +33,22 @@ PATH=/sbin:/system/sbin:/system/bin:/system/xbin
 export PATH
 
 # Set baseband based on modem
-v10=`strings /dev/block/mmcblk0p12 | grep -e "-V10.-"| head -1`
-v20=`strings /dev/block/mmcblk0p12 | grep -e "-V20.-"| head -1`
+v10=`strings /dev/block/mmcblk0p12 | grep -e "-V10.-" | head -1`
+v20=`strings /dev/block/mmcblk0p12 | grep -e "-V20.-" | head -1`
 setprop gsm.version.baseband ${v10}${v20}
 
 # Set essential configs
 roserialno=`getprop ro.serialno`
 romanufacturer=`getprop ro.product.manufacturer`
 romodel=`getprop ro.product.model`
-
 echo $roserialno > /sys/class/android_usb/android0/iSerial
 echo $romanufacturer > /sys/class/android_usb/android0/iManufacturer
 echo $romodel > /sys/class/android_usb/android0/iProduct
 echo $romanufacturer > /sys/class/android_usb/android0/f_rndis/manufacturer
+
+# Set DualSim based on baseband
+e425set=`getprop gsm.version.baseband | head -1 | grep -o "E425"`
+e430set=`getprop gsm.version.baseband | head -1 | grep -o "E430"`
+e431set=`getprop gsm.version.baseband | head -1 | grep -o "E431"`
+e435set=`getprop gsm.version.baseband | head -1 | grep -o "E435"`
+setprop persist.baseband.device ${e425set}${e430set}${e431set}${e435set}

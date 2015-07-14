@@ -409,8 +409,13 @@ service sensord /system/bin/sensord
     class core
     oneshot
 
-on property:persist.radio.multisim.config=dsds
+on property:persist.baseband.device=E435
+    setprop persist.radio.multisim.config dsds
+    setprop persist.multisim.config dsds
+    stop ril-daemon
+    stop ril-daemon1
     setprop ro.multi.rild true
+    start ril-daemon
     start ril-daemon1
 
 on property:wlan.driver.status=loading
