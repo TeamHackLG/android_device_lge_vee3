@@ -75,12 +75,17 @@ esac
 # Enable DualSim
 case "$deviceset" in
 	"E415" | "E420" | "E435")
-	setprop persist.radio.multisim.config dsds
-	setprop persist.multisim.config dsds
-	setprop ro.multi.rild true
-	stop ril-daemon
-	start ril-daemon
-	start ril-daemon1
+	disabledualsim=`getprop persist.disable.dualsim`
+	case "$disabledualsim" in
+		"false" | "")
+		setprop persist.radio.multisim.config dsds
+		setprop persist.multisim.config dsds
+		setprop ro.multi.rild true
+		stop ril-daemon
+		start ril-daemon
+		start ril-daemon1
+		;;
+	esac
 	;;
 esac
 
@@ -95,8 +100,17 @@ case "$deviceset" in
 	busybox sed -i '/key 172   MENU              VIRTUAL/c\key 172   HOME              VIRTUAL' system/usr/keylayout/touch_mcs8000.kl
 	;;
 	"E435")
-	busybox sed -i '/key 139   MENU              VIRTUAL/c\key 139   HOME              VIRTUAL' system/usr/keylayout/touch_mcs8000.kl
-	busybox sed -i '/key 172   HOME              VIRTUAL/c\key 172   MENU              VIRTUAL' system/usr/keylayout/touch_mcs8000.kl
+	disablekeyhack=`getprop persist.disable.keyhack`
+	case "$disablekeyhack" in
+		"false" | "")
+		busybox sed -i '/key 139   MENU              VIRTUAL/c\key 139   HOME              VIRTUAL' system/usr/keylayout/touch_mcs8000.kl
+		busybox sed -i '/key 172   HOME              VIRTUAL/c\key 172   MENU              VIRTUAL' system/usr/keylayout/touch_mcs8000.kl
+		;;
+		"true")
+		busybox sed -i '/key 139   HOME              VIRTUAL/c\key 139   MENU              VIRTUAL' system/usr/keylayout/touch_mcs8000.kl
+		busybox sed -i '/key 172   MENU              VIRTUAL/c\key 172   HOME              VIRTUAL' system/usr/keylayout/touch_mcs8000.kl
+		;;
+	esac
 	;;
 esac
 mount -o ro,remount /system
