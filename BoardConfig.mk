@@ -50,7 +50,7 @@ TARGET_CORTEX_CACHE_LINE_32 := true
 ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 
 # Kernel
-TARGET_KERNEL_SOURCE := kernel/lge/VeeKernel
+TARGET_KERNEL_SOURCE := kernel/lge/msm7x27a-common
 TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
 BOARD_KERNEL_BASE := 0x00200000
 BOARD_KERNEL_CMDLINE := androidboot.hardware=vee3 androidboot.selinux=permissive
