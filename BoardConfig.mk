@@ -49,13 +49,9 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_CORTEX_CACHE_LINE_32 := true
 ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 
-# VeeKernel
+# Kernel
 TARGET_KERNEL_SOURCE := kernel/lge/VeeKernel
-
-# Change this if you are building to L3 II Dual
-TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig #cyanogenmod_vee3ds_defconfig
-
-# Kernel commands
+TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
 BOARD_KERNEL_BASE := 0x00200000
 BOARD_KERNEL_CMDLINE := androidboot.hardware=vee3 androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01300000
