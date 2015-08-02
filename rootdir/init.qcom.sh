@@ -35,41 +35,25 @@ export PATH
 # Set baseband based on modem
 basebandcheck=`getprop gsm.version.baseband`
 case "$basebandcheck" in
-	"")
-	setprop gsm.version.baseband `strings /dev/block/mmcblk0p12 | grep -e "-V10.-" -e "-V20.-" | head -1`
-	;;
+	"") setprop gsm.version.baseband `strings /dev/block/mmcblk0p12 | grep -e "-V10.-" -e "-V20.-" | head -1` ;;
 esac
 
 # Get device based on baseband
 deviceset=`getprop gsm.version.baseband | grep -o -e "E410" -e "E411" -e "E415" -e "E420" -e "E425" -e "E430" -e "E431" -e "E435" | head -1`
 
-# Set Variant in build.prop
+# ReMount /system to Read-Write
 mount -o rw,remount /system
+
+# Set Variant in build.prop
 case "$deviceset" in
-	"E410")
-	busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E410 (L1 II Single)' system/build.prop
-	;;
-	"E411")
-	busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E411 (L1 II Single)' system/build.prop
-	;;
-	"E415")
-	busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E415 (L1 II Dual)' system/build.prop
-	;;
-	"E420")
-	busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E420 (L1 II Dual)' system/build.prop
-	;;
-	"E425")
-	busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E425 (L3 II Single)' system/build.prop
-	;;
-	"E430")
-	busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E430 (L3 II Single)' system/build.prop
-	;;
-	"E431")
-	busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E431 (L3 II Single)' system/build.prop
-	;;
-	"E435")
-	busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E435 (L3 II Dual)' system/build.prop
-	;;
+	"E410") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E410 (L1 II Single)' system/build.prop ;;
+	"E411") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E411 (L1 II Single)' system/build.prop ;;
+	"E415") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E415 (L1 II Dual)' system/build.prop ;;
+	"E420") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E420 (L1 II Dual)' system/build.prop ;;
+	"E425") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E425 (L3 II Single)' system/build.prop ;;
+	"E430") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E430 (L3 II Single)' system/build.prop ;;
+	"E431") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E431 (L3 II Single)' system/build.prop ;;
+	"E435") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E435 (L3 II Dual)' system/build.prop ;;
 esac
 
 # Enable DualSim
@@ -96,6 +80,7 @@ case "$deviceset" in
 	cp system/usr/keylayout/vee3_keypad.kl system/usr/keylayout/v1_keypad.kl
 	;;
 	"E425" | "E430" | "E431")
+	# Prevention to Bugs in L3 II Single Devices
 	busybox sed -i '/key 139   HOME              VIRTUAL/c\key 139   MENU              VIRTUAL' system/usr/keylayout/touch_mcs8000.kl
 	busybox sed -i '/key 172   MENU              VIRTUAL/c\key 172   HOME              VIRTUAL' system/usr/keylayout/touch_mcs8000.kl
 	;;
@@ -113,6 +98,8 @@ case "$deviceset" in
 	esac
 	;;
 esac
+
+# ReMount /system to Read-Only
 mount -o ro,remount /system
 
 # Set essential configs
