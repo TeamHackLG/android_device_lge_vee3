@@ -53,8 +53,8 @@ on init
     symlink /storage/sdcard1 /mnt/extSdCard
 
 on fs
-    mount_all fstab.vee3
-    mount_all fstab.qcom
+    mount_all fstab.vee
+    mount_all fstab.lge
 
 on boot
     # Permission for /proc/cmdline
@@ -137,7 +137,7 @@ on boot
 
     start qcamerasvr
 
-    start qcomset
+    start veeset
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -325,7 +325,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     user camera
     group camera system inet audio
 
-service qcomset /system/bin/sh /init.qcom.sh
+service veeset /system/bin/sh /init.vee.sh
     class late_start
     disabled
     oneshot

@@ -13,13 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH := device/lge/vee3
-
-# inherit from the proprietary version
--include vendor/lge-vee3/vee3/BoardConfigVendor.mk
+LOCAL_PATH := device/lge/vee-common
 
 # inherit from the common proprietary version
--include vendor/lge-vee3/msm7x27a-common/BoardConfigVendor.mk
+-include vendor/lge-vee/msm7x27a-common/BoardConfigVendor.mk
 
 BOARD_VENDOR := lge
 
@@ -34,7 +31,7 @@ ARCH_ARM_HIGH_OPTIMIZATION := true
 ARCH_ARM_HIGH_OPTIMIZATION_COMPAT := true
 
 TARGET_NO_BOOTLOADER := true
-TARGET_BOOTLOADER_BOARD_NAME := Vee3
+TARGET_BOOTLOADER_BOARD_NAME := Vee
 TARGET_BOARD_PLATFORM := msm7x27a
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 TARGET_GRALLOC_USES_ASHMEM := true
@@ -51,19 +48,10 @@ ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/lge/msm7x27a-common
-TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
 BOARD_KERNEL_BASE := 0x00200000
-BOARD_KERNEL_CMDLINE := androidboot.hardware=vee3 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := androidboot.hardware=vee androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01300000
 BOARD_KERNEL_PAGESIZE := 4096
-
-# Partitions
-BOARD_BOOTIMAGE_PARTITION_SIZE := 12582912
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 12582912
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 958398464
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 1876951040
-BOARD_FLASH_BLOCK_SIZE := 131072
-TARGET_USERIMAGES_USE_EXT4 := true
 
 # Qualcomm hardware
 BOARD_USES_QCOM_HARDWARE := true
@@ -105,7 +93,6 @@ BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw
 
 # BT
 BOARD_HAVE_BLUETOOTH := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(LOCAL_PATH)/libbt/buildcfg
 
 # Light
 TARGET_PROVIDES_LIBLIGHT := true
@@ -161,7 +148,6 @@ TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/recovery.fstab
 
 # TWRP
 RECOVERY_VARIANT := omni
-DEVICE_RESOLUTION := 240x240
 TW_INTERNAL_STORAGE_PATH := "/data/media"
 TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 TW_EXTERNAL_STORAGE_PATH := "/external sd"

@@ -18,29 +18,24 @@
 #
 # Everything in this directory will become public
 
-LOCAL_PATH := device/lge/vee3
+LOCAL_PATH := device/lge/vee-common
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
-$(call inherit-product, vendor/lge-vee3/vee3/vee3-vendor.mk)
-
-$(call inherit-product, vendor/lge-vee3/msm7x27a-common/msm7x27a-common-vendor.mk)
+$(call inherit-product, vendor/lge-vee/msm7x27a-common/msm7x27a-common-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
-PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
-PRODUCT_AAPT_PREF_CONFIG := ldpi
-
 # Rootdir files
-PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/lge/vee3/rootdir,root)
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/lge/vee-common/rootdir,root)
 
 # Config Files
-PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/lge/vee3/configs,system)
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/lge/vee-common/configs,system)
 
 # Permission files
 PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml
