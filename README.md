@@ -1,4 +1,4 @@
-TeamVee - Project Vee3 © 2015
+TeamVee - Project Vee © 2015
 
 Device configuration for LGE Optimus L3 II (Vee3)
 =====================================

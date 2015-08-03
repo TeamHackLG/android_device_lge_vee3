@@ -1,5 +1,5 @@
-#
 # Copyright (C) 2015 The CyanogenMod Project
+# Copyright (C) 2015 The TeamVee Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-# This file includes all definitions that apply to ALL L3 II devices.
+# This file includes all definitions that apply to all "Vee" QCom MSM7x27a devices.
 #
 # Everything in this directory will become public
 
@@ -36,34 +36,11 @@ $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
 PRODUCT_AAPT_PREF_CONFIG := ldpi
 
-# Vee3 Rootdir files
-PRODUCT_PACKAGES += fstab.vee3
-PRODUCT_PACKAGES += init.vee3.rc
-PRODUCT_PACKAGES += ueventd.vee3.rc
-
-# QCOM Rootdir files
-PRODUCT_PACKAGES += fstab.qcom
-PRODUCT_PACKAGES += init.qcom.sh
-PRODUCT_PACKAGES += init.qcom.usb.rc
+# Rootdir files
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/lge/vee3/rootdir,root)
 
 # Config Files
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/etc/firmware/wlan/volans/WCN1314_cfg.dat:system/etc/firmware/wlan/volans/WCN1314_cfg.dat
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini:system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/etc/firmware/wlan/volans/WCN1314_qcom_fw.bin:system/etc/firmware/wlan/volans/WCN1314_qcom_fw.bin
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin:system/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/etc/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/etc/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/etc/AudioFilter.csv:system/etc/AudioFilter.csv
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/etc/audio_policy.conf:system/etc/audio_policy.conf
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/etc/media_codecs.xml:system/etc/media_codecs.xml
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/etc/media_profiles.xml:system/etc/media_profiles.xml
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/usr/keylayout/7k_handset.kl:system/usr/keylayout/7k_handset.kl
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/usr/keylayout/7x27a_kp.kl:system/usr/keylayout/7x27a_kp.kl
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/usr/keylayout/touch_mcs8000.kl:system/usr/keylayout/touch_mcs8000.kl
-PRODUCT_COPY_FILES += $(LOCAL_PATH)/configs/usr/keylayout/vee3_keypad.kl:system/usr/keylayout/vee3_keypad.kl
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/lge/vee3/configs,system)
 
 # Permission files
 PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml
