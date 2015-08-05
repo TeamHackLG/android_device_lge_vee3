@@ -18,8 +18,6 @@
 #
 # Everything in this directory will become public
 
-LOCAL_PATH := device/lge/vee-common
-
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # The gps config appropriate for this device
@@ -27,7 +25,7 @@ $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
 $(call inherit-product, vendor/lge-vee/msm7x27a-common/msm7x27a-common-vendor.mk)
 
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+DEVICE_PACKAGE_OVERLAYS += device/lge/vee-common/overlay
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
@@ -113,4 +111,4 @@ PRODUCT_PACKAGES += com.android.future.usb.accessory
 PRODUCT_PACKAGES += libQWiFiSoftApCfg
 PRODUCT_PACKAGES += libqcomvoiceprocessing
 
-include $(LOCAL_PATH)/system_prop.mk
+include device/lge/vee-common/system_prop.mk

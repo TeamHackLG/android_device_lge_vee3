@@ -13,8 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH := device/lge/vee-common
-
 # inherit from the common proprietary version
 -include vendor/lge-vee/msm7x27a-common/BoardConfigVendor.mk
 
@@ -88,7 +86,7 @@ TARGET_NO_INITLOGO := true
 BOARD_USE_MHEAP_SCREENSHOT := true
 
 # Hardware
-BOARD_HARDWARE_CLASS := $(LOCAL_PATH)/cmhw
+BOARD_HARDWARE_CLASS := device/lge/vee-common/cmhw
 
 # BT
 BOARD_HAVE_BLUETOOTH := true
@@ -100,7 +98,7 @@ TARGET_PROVIDES_LIBLIGHT := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # SEPolicy
-BOARD_SEPOLICY_DIRS += $(LOCAL_PATH)/sepolicy
+BOARD_SEPOLICY_DIRS += device/lge/vee-common/sepolicy
 
 BOARD_SEPOLICY_UNION += app.te
 BOARD_SEPOLICY_UNION += device.te
