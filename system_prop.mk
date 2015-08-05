@@ -30,10 +30,6 @@ PRODUCT_PROPERTY_OVERRIDES += ro.opengles.version="131072"
 PRODUCT_PROPERTY_OVERRIDES += wifi.interface="wlan0"
 # KSM
 PRODUCT_PROPERTY_OVERRIDES += ro.ksm.default="true"
-# Lcd Density
-PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density="120"
-# Enforce Phone Mode view
-PRODUCT_PROPERTY_OVERRIDES += ro.screen.layout="normal"
 # Display Composition
 PRODUCT_PROPERTY_OVERRIDES += debug.composition.type="mdp"
 PRODUCT_PROPERTY_OVERRIDES += persist.hwc.mdpcomp.enable="true"
