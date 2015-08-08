@@ -1,7 +1,7 @@
-From 1dbbcb1fe5786f2034ddc220bcae128a4b694313 Mon Sep 17 00:00:00 2001
+From e90f6e583b2aa5a246ea5d2d48e7d296bf74c03c Mon Sep 17 00:00:00 2001
 From: Caio99BR <caiooliveirafarias0@gmail.com>
 Date: Fri, 22 May 2015 19:17:22 -0300
-Subject: [PATCH] Support to Working DualSim
+Subject: [PATCH] Support to Working LGE DualSim
 
 Change-Id: Ic05229efb2e3970d52d19703925339964e022b82
 ---
@@ -76,5 +76,5 @@ index 09e760a..74143da 100644
 +    int RIL_REQUEST_SET_INITIAL_ATTACH_APN = 20003;
  }
 -- 
-1.9.1
+2.1.4
 
