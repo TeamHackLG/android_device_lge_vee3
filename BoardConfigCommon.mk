@@ -47,7 +47,6 @@ ARCH_ARM_HAVE_32_BYTE_CACHE_LINES := true
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/lge/msm7x27a-common
 BOARD_KERNEL_BASE := 0x00200000
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01300000
 BOARD_KERNEL_PAGESIZE := 4096
 
 # Qualcomm hardware
