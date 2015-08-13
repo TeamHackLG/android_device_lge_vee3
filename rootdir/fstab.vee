@@ -5,4 +5,3 @@
 /dev/block/mmcblk0p15	/persist	ext4	nosuid,nodev,barrier=1		wait
 /dev/block/mmcblk0p18	/persist-lg	ext4	nosuid,nodev,barrier=1		wait
 /dev/block/mmcblk0p23	/mpt		ext4	nosuid,nodev,barrier=1		wait
-/dev/block/mmcblk0p25	/cust		ext4	ro,nosuid,nodev,barrier=1	wait
