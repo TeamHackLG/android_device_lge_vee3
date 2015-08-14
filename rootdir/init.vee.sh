@@ -33,13 +33,13 @@ PATH=/sbin:/system/sbin:/system/bin:/system/xbin
 export PATH
 
 # Set baseband based on modem
-basebandcheck=`getprop gsm.version.baseband`
+basebandcheck=`getprop gsm.version.baseband | grep -o -e "V10" -e "V20"`
 case "$basebandcheck" in
 	"") setprop gsm.version.baseband `strings /dev/block/mmcblk0p12 | grep -e "-V10.-" -e "-V20.-" | head -1` ;;
 esac
 
 # Get device based on baseband
-deviceset=`getprop gsm.version.baseband | grep -o -e "E410" -e "E411" -e "E415" -e "E420" -e "E425" -e "E430" -e "E431" -e "E435" | head -1`
+deviceset=`getprop gsm.version.baseband | grep -o -e "E410" -e "E411" -e "E415" -e "E420" -e "E425" -e "E430" -e "E431" -e "E435" -e "P710" -e "P712" -e "P713" -e "P714" -e "P715" -e "P716" | head -1`
 
 # ReMount /system to Read-Write
 mount -o rw,remount /system
@@ -54,11 +54,17 @@ case "$deviceset" in
 	"E430") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E430 (L3 II Single)' system/build.prop ;;
 	"E431") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E431 (L3 II Single)' system/build.prop ;;
 	"E435") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E435 (L3 II Dual)' system/build.prop ;;
+	"P710") busybox sed -i '/ro.product.model=L7 II/c\ro.product.model=P710 (L7 II Single)' system/build.prop ;;
+	"P712") busybox sed -i '/ro.product.model=L7 II/c\ro.product.model=P712 (L7 II Single)' system/build.prop ;;
+	"P713") busybox sed -i '/ro.product.model=L7 II/c\ro.product.model=P713 (L7 II Single)' system/build.prop ;;
+	"P714") busybox sed -i '/ro.product.model=L7 II/c\ro.product.model=P714 (L7 II Single)' system/build.prop ;;
+	"P715") busybox sed -i '/ro.product.model=L7 II/c\ro.product.model=P715 (L7 II Dual)' system/build.prop ;;
+	"P716") busybox sed -i '/ro.product.model=L7 II/c\ro.product.model=P716 (L7 II Dual)' system/build.prop ;;
 esac
 
 # Enable DualSim
 case "$deviceset" in
-	"E415" | "E420" | "E435")
+	"E415" | "E420" | "E435" | "P715" | "P716")
 	disabledualsim=`getprop persist.disable.dualsim`
 	case "$disabledualsim" in
 		"false" | "")
@@ -68,9 +74,7 @@ case "$deviceset" in
 		stop ril-daemon
 		start ril-daemon
 		start ril-daemon1
-		;;
 	esac
-	;;
 esac
 
 # Change KeyLayouts
@@ -92,6 +96,15 @@ esac
 
 # ReMount /system to Read-Only
 mount -o ro,remount /system
+
+# V20
+case "$deviceset" in
+	"P710" | "P712" | "P713" | "P714" | "P715" | "P716")
+	case "$basebandcheck" in
+		"V10")
+		setprop gsm.version.baseband ""
+	esac
+esac
 
 # Set essential configs
 echo `getprop ro.serialno` > /sys/class/android_usb/android0/iSerial
