@@ -38,6 +38,61 @@ case "$basebandcheck" in
 	"") setprop gsm.version.baseband `strings /dev/block/mmcblk0p12 | grep -e "-V10.-" -e "-V20.-" | head -1` ;;
 esac
 
+# Get device based on baseband
+deviceset=`getprop gsm.version.baseband | grep -o -e "E410" -e "E411" -e "E415" -e "E420" -e "E425" -e "E430" -e "E431" -e "E435" | head -1`
+
+# ReMount /system to Read-Write
+mount -o rw,remount /system
+
+# Set Variant in build.prop
+case "$deviceset" in
+	"E410") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E410 (L1 II Single)' system/build.prop ;;
+	"E411") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E411 (L1 II Single)' system/build.prop ;;
+	"E415") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E415 (L1 II Dual)' system/build.prop ;;
+	"E420") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E420 (L1 II Dual)' system/build.prop ;;
+	"E425") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E425 (L3 II Single)' system/build.prop ;;
+	"E430") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E430 (L3 II Single)' system/build.prop ;;
+	"E431") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E431 (L3 II Single)' system/build.prop ;;
+	"E435") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E435 (L3 II Dual)' system/build.prop ;;
+esac
+
+# Enable DualSim
+case "$deviceset" in
+	"E415" | "E420" | "E435")
+	disabledualsim=`getprop persist.disable.dualsim`
+	case "$disabledualsim" in
+		"false" | "")
+		setprop persist.radio.multisim.config dsds
+		setprop persist.multisim.config dsds
+		setprop ro.multi.rild true
+		stop ril-daemon
+		start ril-daemon
+		start ril-daemon1
+		;;
+	esac
+	;;
+esac
+
+# Change KeyLayouts
+case "$deviceset" in
+	"E435")
+	disablekeyhack=`getprop persist.disable.keyhack`
+	case "$disablekeyhack" in
+		"false" | "")
+		busybox sed -i '/key 139   MENU              VIRTUAL/c\key 139   HOME              VIRTUAL' system/usr/keylayout/touch_mcs8000.kl
+		busybox sed -i '/key 172   HOME              VIRTUAL/c\key 172   MENU              VIRTUAL' system/usr/keylayout/touch_mcs8000.kl
+		;;
+		"true")
+		busybox sed -i '/key 139   HOME              VIRTUAL/c\key 139   MENU              VIRTUAL' system/usr/keylayout/touch_mcs8000.kl
+		busybox sed -i '/key 172   MENU              VIRTUAL/c\key 172   HOME              VIRTUAL' system/usr/keylayout/touch_mcs8000.kl
+		;;
+	esac
+	;;
+esac
+
+# ReMount /system to Read-Only
+mount -o ro,remount /system
+
 # Set essential configs
 echo `getprop ro.serialno` > /sys/class/android_usb/android0/iSerial
 echo `getprop ro.product.manufacturer` > /sys/class/android_usb/android0/iManufacturer
