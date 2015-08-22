@@ -24,7 +24,7 @@
                          AudioDecoderCap)>
 <!ELEMENT CamcorderProfiles (EncoderProfile+, ImageEncoding+, ImageDecoding, Camera)>
 <!ELEMENT EncoderProfile (Video, Audio)>
-<!ATTLIST EncoderProfile quality (high|low|timelapseqvga|timelapsehvga|timelapsewvga) #REQUIRED>
+<!ATTLIST EncoderProfile quality (high|low|timelapseqvga|timelapsevga|timelapsewvga) #REQUIRED>
 <!ATTLIST EncoderProfile fileFormat (mp4|3gp) #REQUIRED>
 <!ATTLIST EncoderProfile duration (30|60) #REQUIRED>
 <!ATTLIST EncoderProfile cameraId (0|1) #REQUIRED>
@@ -131,7 +131,7 @@
                    channels="1" />
         </EncoderProfile>
 
-        <EncoderProfile quality="hvga" fileFormat="mp4" duration="30">
+        <EncoderProfile quality="vga" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="2000000"
                    width="480"
@@ -196,7 +196,7 @@
                    channels="1" />
          </EncoderProfile>
 
-        <EncoderProfile quality="timelapsehvga" fileFormat="mp4" duration="30">
+        <EncoderProfile quality="timelapsevga" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="2000000"
                    width="480"
@@ -270,7 +270,7 @@
                    channels="1" />
         </EncoderProfile>
 
-        <EncoderProfile quality="hvga" fileFormat="mp4" duration="30">
+        <EncoderProfile quality="vga" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="2000000"
                    width="480"
@@ -335,7 +335,7 @@
                    channels="1" />
          </EncoderProfile>
 
-        <EncoderProfile quality="timelapsehvga" fileFormat="mp4" duration="30">
+        <EncoderProfile quality="timelapsevga" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="2000000"
                    width="480"
