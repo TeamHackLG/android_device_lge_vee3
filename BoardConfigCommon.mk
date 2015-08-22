@@ -14,7 +14,7 @@
 # limitations under the License.
 
 # inherit from the common proprietary version
--include vendor/lge-vee/msm7x27a-common/BoardConfigVendor.mk
+-include vendor/lge/vee-common/BoardConfigVendor.mk
 
 BOARD_VENDOR := lge
 
@@ -29,7 +29,7 @@ ARCH_ARM_HIGH_OPTIMIZATION := true
 ARCH_ARM_HIGH_OPTIMIZATION_COMPAT := true
 
 TARGET_NO_BOOTLOADER := true
-TARGET_BOOTLOADER_BOARD_NAME := Vee
+TARGET_BOOTLOADER_BOARD_NAME := vee
 TARGET_BOARD_PLATFORM := msm7x27a
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 TARGET_GRALLOC_USES_ASHMEM := true
