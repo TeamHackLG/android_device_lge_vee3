@@ -54,8 +54,8 @@ case "$deviceset" in
 	"E430") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E430 (L3 II Single)' system/build.prop ;;
 	"E431") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E431 (L3 II Single)' system/build.prop ;;
 	"E435") busybox sed -i '/ro.product.model=L3 II/c\ro.product.model=E435 (L3 II Dual)' system/build.prop ;;
-	"P710") busybox sed -i '/ro.product.model=L7 II/c\ro.product.model=P710 (L7 II Single)' system/build.prop ;;
-	"P712") busybox sed -i '/ro.product.model=L7 II/c\ro.product.model=P712 (L7 II Single)' system/build.prop ;;
+	"P710") busybox sed -i '/ro.product.model=L7 II/c\ro.product.model=P710 (L7 II Single NFC)' system/build.prop ;;
+	"P712") busybox sed -i '/ro.product.model=L7 II/c\ro.product.model=P712 (L7 II Single NFC)' system/build.prop ;;
 	"P713") busybox sed -i '/ro.product.model=L7 II/c\ro.product.model=P713 (L7 II Single)' system/build.prop ;;
 	"P714") busybox sed -i '/ro.product.model=L7 II/c\ro.product.model=P714 (L7 II Single)' system/build.prop ;;
 	"P715") busybox sed -i '/ro.product.model=L7 II/c\ro.product.model=P715 (L7 II Dual)' system/build.prop ;;
