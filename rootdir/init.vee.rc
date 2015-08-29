@@ -136,8 +136,6 @@ on boot
 
     start qcamerasvr
 
-    start veeset
-
 # msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/radio 0770 radio radio
@@ -324,9 +322,13 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     user camera
     group camera system inet audio
 
-service veeset /system/bin/sh /init.vee.sh
+service bbset /system/bin/sh /init.vee.baseband.sh
     class late_start
-    disabled
+    oneshot
+
+service vee-c_main-sh /system/bin/sh /init.vee.class_main.sh
+    class main
+    user root
     oneshot
 
 service p2p_supplicant /system/bin/wpa_supplicant \
