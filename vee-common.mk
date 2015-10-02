@@ -89,7 +89,7 @@ PRODUCT_PACKAGES += make_ext4fs
 PRODUCT_PACKAGES += e2fsck
 PRODUCT_PACKAGES += setup_fs
 
-# Misc
+# Usb
 PRODUCT_PACKAGES += com.android.future.usb.accessory
 
 # Audio
@@ -105,10 +105,5 @@ PRODUCT_PACKAGES += lights.msm7x27a
 
 # Camera Hal
 PRODUCT_PACKAGES += camera.msm7x27a
-
-# Misc
-PRODUCT_PACKAGES += com.android.future.usb.accessory
-PRODUCT_PACKAGES += libQWiFiSoftApCfg
-PRODUCT_PACKAGES += libqcomvoiceprocessing
 
 include device/lge/vee-common/system_prop.mk
