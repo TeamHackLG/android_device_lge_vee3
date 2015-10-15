@@ -73,4 +73,4 @@ PRODUCT_PROPERTY_OVERRIDES += debug.hwc.fakevsync="true"
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += audio.offload.disable="true"
 # Resampler quality
-PRODUCT_PROPERTY_OVERRIDES += af.resampler.quality='4"
+PRODUCT_PROPERTY_OVERRIDES += af.resampler.quality="4"
