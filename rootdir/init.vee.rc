@@ -54,6 +54,7 @@ on init
 
 on fs
     mount_all fstab.vee
+    swapon_all fstab.vee
 
 on boot
     # Permission for /proc/cmdline
