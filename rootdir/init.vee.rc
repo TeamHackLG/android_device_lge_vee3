@@ -130,9 +130,14 @@ on boot
     chmod 0777 /dev/input/event5
     chmod 0777 /dev/input/event3
 
+    # allow system to modify Vibration
     chown system system /sys/class/timed_output/vibrator/voltage
-
     chmod 0777 /sys/class/timed_output/vibrator/voltage
+
+    # use new ksm values
+    write /sys/kernel/mm/ksm/sleep_millisecs 1000
+    write /sys/kernel/mm/ksm/pages_to_scan 128
+    write /sys/kernel/mm/ksm/run 1
 
     start qcamerasvr
 

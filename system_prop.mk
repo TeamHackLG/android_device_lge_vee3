@@ -28,8 +28,6 @@ PRODUCT_PROPERTY_OVERRIDES += ro.vendor.extension_library="/system/lib/libqc-opt
 PRODUCT_PROPERTY_OVERRIDES += ro.opengles.version="131072"
 # WiFi
 PRODUCT_PROPERTY_OVERRIDES += wifi.interface="wlan0"
-# KSM
-PRODUCT_PROPERTY_OVERRIDES += ro.ksm.default="true"
 # Display Composition
 PRODUCT_PROPERTY_OVERRIDES += debug.composition.type="mdp"
 PRODUCT_PROPERTY_OVERRIDES += persist.hwc.mdpcomp.enable="true"
