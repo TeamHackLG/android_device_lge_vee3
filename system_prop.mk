@@ -33,10 +33,10 @@ PRODUCT_PROPERTY_OVERRIDES += ro.opengles.version="131072"
 # WiFi
 PRODUCT_PROPERTY_OVERRIDES += wifi.interface="wlan0"
 # Display Composition
-PRODUCT_PROPERTY_OVERRIDES += debug.composition.type="mdp"
-PRODUCT_PROPERTY_OVERRIDES += persist.hwc.mdpcomp.enable="true"
+PRODUCT_PROPERTY_OVERRIDES += debug.composition.type="dyn"
+PRODUCT_PROPERTY_OVERRIDES += persist.hwc.mdpcomp.enable="false"
 # Use Hardware Rendering
-PRODUCT_PROPERTY_OVERRIDES += debug.sf.hw="true"
+PRODUCT_PROPERTY_OVERRIDES += debug.sf.hw="1"
 # Media StageFright
 PRODUCT_PROPERTY_OVERRIDES += media.stagefright.enable-player="true"
 PRODUCT_PROPERTY_OVERRIDES += media.stagefright.enable-meta="false"
