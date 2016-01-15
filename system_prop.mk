@@ -65,14 +65,14 @@ PRODUCT_PROPERTY_OVERRIDES += persist.rild.nitz_short_ons_2=""
 PRODUCT_PROPERTY_OVERRIDES += persist.rild.nitz_short_ons_3=""
 # Data
 PRODUCT_PROPERTY_OVERRIDES += ro.use_data_netmgrd="true"
-PRODUCT_PROPERTY_OVERRIDES += persist.data.ds_fmc_app.mode="false"
+PRODUCT_PROPERTY_OVERRIDES += persist.data.ds_fmc_app.mode="0"
 # SIM
-PRODUCT_PROPERTY_OVERRIDES += persist.service.factory.enable="false"
-PRODUCT_PROPERTY_OVERRIDES += persist.radio.apm_sim_not_pwdn="true"
+PRODUCT_PROPERTY_OVERRIDES += persist.service.factory.enable="0"
+PRODUCT_PROPERTY_OVERRIDES += persist.radio.apm_sim_not_pwdn="1"
 # Debug
-PRODUCT_PROPERTY_OVERRIDES += debug.gralloc.map_fb_memory="true"
-PRODUCT_PROPERTY_OVERRIDES += debug.hwc.fakevsync="true"
+PRODUCT_PROPERTY_OVERRIDES += debug.gralloc.map_fb_memory="1"
+PRODUCT_PROPERTY_OVERRIDES += debug.hwc.fakevsync="1"
 # Audio
-PRODUCT_PROPERTY_OVERRIDES += audio.offload.disable="true"
+PRODUCT_PROPERTY_OVERRIDES += audio.offload.disable="1"
 # Resampler quality
 PRODUCT_PROPERTY_OVERRIDES += af.resampler.quality="4"
