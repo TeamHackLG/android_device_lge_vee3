@@ -64,9 +64,6 @@ PRODUCT_PACKAGES += copybit.msm7x27a
 PRODUCT_PACKAGES += gralloc.msm7x27a
 PRODUCT_PACKAGES += hwcomposer.msm7x27a
 PRODUCT_PACKAGES += memtrack.msm7x27a
-PRODUCT_PACKAGES += liboverlay
-PRODUCT_PACKAGES += libtilerenderer
-PRODUCT_PACKAGES += libgenlock
 PRODUCT_PACKAGES += libqdMetaData
 
 # Video
