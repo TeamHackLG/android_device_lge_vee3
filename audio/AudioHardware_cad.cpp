@@ -1283,33 +1283,32 @@ status_t AudioHardware::doRouting(AudioStreamInMSM72xx *input, uint32_t outputDe
         // Recording will happen through currently active tx device
         if(inputDevice == AUDIO_DEVICE_IN_VOICE_CALL)
             return NO_ERROR;
-        if (inputDevice & AUDIO_DEVICE_BIT_IN) {
-            if (inputDevice & AUDIO_DEVICE_IN_BLUETOOTH_SCO_HEADSET) {
+        if (inputDevice != 0) {
+            if (outputDevices &
+                   (AUDIO_DEVICE_OUT_BLUETOOTH_SCO | AUDIO_DEVICE_OUT_BLUETOOTH_SCO_HEADSET)) {
                     ALOGI("Routing audio to Bluetooth PCM\n");
                     new_snd_device = SND_DEVICE_BT;
-            } else if (inputDevice & AUDIO_DEVICE_IN_WIRED_HEADSET) {
+            } else if (outputDevices & AUDIO_DEVICE_OUT_WIRED_HEADSET) {
                     ALOGI("Routing audio to Wired Headset\n");
                     new_snd_device = SND_DEVICE_HEADSET;
-            } else if (outputDevices == AUDIO_DEVICE_OUT_WIRED_HEADPHONE) {
-                    ALOGI("Routing audio to No microphone Wired Headphone (%d,%x)\n");
+            } else if (outputDevices & AUDIO_DEVICE_OUT_WIRED_HEADPHONE) {
+                    ALOGI("Routing audio to No microphone Wired Headphone\n");
                     new_snd_device = SND_DEVICE_HEADSET;
+            } else if (outputDevices & AUDIO_DEVICE_OUT_SPEAKER) {
+                    ALOGI("Routing audio to Speakerphone\n");
+                    new_snd_device = SND_DEVICE_SPEAKER;
+            } else if (outputDevices & AUDIO_DEVICE_OUT_EARPIECE) {
+                    ALOGI("Routing audio to Handset\n");
+                    new_snd_device = SND_DEVICE_HANDSET;
 #ifdef QCOM_FM_ENABLED
             } else if (inputDevice & AUDIO_DEVICE_IN_FM_RX_A2DP) {
                     ALOGI("Routing audio from FM to Bluetooth A2DP\n");
                     new_snd_device = SND_DEVICE_FM_DIGITAL_BT_A2DP_HEADSET;
-                    FmA2dpStatus=true;
+                    FmA2dpStatus = true;
             } else if (inputDevice & AUDIO_DEVICE_IN_FM_RX) {
                     ALOGI("Routing audio to FM\n");
                     enableDgtlFmDriver = true;
 #endif
-            } else {
-                if (outputDevices & AUDIO_DEVICE_OUT_EARPIECE) {
-                    ALOGI("Routing audio to Handset\n");
-                    new_snd_device = SND_DEVICE_HANDSET;
-                } else {
-                    ALOGI("Routing audio to Speakerphone\n");
-                    new_snd_device = SND_DEVICE_SPEAKER;
-                }
             }
         }
     }
