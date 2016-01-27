@@ -1301,10 +1301,7 @@ status_t AudioHardware::doRouting(AudioStreamInMSM72xx *input, uint32_t outputDe
                     enableDgtlFmDriver = true;
 #endif
             } else {
-                if (outputDevices == AUDIO_DEVICE_OUT_WIRED_HEADPHONE) {
-                    ALOGI("Routing audio to Speakerphone\n");
-                    new_snd_device = SND_DEVICE_NO_MIC_HEADSET;
-                } else if (outputDevices & AUDIO_DEVICE_OUT_EARPIECE) {
+                if (outputDevices & AUDIO_DEVICE_OUT_EARPIECE) {
                     ALOGI("Routing audio to Handset\n");
                     new_snd_device = SND_DEVICE_HANDSET;
                 } else {
