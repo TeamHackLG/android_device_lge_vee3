@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "qcom_audio_hw_hal"
+#define LOG_TAG "audio.primary.msm7x27a"
 //#define LOG_NDEBUG 0
 
 #include <stdint.h>
