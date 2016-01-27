@@ -836,12 +836,6 @@ String8 AudioHardware::getParameters(const String8& keys)
         }
     }
 
-    key = String8(ECHO_SUPRESSION);
-    if (param.get(key, value) == NO_ERROR) {
-        value = String8("yes");
-        param.add(key, value);
-    }
-
     ALOGV("AudioHardware::getParameters() %s", param.toString().string());
     return param.toString();
 }

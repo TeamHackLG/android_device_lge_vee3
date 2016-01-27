@@ -832,12 +832,6 @@ String8 AudioHardware::getParameters(const String8& keys)
         }
     }
 
-    key = String8(ECHO_SUPRESSION);
-    if (param.get(key, value) == NO_ERROR) {
-        value = String8("yes");
-        param.add(key, value);
-    }
-
     key = String8(AUDIO_PARAMETER_KEY_FLUENCE_TYPE);
     if (param.get(key, value) == NO_ERROR) {
        if (mDualMicEnabled) {
