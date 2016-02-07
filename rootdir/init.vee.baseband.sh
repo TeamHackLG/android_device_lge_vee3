@@ -33,23 +33,8 @@ PATH=/sbin:/system/sbin:/system/bin:/system/xbin
 export PATH
 
 # Set baseband based on modem
-basebandcheck=`getprop gsm.version.baseband | grep -o -e "V10" -e "V20"`
-case "$basebandcheck" in
+case `getprop gsm.version.baseband | grep -o -e "V10" -e "V20"` in
 	"") setprop gsm.version.baseband `strings /dev/block/mmcblk0p12 | grep -e "-V10.-" -e "-V20.-" | head -1` ;;
-esac
-
-# Fix KL of E435 based on baseband
-deviceset=`getprop gsm.version.baseband | grep -o -e "E435" | head -1`
-case "$deviceset" in
-	"E435")
-	# ReMount /system to Read-Write
-	mount -o rw,remount /system
-	# Change KeyLayouts
-	busybox sed -i '/key 139   MENU              VIRTUAL/c\key 139   HOME              VIRTUAL' system/usr/keylayout/touch_mcs8000.kl
-	busybox sed -i '/key 172   HOME              VIRTUAL/c\key 172   MENU              VIRTUAL' system/usr/keylayout/touch_mcs8000.kl
-	# ReMount /system to Read-Only
-	mount -o ro,remount /system
-	;;
 esac
 
 # Set essential configs
