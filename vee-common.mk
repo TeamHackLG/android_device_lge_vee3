@@ -108,7 +108,4 @@ PRODUCT_PACKAGES += lights.msm7x27a
 # Camera Hal
 PRODUCT_PACKAGES += camera.msm7x27a
 
-# Setup Wizard
-PRODUCT_PACKAGES += CMAccount
-
 include device/lge/vee-common/system_prop.mk
