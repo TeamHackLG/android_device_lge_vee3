@@ -57,8 +57,8 @@ on init
     symlink /storage/sdcard1 /mnt/extSdCard
 
 on fs
-    mount_all fstab.vee
-    swapon_all fstab.vee
+    mount_all fstab.vee-common
+    swapon_all fstab.vee-common
 
 on boot
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
@@ -293,11 +293,11 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     user camera
     group camera system inet audio
 
-service bbset /system/bin/sh /init.vee.baseband.sh
+service vee-common_bb-sh /system/bin/sh /init.vee-common.bb.sh
     class main
     oneshot
 
-service qcom-c_main-sh /system/bin/sh /init.qcom.class_main.sh
+service vee-common_main-sh /system/bin/sh /init.vee-common.main.sh
     class main
     user root
     oneshot
