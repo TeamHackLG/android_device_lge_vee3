@@ -33,8 +33,30 @@ DEVICE_PACKAGE_OVERLAYS += device/lge/vee-common/overlay
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
-# Rootdir files
-PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/lge/vee-common/rootdir,root)
+# TWRP Hack
+$(shell mkdir -p out/target/product/$(PRODUCT_DEVICE)/recovery/root/etc)
+$(shell cp device/lge/vee-common/rootdir/recovery/twrp.fstab out/target/product/$(PRODUCT_DEVICE)/recovery/root/etc/twrp.fstab)
+# Recovery Device Set Hack
+$(shell cp device/lge/vee-common/rootdir/recovery/init.recovery.vee-common.bb.sh out/target/product/$(PRODUCT_DEVICE)/recovery/root/init.recovery.vee-common.bb.sh)
+ifeq ($(PRODUCT_DEVICE),vee3)
+$(shell cp device/lge/vee-common/rootdir/vee3/init.recovery.vee3.rc out/target/product/$(PRODUCT_DEVICE)/recovery/root/init.recovery.vee3.rc)
+endif
+ifeq ($(PRODUCT_DEVICE),v1)
+$(shell cp device/lge/vee-common/rootdir/vee3/init.recovery.v1.rc out/target/product/$(PRODUCT_DEVICE)/recovery/root/init.recovery.v1.rc)
+endif
+
+# Device Rootdir files
+ifeq ($(PRODUCT_DEVICE),vee3)
+PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee3/init.vee3.rc:root/init.vee3.rc
+endif
+ifeq ($(PRODUCT_DEVICE),v1)
+PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/v1/init.v1.rc:root/init.v1.rc
+endif
+# Common Rootdir files
+PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/init.vee-common.main.sh:root/init.vee-common.main.sh
+PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/init.vee-common.usb.rc:root/init.vee-common.usb.rc
+PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/fstab.vee-common:root/fstab.$(PRODUCT_DEVICE)
+PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/ueventd.vee-common.rc:root/ueventd.$(PRODUCT_DEVICE).rc
 
 # Config Files
 PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/lge/vee-common/configs,system)
