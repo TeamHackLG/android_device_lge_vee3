@@ -32,25 +32,25 @@
 PATH=/sbin:/system/sbin:/system/bin:/system/xbin
 export PATH
 
-# Set baseband based on modem
-basebandcheck=`getprop gsm.version.baseband | grep -o -e "V10" -e "V20"`
-case "$basebandcheck" in
-	"") setprop gsm.version.baseband `strings /dev/block/mmcblk0p12 | grep -e "-V10.-" -e "-V20.-" | head -1` ;;
-esac
+setprop gsm.version.baseband $(strings /dev/block/mmcblk0p12 | grep -e "-V10.-" -e "-V20.-" | head -1) ;;
 
 # Get device based on baseband
-deviceset=`getprop gsm.version.baseband | grep -o -e "E410" -e "E411" -e "E415" -e "E420" -e "E425" -e "E430" -e "E431" -e "E435" -e "P710" -e "P712" -e "P713" -e "P714" -e "P715" -e "P716" | head -1`
+deviceset=$(getprop gsm.version.baseband | grep -o -e "E410" -e "E411" -e "E415" -e "E420" -e "E425" -e "E430" -e "E431" -e "E435"
 
 # Set Variant
-setprop ro.product.model "$deviceset"
-setprop ro.product.device "$deviceset"
+setprop ro.product.model ${deviceset}
+setprop ro.product.device ${deviceset}
 setprop ro.product.manufacturer "LGE"
 
 # Set essential configs
-echo `getprop ro.serialno` > /sys/class/android_usb/android0/iSerial
-echo `getprop ro.product.manufacturer` > /sys/class/android_usb/android0/iManufacturer
-echo `getprop ro.product.manufacturer` > /sys/class/android_usb/android0/f_rndis/manufacturer
-echo `getprop ro.product.model` > /sys/class/android_usb/android0/iProduct
+echo $(getprop ro.serialno) > /sys/class/android_usb/android0/iSerial
+echo $(getprop ro.product.manufacturer) > /sys/class/android_usb/android0/iManufacturer
+echo $(getprop ro.product.manufacturer) > /sys/class/android_usb/android0/f_rndis/manufacturer
+echo $(getprop ro.product.model) > /sys/class/android_usb/android0/iProduct
+
+# Set secondary things
+setprop ro.build.description "$(getprop ro.build.product)-$(getprop ro.build.type) $(getprop ro.build.version.release) $(getprop ro.build.id) $(getprop ro.build.version.incremental) $(getprop ro.build.tags)"
+setprop ro.build.fingerprint "$(getprop ro.product.manufacturer)/$(getprop ro.build.product)/$(getprop ro.build.product):$(getprop ro.build.version.release)/$(getprop ro.build.id):$(getprop ro.build.type)/$(getprop ro.build.tags)"
 
 # Restart ADBD
 stop adbd

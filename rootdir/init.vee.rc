@@ -293,10 +293,6 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     user camera
     group camera system inet audio
 
-service vee-common_bb-sh /system/bin/sh /init.vee-common.bb.sh
-    class main
-    oneshot
-
 service vee-common_main-sh /system/bin/sh /init.vee-common.main.sh
     class main
     user root

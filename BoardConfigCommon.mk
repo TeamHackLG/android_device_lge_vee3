@@ -127,6 +127,10 @@ WIFI_DRIVER_FW_PATH_AP := "ap"
 WIFI_DRIVER_FW_PATH_P2P := "p2p"
 WIFI_DRIVER_FW_PATH_PARAM := "/data/misc/wifi/fwpath"
 
+# Set Device in init based on baseband
+TARGET_INIT_VENDOR_LIB := libinit_vee-common
+TARGET_LIBINIT_DEFINES_FILE := device/lge/vee-common/init/init_vee-common.c
+
 # Recovery
 DEVICE_RESOLUTION := 240x240
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
