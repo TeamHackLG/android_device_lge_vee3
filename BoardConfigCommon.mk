@@ -131,6 +131,16 @@ WIFI_DRIVER_FW_PATH_PARAM := "/data/misc/wifi/fwpath"
 TARGET_INIT_VENDOR_LIB := libinit_vee-common
 TARGET_LIBINIT_DEFINES_FILE := device/lge/vee-common/init/init_vee-common.c
 
+# BT
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/vee-common/bluetooth
+
+# Kernel
+TARGET_KERNEL_CONFIG := cyanogenmod_$(TARGET_DEVICE)_defconfig
+BOARD_KERNEL_CMDLINE := androidboot.hardware=$(TARGET_DEVICE) androidboot.selinux=permissive
+
+# FSTAB
+TARGET_RECOVERY_FSTAB := device/lge/vee-common/rootdir/fstab.vee-common
+
 # Recovery
 DEVICE_RESOLUTION := 240x240
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
