@@ -35,10 +35,18 @@ $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 # TWRP Hack
 $(shell mkdir -p out/target/product/$(TARGET_DEVICE)/recovery/root/etc)
-$(shell cp device/lge/vee-common/rootdir/recovery/twrp.fstab out/target/product/$(TARGET_DEVICE)/recovery/root/etc/twrp.fstab)
+ifeq ($(TARGET_DEVICE),v1)
+$(shell cp device/lge/vee-common/rootdir/recovery/twrp.fstab out/target/product/v1/recovery/root/etc/twrp.fstab)
 # Common Recovery Device Set Hack
-$(shell cp device/lge/vee-common/rootdir/recovery/init.recovery.vee-common.bb.sh out/target/product/$(TARGET_DEVICE)/recovery/root/init.recovery.vee-common.bb.sh)
-$(shell cp device/lge/vee-common/rootdir/recovery/init.recovery.vee-common.rc out/target/product/$(TARGET_DEVICE)/recovery/root/init.recovery.$(TARGET_DEVICE).rc)
+$(shell cp device/lge/vee-common/rootdir/recovery/init.recovery.vee-common.bb.sh out/target/product/v1/recovery/root/init.recovery.vee-common.bb.sh)
+$(shell cp device/lge/vee-common/rootdir/recovery/init.recovery.vee-common.rc out/target/product/v1/recovery/root/init.recovery.v1.rc)
+endif
+ifeq ($(TARGET_DEVICE),vee3)
+$(shell cp device/lge/vee-common/rootdir/recovery/twrp.fstab out/target/product/vee3/recovery/root/etc/twrp.fstab)
+# Common Recovery Device Set Hack
+$(shell cp device/lge/vee-common/rootdir/recovery/init.recovery.vee-common.bb.sh out/target/product/vee3/recovery/root/init.recovery.vee-common.bb.sh)
+$(shell cp device/lge/vee-common/rootdir/recovery/init.recovery.vee-common.rc out/target/product/vee3/recovery/root/init.recovery.vee3.rc)
+endif
 
 # Device Rootdir files
 PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/$(TARGET_DEVICE)/init.$(TARGET_DEVICE).rc:root/init.$(TARGET_DEVICE).rc
