@@ -6,6 +6,7 @@ $(shell cp $(LOCAL_PATH)/recovery/twrp.fstab $(OUT)/recovery/root/etc/twrp.fstab
 $(shell cp $(LOCAL_PATH)/$(TARGET_DEVICE)/init.recovery.$(TARGET_DEVICE).rc $(OUT)/recovery/root/init.recovery.$(TARGET_DEVICE).rc)
 
 # Device Rootdir files
+$(shell mkdir -p $(TARGET_ROOT_OUT))
 $(shell cp $(LOCAL_PATH)/$(TARGET_DEVICE)/init.$(TARGET_DEVICE).rc $(TARGET_ROOT_OUT)/init.$(TARGET_DEVICE).rc)
 $(shell cp $(LOCAL_PATH)/$(TARGET_DEVICE)/init.$(TARGET_DEVICE).usb.rc $(TARGET_ROOT_OUT)/init.$(TARGET_DEVICE).usb.rc)
 
