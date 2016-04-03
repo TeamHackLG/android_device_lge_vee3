@@ -25,7 +25,7 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-import init.vee-common.usb.rc
+import init.vee3.usb.rc
 
 on early-init
     # Permission for /proc/cmdline
@@ -293,7 +293,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     user camera
     group camera system inet audio
 
-service vee-common_main-sh /system/bin/sh /init.vee-common.main.sh
+service vee3ds /system/bin/sh /init.vee3.sh
     class main
     user root
     oneshot

@@ -33,10 +33,6 @@ DEVICE_PACKAGE_OVERLAYS += device/lge/vee-common/overlay
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
-# Common Rootdir files
-PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/init.vee-common.main.sh:root/init.vee-common.main.sh
-PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/init.vee-common.usb.rc:root/init.vee-common.usb.rc
-
 # Config Files
 PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/lge/vee-common/configs,system)
 
