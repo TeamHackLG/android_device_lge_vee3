@@ -43,21 +43,11 @@ void vendor_load_properties() {
     fp = popen("/system/xbin/strings /dev/block/mmcblk0p12 | /system/bin/grep -e '-V10' -e '-V20' | /system/xbin/head -1", "r");
     fgets(gversionbb, sizeof(gversionbb), fp);
     pclose(fp);
-
     property_set("gsm.version.baseband", gversionbb);
-
-    if (strstr(gversionbb, "")) {
-        fp = popen("/sbin/strings /dev/block/mmcblk0p12 | /sbin/grep -e '-V10' -e '-V20' | /sbin/head -1", "r");
-        fgets(gversionbb, sizeof(gversionbb), fp);
-        pclose(fp);
-
-        property_set("gsm.version.baseband", gversionbb);
-    }
 
     fp = popen("/system/bin/getprop gsm.version.baseband | /system/bin/grep -o -e 'E410' -e 'E411' -e 'E415' -e 'E420' -e 'E425' -e 'E430' -e 'E431' -e 'E435'", "r");
     fgets(dversionbb, sizeof(dversionbb), fp);
     pclose(fp);
-
     property_set("ro.product.device", dversionbb);
     property_set("ro.product.model", dversionbb);
 
@@ -66,6 +56,19 @@ void vendor_load_properties() {
         property_set("persist.multisim.config", "dsds");
         property_set("ro.multi.rild", "true");
     };
+
+    if (strstr(gversionbb, "")) {
+        fp = popen("/sbin/strings /dev/block/mmcblk0p12 | /sbin/grep -e '-V10' -e '-V20' | /sbin/head -1", "r");
+        fgets(gversionbb, sizeof(gversionbb), fp);
+        pclose(fp);
+        property_set("gsm.version.baseband", gversionbb);
+
+        fp = popen("/sbin/getprop gsm.version.baseband | /sbin/grep -o -e 'E410' -e 'E411' -e 'E415' -e 'E420' -e 'E425' -e 'E430' -e 'E431' -e 'E435'", "r");
+        fgets(dversionbb, sizeof(dversionbb), fp);
+        pclose(fp);
+        property_set("ro.product.device", dversionbb);
+        property_set("ro.product.model", dversionbb);
+    }
 
     ERROR("Found %s gsm baseband setting build properties for %s device\n", dversionbb, dversionbb);
 }
