@@ -32,16 +32,6 @@
 PATH=/sbin:/system/sbin:/system/bin:/system/xbin
 export PATH
 
-setprop gsm.version.baseband $(strings /dev/block/mmcblk0p12 | grep -e "-V10.-" -e "-V20.-" | head -1) ;;
-
-# Get device based on baseband
-deviceset=$(getprop gsm.version.baseband | grep -o -e "E410" -e "E411" -e "E415" -e "E420" -e "E425" -e "E430" -e "E431" -e "E435"
-
-# Set Variant
-setprop ro.product.model ${deviceset}
-setprop ro.product.device ${deviceset}
-setprop ro.product.manufacturer "LGE"
-
 # Set essential configs
 echo $(getprop ro.serialno) > /sys/class/android_usb/android0/iSerial
 echo $(getprop ro.product.manufacturer) > /sys/class/android_usb/android0/iManufacturer
