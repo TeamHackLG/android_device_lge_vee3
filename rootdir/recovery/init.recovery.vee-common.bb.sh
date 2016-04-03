@@ -29,8 +29,7 @@
 #
 
 # No path is set up at this point so we have to do it here.
-PATH=/sbin:/system/sbin:/system/bin:/system/xbin
-export PATH
+export PATH=/sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
 
 # Set secondary things
 setprop ro.build.description "$(getprop ro.build.product)-$(getprop ro.build.type) $(getprop ro.build.version.release) $(getprop ro.build.id) $(getprop ro.build.version.incremental) $(getprop ro.build.tags)"

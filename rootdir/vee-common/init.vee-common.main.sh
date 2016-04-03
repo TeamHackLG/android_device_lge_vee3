@@ -27,6 +27,9 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+# No path is set up at this point so we have to do it here.
+export PATH=/sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
+
 # Start ril-daemon1 for dualsim
 if [ $(getprop persist.radio.multisim.config) -eq dsds ]
 then

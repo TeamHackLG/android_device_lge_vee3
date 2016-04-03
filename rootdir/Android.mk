@@ -11,4 +11,4 @@ $(shell cp $(LOCAL_PATH)/recovery/init.recovery.vee-common.rc $(OUT)/recovery/ro
 # Device Rootdir files
 $(shell cp $(LOCAL_PATH)/$(TARGET_DEVICE)/init.$(TARGET_DEVICE).rc $(TARGET_ROOT_OUT)/init.$(TARGET_DEVICE).rc)
 $(shell cp $(LOCAL_PATH)/vee-common/fstab.vee-common $(TARGET_ROOT_OUT)/fstab.$(TARGET_DEVICE))
-$(shell cp $(LOCAL_PATH)/vee-common/ueventd.vee-common.rc $(TARGET_ROOT_OUT)/root/ueventd.$(TARGET_DEVICE).rc)
+$(shell cp $(LOCAL_PATH)/vee-common/ueventd.vee-common.rc $(TARGET_ROOT_OUT)/ueventd.$(TARGET_DEVICE).rc)
