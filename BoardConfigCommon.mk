@@ -50,6 +50,17 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01300000
 BOARD_KERNEL_BASE := 0x00200000
 BOARD_KERNEL_PAGESIZE := 4096
 
+# Device Kernel
+ifeq ($(TARGET_DEVICE),v1)
+TARGET_KERNEL_CONFIG := cyanogenmod_v1_defconfig
+BOARD_KERNEL_CMDLINE := androidboot.hardware=v1 androidboot.selinux=permissive
+endif
+ifeq ($(TARGET_DEVICE),vee3)
+TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
+BOARD_KERNEL_CMDLINE := androidboot.hardware=vee3 androidboot.selinux=permissive
+endif
+
+
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 12582912
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 12582912
@@ -133,10 +144,6 @@ TARGET_LIBINIT_DEFINES_FILE := device/lge/vee-common/init/init_vee-common.c
 
 # BT
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/vee-common/bluetooth
-
-# Kernel
-TARGET_KERNEL_CONFIG := cyanogenmod_$(TARGET_DEVICE)_defconfig
-BOARD_KERNEL_CMDLINE := androidboot.hardware=$(TARGET_DEVICE) androidboot.selinux=permissive
 
 # FSTAB
 TARGET_RECOVERY_FSTAB := device/lge/vee-common/rootdir/fstab.vee-common

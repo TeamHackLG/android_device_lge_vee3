@@ -34,27 +34,40 @@ DEVICE_PACKAGE_OVERLAYS += device/lge/vee-common/overlay
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 # TWRP Hack
-$(shell mkdir -p out/target/product/$(TARGET_DEVICE)/recovery/root/etc)
 ifeq ($(TARGET_DEVICE),v1)
+$(shell mkdir -p out/target/product/v1/recovery/root/etc)
 $(shell cp device/lge/vee-common/rootdir/recovery/twrp.fstab out/target/product/v1/recovery/root/etc/twrp.fstab)
+endif
+ifeq ($(TARGET_DEVICE),vee3)
+$(shell mkdir -p out/target/product/vee3/recovery/root/etc)
+$(shell cp device/lge/vee-common/rootdir/recovery/twrp.fstab out/target/product/vee3/recovery/root/etc/twrp.fstab)
+endif
+
 # Common Recovery Device Set Hack
+ifeq ($(TARGET_DEVICE),v1)
 $(shell cp device/lge/vee-common/rootdir/recovery/init.recovery.vee-common.bb.sh out/target/product/v1/recovery/root/init.recovery.vee-common.bb.sh)
 $(shell cp device/lge/vee-common/rootdir/recovery/init.recovery.vee-common.rc out/target/product/v1/recovery/root/init.recovery.v1.rc)
 endif
 ifeq ($(TARGET_DEVICE),vee3)
-$(shell cp device/lge/vee-common/rootdir/recovery/twrp.fstab out/target/product/vee3/recovery/root/etc/twrp.fstab)
-# Common Recovery Device Set Hack
 $(shell cp device/lge/vee-common/rootdir/recovery/init.recovery.vee-common.bb.sh out/target/product/vee3/recovery/root/init.recovery.vee-common.bb.sh)
 $(shell cp device/lge/vee-common/rootdir/recovery/init.recovery.vee-common.rc out/target/product/vee3/recovery/root/init.recovery.vee3.rc)
 endif
 
 # Device Rootdir files
-PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/$(TARGET_DEVICE)/init.$(TARGET_DEVICE).rc:root/init.$(TARGET_DEVICE).rc
+ifeq ($(TARGET_DEVICE),v1)
+PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/v1/init.v1.rc:root/init.v1.rc
+PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/fstab.vee-common:root/fstab.v1
+PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/ueventd.vee-common.rc:root/ueventd.v1.rc
+endif
+ifeq ($(TARGET_DEVICE),vee3)
+PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee3/init.vee3.rc:root/init.vee3.rc
+PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/fstab.vee-common:root/fstab.vee3
+PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/ueventd.vee-common.rc:root/ueventd.vee3.rc
+endif
+
 # Common Rootdir files
-PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/fstab.vee-common:root/fstab.$(TARGET_DEVICE)
 PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/init.vee-common.main.sh:root/init.vee-common.main.sh
 PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/init.vee-common.usb.rc:root/init.vee-common.usb.rc
-PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/ueventd.vee-common.rc:root/ueventd.$(TARGET_DEVICE).rc
 
 # Config Files
 PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/lge/vee-common/configs,system)
