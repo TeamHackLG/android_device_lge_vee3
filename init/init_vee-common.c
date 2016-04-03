@@ -53,7 +53,7 @@ void vendor_load_properties() {
     property_set("ro.product.device", dversionbb);
     property_set("ro.product.model", dversionbb);
 
-    if (strstr(dversionbb, "E415")) || (strstr(dversionbb, "E420")) || (strstr(dversionbb, "E435")) {
+    if (strstr(dversionbb, "E415") || strstr(dversionbb, "E420") || strstr(dversionbb, "E435")) {
         property_set("persist.radio.multisim.config", "dsds");
         property_set("persist.multisim.config", "dsds");
         property_set("ro.multi.rild", "true");
