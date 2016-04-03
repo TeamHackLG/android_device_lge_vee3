@@ -25,7 +25,7 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-import init.vee.usb.rc
+import init.vee-common.usb.rc
 
-service vee_main-sh /sbin/sh /init.recovery.vee.sh
+service vee-common_bb-sh /sbin/sh /init.recovery.vee-common.bb.sh
     oneshot

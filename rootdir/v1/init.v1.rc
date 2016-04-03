@@ -25,7 +25,7 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-import init.vee.usb.rc
+import init.vee-common.usb.rc
 
 on early-init
     # Permission for /proc/cmdline
@@ -57,8 +57,8 @@ on init
     symlink /storage/sdcard1 /mnt/extSdCard
 
 on fs
-    mount_all fstab.vee-common
-    swapon_all fstab.vee-common
+    mount_all fstab.v1
+    swapon_all fstab.v1
 
 on boot
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock

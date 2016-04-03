@@ -53,9 +53,9 @@ ifeq ($(PRODUCT_DEVICE),v1)
 PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/v1/init.v1.rc:root/init.v1.rc
 endif
 # Common Rootdir files
+PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/fstab.vee-common:root/fstab.$(PRODUCT_DEVICE)
 PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/init.vee-common.main.sh:root/init.vee-common.main.sh
 PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/init.vee-common.usb.rc:root/init.vee-common.usb.rc
-PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/fstab.vee-common:root/fstab.$(PRODUCT_DEVICE)
 PRODUCT_COPY_FILES += device/lge/vee-common/rootdir/vee-common/ueventd.vee-common.rc:root/ueventd.$(PRODUCT_DEVICE).rc
 
 # Config Files
