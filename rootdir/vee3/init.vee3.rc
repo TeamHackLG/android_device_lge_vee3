@@ -293,7 +293,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     user camera
     group camera system inet audio
 
-service vee3ds /system/bin/sh /init.vee3.sh
+service vee3ds /system/bin/sh /init.vee3ds.sh
     class main
     user root
     oneshot

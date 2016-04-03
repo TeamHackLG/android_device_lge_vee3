@@ -293,7 +293,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     user camera
     group camera system inet audio
 
-service v1ds /system/bin/sh /init.v1.sh
+service v1ds /system/bin/sh /init.v1ds.sh
     class main
     user root
     oneshot

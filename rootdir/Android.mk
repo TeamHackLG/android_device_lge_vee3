@@ -12,5 +12,5 @@ $(shell cp $(LOCAL_PATH)/$(TARGET_DEVICE)/init.$(TARGET_DEVICE).usb.rc $(TARGET_
 
 # Common Device Rootdir files
 $(shell cp $(LOCAL_PATH)/vee-common/fstab.vee-common $(TARGET_ROOT_OUT)/fstab.$(TARGET_DEVICE))
-$(shell cp $(LOCAL_PATH)/vee-common/init.vee-common.sh $(TARGET_ROOT_OUT)/init.$(TARGET_DEVICE).sh)
+$(shell cp $(LOCAL_PATH)/vee-common/init.vee-common.sh $(TARGET_ROOT_OUT)/init.$(TARGET_DEVICE)ds.sh)
 $(shell cp $(LOCAL_PATH)/vee-common/ueventd.vee-common.rc $(TARGET_ROOT_OUT)/ueventd.$(TARGET_DEVICE).rc)
