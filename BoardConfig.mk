@@ -12,11 +12,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
 # HardCode Device Local Path
 DEVICE_LOCAL_PATH:= device/lge/vee3
 
-# Delete the '#' if you are building to L1II
+# Delete the '#' if you are building to L1II or use 'export TARGET_KERNEL_V1_BUILD_DEVICE=true' before build
 #TARGET_KERNEL_V1_BUILD_DEVICE := true
 
 # inherit from the common proprietary version
@@ -24,7 +25,11 @@ DEVICE_LOCAL_PATH:= device/lge/vee3
 -include vendor/lge/vee-common/BoardConfigVendor.mk
 
 # inherit from the proprietary device version
--include vendor/lge/vee3/BoardConfigVendor.mk
+ifeq ($(TARGET_KERNEL_V1_BUILD_DEVICE),true)
+	-include vendor/lge/v1/BoardConfigVendor.mk
+else
+	-include vendor/lge/vee3/BoardConfigVendor.mk
+endif
 
 BOARD_VENDOR := lge
 

@@ -14,8 +14,8 @@
 # limitations under the License.
 #
 
-# This file includes all definitions that apply to all LGE Optimus L1 II/L3 II Vee/QCom MSM7x27a devices.
-# Everything in this directory will become public
+# Delete the '#' if you are building to L1II or use 'export TARGET_KERNEL_V1_BUILD_DEVICE=true' before build
+#TARGET_KERNEL_V1_BUILD_DEVICE := true
 
 # HardCode Device Local Path
 DEVICE_LOCAL_PATH:= device/lge/vee3
@@ -30,7 +30,11 @@ $(call inherit-product, device/common/gps/gps_us_supl.mk)
 # inherit from the proprietary version
 $(call inherit-product, vendor/lge/msm7x27a-common/msm7x27a-common-vendor.mk)
 $(call inherit-product, vendor/lge/vee-common/vee-common-vendor.mk)
-$(call inherit-product, vendor/lge/vee3/vee3-vendor.mk)
+ifeq ($(TARGET_KERNEL_V1_BUILD_DEVICE),true)
+	$(call inherit-product, vendor/lge/v1/v1-vendor.mk)
+else
+	$(call inherit-product, vendor/lge/vee3/vee3-vendor.mk)
+endif
 
 DEVICE_PACKAGE_OVERLAYS += $(DEVICE_LOCAL_PATH)/overlay
 
