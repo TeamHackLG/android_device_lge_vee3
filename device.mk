@@ -35,37 +35,36 @@ $(call inherit-product, vendor/lge/vee3/vee3-vendor.mk)
 DEVICE_PACKAGE_OVERLAYS += $(DEVICE_LOCAL_PATH)/overlay
 
 # TWRP Hack
-$(shell mkdir -p $(OUT)/recovery/root/etc)
-$(shell cp $(DEVICE_LOCAL_PATH)/recovery/twrp.fstab $(OUT)/recovery/root/etc/twrp.fstab)
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
 
 # Rootdir files
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/fstab.vee3
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.recovery.vee3.rc
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.recovery.vee3.sh
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.vee3.rc
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.vee3.sh
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.vee3.usb.rc
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/ueventd.vee3.rc
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/fstab.vee3:root/fstab.vee3
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.recovery.vee3.rc:root/init.recovery.vee3.rc
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.recovery.vee3.sh:root/init.recovery.vee3.sh
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.vee3.rc:root/init.vee3.rc
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.vee3.sh:root/init.vee3.sh
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.vee3.usb.rc:root/init.vee3.usb.rc
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/ueventd.vee3.rc:root/ueventd.vee3.rc
 
 # Config Files
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/7k_handset.kl
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/7x27a_kp.kl
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/mms100s_ts.kl
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/touch_mcs8000.kl
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/v1_keypad.kl
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/vee3_keypad.kl
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/firmware/wlan/volans/WCN1314_cfg.dat
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/firmware/wlan/volans/WCN1314_qcom_fw.bin
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.accept
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.deny
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd_default.conf
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/wifi/p2p_supplicant_overlay.conf
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/wifi/wpa_supplicant_overlay.conf
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/audio_policy.conf
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/media_codecs.xml
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/media_profiles.xml
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/7k_handset.kl:system/usr/keylayout/7k_handset.kl
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/7x27a_kp.kl:system/usr/keylayout/7x27a_kp.kl
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/mms100s_ts.kl:system/usr/keylayout/mms100s_ts.kl
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/touch_mcs8000.kl:system/usr/keylayout/touch_mcs8000.kl
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/v1_keypad.kl:system/usr/keylayout/v1_keypad.kl
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/vee3_keypad.kl:system/usr/keylayout/vee3_keypad.kl
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/firmware/wlan/volans/WCN1314_cfg.dat:system/etc/firmware/wlan/volans/WCN1314_cfg.dat
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini:system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/firmware/wlan/volans/WCN1314_qcom_fw.bin:system/etc/firmware/wlan/volans/WCN1314_qcom_fw.bin
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin:system/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # Permission files
 PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml
