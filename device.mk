@@ -34,9 +34,6 @@ $(call inherit-product, vendor/lge/vee3/vee3-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += $(DEVICE_LOCAL_PATH)/overlay
 
-# TWRP Hack
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
-
 # Rootdir files
 PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/fstab.vee3:root/fstab.vee3
 PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.recovery.vee3.rc:root/init.recovery.vee3.rc
