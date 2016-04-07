@@ -16,8 +16,8 @@
 # HardCode Device Local Path
 DEVICE_LOCAL_PATH:= device/lge/vee3
 
-# Change this line to 'true' if you are building to L1II
-TARGET_KERNEL_V1_BUILD_DEVICE := false
+# Delete the '#' if you are building to L1II
+#TARGET_KERNEL_V1_BUILD_DEVICE := true
 
 # inherit from the common proprietary version
 -include vendor/lge/msm7x27a-common/BoardConfigVendor.mk
@@ -178,7 +178,6 @@ TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
 TW_DEFAULT_EXTERNAL_STORAGE := true
 TW_FLASH_FROM_STORAGE := true
 TW_NO_CPU_TEMP := true
-TW_NO_SCREEN_TIMEOUT := true
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 225
 
