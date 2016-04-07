@@ -14,9 +14,11 @@
 # limitations under the License.
 #
 
-# This file includes all definitions that apply to all L1II/L3II LGE QCom MSM7x27a devices.
-#
+# This file includes all definitions that apply to all LGE Optimus L1 II/L3 II Vee/QCom MSM7x27a devices.
 # Everything in this directory will become public
+
+# HardCode Device Local Path
+DEVICE_LOCAL_PATH:= device/lge/vee-common
 
 PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
 PRODUCT_AAPT_PREF_CONFIG := ldpi
@@ -29,12 +31,42 @@ $(call inherit-product, vendor/lge/msm7x27a-common/msm7x27a-common-vendor.mk)
 
 $(call inherit-product, vendor/lge/vee-common/vee-common-vendor.mk)
 
-DEVICE_PACKAGE_OVERLAYS += device/lge/vee-common/overlay
+DEVICE_PACKAGE_OVERLAYS += $(DEVICE_LOCAL_PATH)/overlay
 
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
+# TWRP Hack
+$(shell mkdir -p $(OUT)/recovery/root/etc)
+$(shell cp $(DEVICE_LOCAL_PATH)/recovery/twrp.fstab $(OUT)/recovery/root/etc/twrp.fstab)
+
+# Rootdir files
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/fstab.vee3
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.recovery.vee3.rc
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.recovery.vee3.sh
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.vee3.rc
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.vee3.sh
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.vee3.usb.rc
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/ueventd.vee3.rc
+
 # Config Files
-PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/lge/vee-common/configs,system)
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/7k_handset.kl
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/7x27a_kp.kl
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/mms100s_ts.kl
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/touch_mcs8000.kl
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/v1_keypad.kl
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/usr/keylayout/vee3_keypad.kl
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/firmware/wlan/volans/WCN1314_cfg.dat
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/firmware/wlan/volans/WCN1314_qcom_cfg.ini
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/firmware/wlan/volans/WCN1314_qcom_fw.bin
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/firmware/wlan/volans/WCN1314_qcom_wlan_nv.bin
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.accept
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.deny
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd_default.conf
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/wifi/p2p_supplicant_overlay.conf
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/wifi/wpa_supplicant_overlay.conf
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/audio_policy.conf
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/media_codecs.xml
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/system/etc/media_profiles.xml
 
 # Permission files
 PRODUCT_COPY_FILES += frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml
@@ -105,4 +137,4 @@ PRODUCT_PACKAGES += lights.msm7x27a
 # Camera Hal
 PRODUCT_PACKAGES += camera.msm7x27a
 
-include device/lge/vee-common/system_prop.mk
+include $(DEVICE_LOCAL_PATH)/system_prop.mk

@@ -13,6 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# HardCode Device Local Path
+DEVICE_LOCAL_PATH:= device/lge/vee-common
+
 # inherit from the common proprietary version
 -include vendor/lge/msm7x27a-common/BoardConfigVendor.mk
 -include vendor/lge/vee-common/BoardConfigVendor.mk
@@ -49,17 +52,16 @@ TARGET_KERNEL_SOURCE := kernel/lge/msm7x27a-common
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01300000
 BOARD_KERNEL_BASE := 0x00200000
 BOARD_KERNEL_PAGESIZE := 4096
+BOARD_KERNEL_CMDLINE := androidboot.hardware=vee3 androidboot.selinux=permissive
 
 # Device Kernel
-ifeq ($(TARGET_DEVICE),v1)
+# Change this line if you are building to L1II
+TARGET_KERNEL_DEVICE := vee3
+ifeq ($(TARGET_KERNEL_DEVICE),v1)
 TARGET_KERNEL_CONFIG := cyanogenmod_v1_defconfig
-BOARD_KERNEL_CMDLINE := androidboot.hardware=v1 androidboot.selinux=permissive
-endif
-ifeq ($(TARGET_DEVICE),vee3)
+else
 TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
-BOARD_KERNEL_CMDLINE := androidboot.hardware=vee3 androidboot.selinux=permissive
 endif
-
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 12582912
@@ -105,7 +107,7 @@ TARGET_NO_INITLOGO := true
 BOARD_USE_MHEAP_SCREENSHOT := true
 
 # Hardware
-BOARD_HARDWARE_CLASS := device/lge/vee-common/cmhw
+BOARD_HARDWARE_CLASS := $(DEVICE_LOCAL_PATH)/cmhw
 
 # BT
 BOARD_HAVE_BLUETOOTH := true
@@ -140,13 +142,13 @@ WIFI_DRIVER_FW_PATH_PARAM := "/data/misc/wifi/fwpath"
 
 # Set Device in init based on baseband
 TARGET_INIT_VENDOR_LIB := libinit_vee-common
-TARGET_LIBINIT_DEFINES_FILE := device/lge/vee-common/init/init_vee-common.c
+TARGET_LIBINIT_DEFINES_FILE := $(DEVICE_LOCAL_PATH)/init/init_vee-common.c
 
 # BT
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/vee-common/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_LOCAL_PATH)/bluetooth
 
 # FSTAB
-TARGET_RECOVERY_FSTAB := device/lge/vee-common/rootdir/vee-common/fstab.vee-common
+TARGET_RECOVERY_FSTAB := $(DEVICE_LOCAL_PATH)/rootdir/vee-common/fstab.vee-common
 
 # Recovery
 DEVICE_RESOLUTION := 240x240
@@ -174,7 +176,7 @@ TW_MAX_BRIGHTNESS := 225
 
 # Sepolicy
 BOARD_SEPOLICY_DIRS += \
-	device/lge/vee-common/sepolicy
+	$(DEVICE_LOCAL_PATH)/sepolicy
 
 BOARD_SEPOLICY_UNION += \
 	file_contexts \
