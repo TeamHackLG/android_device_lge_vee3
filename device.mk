@@ -18,22 +18,21 @@
 # Everything in this directory will become public
 
 # HardCode Device Local Path
-DEVICE_LOCAL_PATH:= device/lge/vee-common
+DEVICE_LOCAL_PATH:= device/lge/vee3
 
 PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
 PRODUCT_AAPT_PREF_CONFIG := ldpi
 
+$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
+# inherit from the proprietary version
 $(call inherit-product, vendor/lge/msm7x27a-common/msm7x27a-common-vendor.mk)
-
 $(call inherit-product, vendor/lge/vee-common/vee-common-vendor.mk)
+$(call inherit-product, vendor/lge/vee3/vee3-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += $(DEVICE_LOCAL_PATH)/overlay
-
-$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 # TWRP Hack
 $(shell mkdir -p $(OUT)/recovery/root/etc)

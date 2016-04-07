@@ -14,11 +14,17 @@
 # limitations under the License.
 
 # HardCode Device Local Path
-DEVICE_LOCAL_PATH:= device/lge/vee-common
+DEVICE_LOCAL_PATH:= device/lge/vee3
+
+# Change this line to 'true' if you are building to L1II
+TARGET_KERNEL_V1_BUILD_DEVICE := false
 
 # inherit from the common proprietary version
 -include vendor/lge/msm7x27a-common/BoardConfigVendor.mk
 -include vendor/lge/vee-common/BoardConfigVendor.mk
+
+# inherit from the proprietary device version
+-include vendor/lge/vee3/BoardConfigVendor.mk
 
 BOARD_VENDOR := lge
 
@@ -55,12 +61,10 @@ BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_CMDLINE := androidboot.hardware=vee3 androidboot.selinux=permissive
 
 # Device Kernel
-# Change this line if you are building to L1II
-TARGET_KERNEL_DEVICE := vee3
-ifeq ($(TARGET_KERNEL_DEVICE),v1)
-TARGET_KERNEL_CONFIG := cyanogenmod_v1_defconfig
+ifeq ($(TARGET_KERNEL_V1_BUILD_DEVICE),true)
+	TARGET_KERNEL_CONFIG := cyanogenmod_v1_defconfig
 else
-TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
+	TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
 endif
 
 # Partitions
@@ -140,15 +144,19 @@ WIFI_DRIVER_FW_PATH_AP := "ap"
 WIFI_DRIVER_FW_PATH_P2P := "p2p"
 WIFI_DRIVER_FW_PATH_PARAM := "/data/misc/wifi/fwpath"
 
+# Unified Device
+TARGET_UNIFIED_DEVICE := true
+TARGET_OTA_ASSERT_DEVICE := E410,E411,E415,E420,E425,E430,E431,E435,v1,vee3
+
 # Set Device in init based on baseband
-TARGET_INIT_VENDOR_LIB := libinit_vee-common
-TARGET_LIBINIT_DEFINES_FILE := $(DEVICE_LOCAL_PATH)/init/init_vee-common.c
+TARGET_INIT_VENDOR_LIB := libinit_vee3
+TARGET_LIBINIT_DEFINES_FILE := $(DEVICE_LOCAL_PATH)/init/init_vee3.c
 
 # BT
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_LOCAL_PATH)/bluetooth
 
 # FSTAB
-TARGET_RECOVERY_FSTAB := $(DEVICE_LOCAL_PATH)/rootdir/vee-common/fstab.vee-common
+TARGET_RECOVERY_FSTAB := $(DEVICE_LOCAL_PATH)/rootdir/root/fstab.vee3
 
 # Recovery
 DEVICE_RESOLUTION := 240x240
@@ -175,8 +183,7 @@ TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_MAX_BRIGHTNESS := 225
 
 # Sepolicy
-BOARD_SEPOLICY_DIRS += \
-	$(DEVICE_LOCAL_PATH)/sepolicy
+BOARD_SEPOLICY_DIRS +=  $(DEVICE_LOCAL_PATH)/sepolicy
 
 BOARD_SEPOLICY_UNION += \
 	file_contexts \
