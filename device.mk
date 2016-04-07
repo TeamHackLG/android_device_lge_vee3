@@ -36,10 +36,8 @@ DEVICE_PACKAGE_OVERLAYS += $(DEVICE_LOCAL_PATH)/overlay
 
 # Rootdir files
 PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/fstab.vee3:root/fstab.vee3
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.recovery.vee3.rc:root/init.recovery.vee3.rc
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.recovery.vee3.sh:root/init.recovery.vee3.sh
 PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.vee3.rc:root/init.vee3.rc
-PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.vee3.sh:root/init.vee3.sh
+PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.vee3ds.sh:root/init.vee3ds.sh
 PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/init.vee3.usb.rc:root/init.vee3.usb.rc
 PRODUCT_COPY_FILES += $(DEVICE_LOCAL_PATH)/rootdir/root/ueventd.vee3.rc:root/ueventd.vee3.rc
 
