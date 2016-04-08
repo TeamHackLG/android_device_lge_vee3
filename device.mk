@@ -31,9 +31,9 @@ $(call inherit-product, device/common/gps/gps_us_supl.mk)
 $(call inherit-product, vendor/lge/msm7x27a-common/msm7x27a-common-vendor.mk)
 $(call inherit-product, vendor/lge/vee-common/vee-common-vendor.mk)
 ifeq ($(TARGET_KERNEL_V1_BUILD_DEVICE),true)
-	$(call inherit-product, vendor/lge/v1/v1-vendor.mk)
+$(call inherit-product, vendor/lge/v1/v1-vendor.mk)
 else
-	$(call inherit-product, vendor/lge/vee3/vee3-vendor.mk)
+$(call inherit-product, vendor/lge/vee3/vee3-vendor.mk)
 endif
 
 DEVICE_PACKAGE_OVERLAYS += $(DEVICE_LOCAL_PATH)/overlay

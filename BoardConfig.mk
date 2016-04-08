@@ -26,9 +26,9 @@ DEVICE_LOCAL_PATH:= device/lge/vee3
 
 # inherit from the proprietary device version
 ifeq ($(TARGET_KERNEL_V1_BUILD_DEVICE),true)
-	-include vendor/lge/v1/BoardConfigVendor.mk
+-include vendor/lge/v1/BoardConfigVendor.mk
 else
-	-include vendor/lge/vee3/BoardConfigVendor.mk
+-include vendor/lge/vee3/BoardConfigVendor.mk
 endif
 
 BOARD_VENDOR := lge
@@ -67,9 +67,9 @@ BOARD_KERNEL_CMDLINE := androidboot.hardware=vee3 androidboot.selinux=permissive
 
 # Device Kernel
 ifeq ($(TARGET_KERNEL_V1_BUILD_DEVICE),true)
-	TARGET_KERNEL_CONFIG := cyanogenmod_v1_defconfig
+TARGET_KERNEL_CONFIG := cyanogenmod_v1_defconfig
 else
-	TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
+TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
 endif
 
 # Partitions
