@@ -377,27 +377,27 @@
          or query the capabilities of the codec at all if it is disabled
     -->
     <VideoEncoderCap name="h264" enabled="true"
-        minBitRate="64000" maxBitRate="2000000"
-        minFrameWidth="320" maxFrameWidth="800"
-        minFrameHeight="240" maxFrameHeight="480"
-        minFrameRate="15" maxFrameRate="30" />
+        minBitRate="64000" maxBitRate="20000000"
+        minFrameWidth="176" maxFrameWidth="800"
+        minFrameHeight="144" maxFrameHeight="480"
+        minFrameRate="1" maxFrameRate="30" />
 
     <VideoEncoderCap name="h263" enabled="true"
-        minBitRate="64000" maxBitRate="2000000"
-        minFrameWidth="320" maxFrameWidth="800"
-        minFrameHeight="240" maxFrameHeight="480"
-        minFrameRate="15" maxFrameRate="30" />
+        minBitRate="192000" maxBitRate="2000000"
+        minFrameWidth="176" maxFrameWidth="800"
+        minFrameHeight="144" maxFrameHeight="480"
+        minFrameRate="1" maxFrameRate="30" />
 
     <VideoEncoderCap name="m4v" enabled="true"
-        minBitRate="64000" maxBitRate="2000000"
-        minFrameWidth="320" maxFrameWidth="800"
-        minFrameHeight="240" maxFrameHeight="480"
-        minFrameRate="15" maxFrameRate="30" />
+        minBitRate="192000" maxBitRate="14000000"
+        minFrameWidth="176" maxFrameWidth="800"
+        minFrameHeight="144" maxFrameHeight="480"
+        minFrameRate="1" maxFrameRate="30" />
 
     <AudioEncoderCap name="aac" enabled="true"
-        minBitRate="8000" maxBitRate="96000"
+        minBitRate="8000" maxBitRate="156000"
         minSampleRate="8000" maxSampleRate="48000"
-        minChannels="1" maxChannels="1" />
+        minChannels="1" maxChannels="2" />
 
     <AudioEncoderCap name="amrwb" enabled="true"
         minBitRate="6600" maxBitRate="23050"
