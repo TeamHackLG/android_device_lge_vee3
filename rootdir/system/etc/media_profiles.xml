@@ -118,7 +118,7 @@
                    channels="2" />
         </EncoderProfile>
 
-        <EncoderProfile quality="qvga" fileFormat="mp4" duration="60">
+        <EncoderProfile quality="qvga" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="512000"
                    width="320"
@@ -257,7 +257,7 @@
                    channels="2" />
         </EncoderProfile>
 
-        <EncoderProfile quality="qvga" fileFormat="mp4" duration="60">
+        <EncoderProfile quality="qvga" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="512000"
                    width="320"
