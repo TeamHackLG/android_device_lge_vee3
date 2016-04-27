@@ -40,12 +40,12 @@ void vendor_load_properties() {
     char dversionbb[92];
     FILE *fp;
 
-    fp = popen("/system/xbin/printf $(/system/xbin/strings /dev/block/mmcblk0p12 | /system/bin/grep -e '-V10' -e '-V20' | /system/xbin/head -1)", "r");
+    fp = popen("/system/xbin/printf $(/system/xbin/strings /dev/block/mmcblk0p12 | /system/bin/grep -e '-V10' -e '-V20')", "r");
     fgets(gversionbb, sizeof(gversionbb), fp);
     pclose(fp);
     property_set("gsm.version.baseband", gversionbb);
 
-    fp = popen("/system/xbin/printf $(/system/bin/getprop gsm.version.baseband | /system/bin/grep -o -e 'E410' -e 'E411' -e 'E415' -e 'E420' -e 'E425' -e 'E430' -e 'E431' -e 'E435' | /system/xbin/head -1)", "r");
+    fp = popen("/system/xbin/printf $(/system/bin/getprop gsm.version.baseband | /system/bin/grep -o -e 'E410' -e 'E411' -e 'E415' -e 'E420' -e 'E425' -e 'E430' -e 'E431' -e 'E435')", "r");
     fgets(dversionbb, sizeof(dversionbb), fp);
     pclose(fp);
     property_set("ro.product.device", dversionbb);
@@ -57,5 +57,14 @@ void vendor_load_properties() {
         property_set("ro.multi.rild", "true");
     };
 
-    ERROR("Found %s gsm baseband setting build properties for %s device\n", gversionbb, dversionbb);
+    if (strstr(dversionbb, "")) {
+        property_set("gsm.version.baseband", "V10");
+        property_set("ro.product.device", "vee3");
+        property_set("ro.product.model", "vee3");
+    }
+
+    property_get("gsm.version.baseband", o_gversionbb);
+    property_get("ro.product.device", o_dversionbb);
+
+    ERROR("Found %s gsm baseband setting build properties for %s device\n", o_gversionbb, o_dversionbb);
 }
