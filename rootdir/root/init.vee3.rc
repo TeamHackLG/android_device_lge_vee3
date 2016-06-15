@@ -32,10 +32,12 @@ on early-init
     chmod 666 /proc/cmdline
 
 on init
-    mkdir /storage/sdcard1 0700 root root
-    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    # See storage config details at http://source.android.com/tech/storage/
+    mkdir /storage/sdcard1 0775 system system
+    mkdir /mnt/media_rw/sdcard1 0555 root root
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
+    mkdir /storage/emulated/legacy 0555 root root
 
     export EXTERNAL_STORAGE /storage/emulated/legacy
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
@@ -46,7 +48,6 @@ on init
     symlink /storage/emulated/legacy /sdcard
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
     symlink /storage/sdcard1 /extSdCard
     symlink /storage/sdcard1 /mnt/extSdCard
 
@@ -74,6 +75,8 @@ on fs
     wait /dev/block/platform/msm_sdcc.3/by-num/p25
     exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p25
     mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p25 /cust nosuid nodev barrier=1 errors=continue
+
+    setprop ro.crypto.fuse_sdcard true
 
 on boot
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
@@ -229,7 +232,9 @@ on boot
 
 # msm specific files that need to be created on /data
 on post-fs-data
-    mkdir /data/media 0770 media_rw media_rw
+    # we will remap this as /mnt/sdcard with the sdcard fuse tool
+    mkdir /data/media 0775 media_rw media_rw
+    chown media_rw media_rw /data/media
 
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -274,12 +279,28 @@ service ril-daemon1 /system/bin/rild -c 1
     disabled
     group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log diag
 
-service fuse_sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
+service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
     class late_start
+    disabled
 
 service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
     class late_start
     disabled
+
+on property:ro.fuse_sdcard=true
+    start sdcard
+
+# Binding fuse mount point to /storage/emulated/legacy
+on property:init.svc.sdcard=running
+    wait /mnt/shell/emulated/0
+    mount none /mnt/shell/emulated/0 /storage/emulated/legacy bind
+
+# This will make sure that sdcard service starts as late_start.
+on nonencrypted
+    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
+
+on property:vold.decrypt=trigger_restart_framework
+    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
 
 service rmt_storage /system/bin/rmt_storage
     class core
