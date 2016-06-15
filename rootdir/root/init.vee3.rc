@@ -25,19 +25,13 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-import init.vee3.usb.rc
+import init.lge.usb.rc
 
 on early-init
     # Permission for /proc/cmdline
     chmod 666 /proc/cmdline
 
 on init
-    # Set permissions for persist partition
-    mkdir /persist 0771 system system
-    mkdir /persist-lg 0771 system system
-    mkdir /mpt 0771 system system
-    mkdir /cust 0771 system system
-
     mkdir /storage/sdcard1 0700 root root
     mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
     mkdir /mnt/shell/emulated 0700 shell shell
@@ -59,6 +53,27 @@ on init
 on fs
     mount_all fstab.vee3
     swapon_all fstab.vee3
+
+    mkdir /persist 0771 system system
+    mkdir /persist-lg  0771 system system
+    mkdir /mpt 0771 system system
+    mkdir /cust 0771 system system
+
+    wait /dev/block/platform/msm_sdcc.3/by-num/p15
+    exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p15
+    mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p15 /persist nosuid nodev barrier=1 errors=continue
+
+    wait /dev/block/platform/msm_sdcc.3/by-num/p18
+    exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p18
+    mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p18 /persist-lg nosuid nodev barrier=1 errors=continue
+
+    wait /dev/block/platform/msm_sdcc.3/by-num/p23
+    exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p23
+    mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p23 /mpt nosuid nodev barrier=1 errors=continue
+
+    wait /dev/block/platform/msm_sdcc.3/by-num/p25
+    exec /system/bin/e2fsck -fy /dev/block/platform/msm_sdcc.3/by-num/p25
+    mount ext4 /dev/block/platform/msm_sdcc.3/by-num/p25 /cust nosuid nodev barrier=1 errors=continue
 
 on boot
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
@@ -187,15 +202,6 @@ on boot
 
     chmod 0664 /sys/class/leds/lcd-backlight/alc
     chmod 0664 /sys/class/leds/lcd-backlight/brightness
-
-    # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
-    # We chown/chmod /persist again so because mount is run as root + defaults
-    chown system system /persist
-    chmod 0771 /persist
-
-    # Make directories in drm partion
-    chown system system /persist-lg
-    chmod 0771 /persist-lg
 
     chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
