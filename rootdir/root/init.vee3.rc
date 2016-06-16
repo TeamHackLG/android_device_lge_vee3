@@ -26,7 +26,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-import init.lge-shared.rc
+import init.lge.shared.rc
 
 on fs
     mount_all fstab.vee3
