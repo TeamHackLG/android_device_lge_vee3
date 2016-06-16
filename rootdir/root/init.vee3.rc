@@ -33,9 +33,6 @@ on fs
     swapon_all fstab.vee3
 
 on boot
-    chown system system /sys/module/lge_emmc_direct_access/parameters/lcd_k_cal
-    chown system system /sys/devices/platform/msm_fb.131073/mdp_kcal
-
     # Sensors
     chown system system /mpt/prox_calibration.dat
     chmod 0660 /mpt/prox_calibration.dat
@@ -86,8 +83,6 @@ on boot
     chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/R/led_current
     chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/G/led_current
     chown system system /sys/devices/platform/i2c-gpio.6/i2c-6/6-0032/leds/B/led_current
-
-    start qcamerasvr
 
 # msm specific files that need to be created on /data
 on post-fs-data
