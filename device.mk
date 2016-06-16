@@ -16,7 +16,7 @@
 # This file includes all definitions that apply to ALL L3II devices
 # Everything in this directory will become public
 
-$(call inherit-product, vendor/lge/msm7x27a-common/msm7x27a-common-vendor.mk)
+$(call inherit-product, device/lge/msm7x27a-common/msm7x27a-common.mk)
 $(call inherit-product-if-exists, vendor/lge/vee3/vee3-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/lge/vee3/overlay
