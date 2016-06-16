@@ -30,7 +30,6 @@ import init.lge.shared.rc
 
 on fs
     mount_all fstab.vee3
-    swapon_all fstab.vee3
 
 on boot
     # Sensors

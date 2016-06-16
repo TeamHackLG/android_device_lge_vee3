@@ -1,10 +1,6 @@
 # Android fstab file.
 # The filesystem that contains the filesystem checker binary (typically /system) cannot
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
-#<src>			<mnt_point>	<type>	<mnt_flags and options>			<fs_mgr_flags>
-# Android fstab file.
-# The filesystem that contains the filesystem checker binary (typically /system) cannot
-# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 #<src>					<mnt_point>	<type>	<mnt_flags and options>						<fs_mgr_flags>
 /dev/block/mmcblk0p9			/boot		emmc	defaults							recoveryonly
 /dev/block/mmcblk0p17			/recovery	emmc	defaults							recoveryonly
@@ -12,4 +8,3 @@
 /dev/block/mmcblk0p20			/data		ext4	nosuid,nodev,noatime,barrier=1,noauto_da_alloc,errors=continue	check
 /dev/block/mmcblk0p16			/cache		ext4	nosuid,nodev,barrier=1						wait
 /devices/platform/msm_sdcc.1/mmc_host	auto		auto	defaults							voldmanaged=sdcard1:auto,noemulatedsd
-/dev/block/zram0			none		swap	defaults							zramsize=157286400
