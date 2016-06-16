@@ -31,9 +31,7 @@ PRODUCT_COPY_FILES += \
     device/lge/vee3/rootdir/root/ueventd.vee3.rc:root/ueventd.vee3.rc
 
 PRODUCT_COPY_FILES += \
-    device/lge/vee3/rootdir/system/usr/keylayout/mms100s_ts.kl:system/usr/keylayout/mms100s_ts.kl \
     device/lge/vee3/rootdir/system/usr/keylayout/touch_mcs8000.kl:system/usr/keylayout/touch_mcs8000.kl \
-    device/lge/vee3/rootdir/system/usr/keylayout/v1_keypad.kl:system/usr/keylayout/v1_keypad.kl \
     device/lge/vee3/rootdir/system/usr/keylayout/vee3_keypad.kl:system/usr/keylayout/vee3_keypad.kl \
     device/lge/vee3/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
     device/lge/vee3/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml \

@@ -47,13 +47,13 @@ void vendor_load_properties() {
     pclose(fp);
     property_set("gsm.version.baseband", gversionbb);
 
-    fp = popen("/system/xbin/printf $(/system/bin/getprop gsm.version.baseband | /system/bin/grep -o -e 'E410' -e 'E411' -e 'E415' -e 'E420' -e 'E425' -e 'E430' -e 'E431' -e 'E435')", "r");
+    fp = popen("/system/xbin/printf $(/system/bin/getprop gsm.version.baseband | /system/bin/grep -o -e 'E425' -e 'E430' -e 'E431' -e 'E435')", "r");
     fgets(dversionbb, sizeof(dversionbb), fp);
     pclose(fp);
     property_set("ro.product.device", dversionbb);
     property_set("ro.product.model", dversionbb);
 
-    if (strstr(dversionbb, "E415") || strstr(dversionbb, "E420") || strstr(dversionbb, "E435")) {
+    if (strstr(dversionbb, "E435")) {
         property_set("persist.radio.multisim.config", "dsds");
         property_set("persist.multisim.config", "dsds");
         property_set("ro.multi.rild", "true");
