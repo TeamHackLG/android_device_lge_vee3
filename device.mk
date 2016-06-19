@@ -32,10 +32,10 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     device/lge/vee3/rootdir/system/usr/keylayout/touch_mcs8000.kl:system/usr/keylayout/touch_mcs8000.kl \
-    device/lge/vee3/rootdir/system/usr/keylayout/vee3_keypad.kl:system/usr/keylayout/vee3_keypad.kl \
-    device/lge/vee3/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
-    device/lge/vee3/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
-    device/lge/vee3/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml
+    device/lge/vee3/rootdir/system/usr/keylayout/vee3_keypad.kl:system/usr/keylayout/vee3_keypad.kl
+
+PRODUCT_COPY_FILES += \
+    device/lge/msm7x27a-common/rootdir/system/etc/gen2_media_profiles.xml:system/etc/media_profiles.xml
 
 # Light HAL
 PRODUCT_PACKAGES += lights.msm7x27a
