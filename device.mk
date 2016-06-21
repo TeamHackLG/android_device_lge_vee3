@@ -21,7 +21,7 @@ $(call inherit-product-if-exists, vendor/lge/vee3/vee3-vendor.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/lge/vee3/overlay
 
-PRODUCT_AAPT_CONFIG := normal ldpi mdpi
+PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := ldpi
 
 PRODUCT_COPY_FILES += \
