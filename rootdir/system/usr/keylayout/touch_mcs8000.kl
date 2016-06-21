@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-key 139   MENU              VIRTUAL
-key 158   BACK              VIRTUAL
-key 172   HOME              VIRTUAL
-key 228   APP_SWITCH        VIRTUAL
+key 139   MENU
+key 158   BACK
+key 172   HOME
+key 228   APP_SWITCH
