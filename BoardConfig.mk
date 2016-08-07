@@ -48,16 +48,13 @@ BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 
 # TWRP
-RECOVERY_VARIANT := omni
-TW_INTERNAL_STORAGE_PATH := "/data/media"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
-TW_EXTERNAL_STORAGE_PATH := "/external sd"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
-TW_DEFAULT_EXTERNAL_STORAGE := true
-TW_FLASH_FROM_STORAGE := true
-TW_NO_CPU_TEMP := true
-TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
-TW_MAX_BRIGHTNESS := 225
+#RECOVERY_VARIANT := omni
+#TW_EXTERNAL_STORAGE_PATH := "/external sd"
+#TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+#TW_DEFAULT_EXTERNAL_STORAGE := true
+#TW_FLASH_FROM_STORAGE := true
+#TW_NO_CPU_TEMP := true
+#TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 
 # Unified Device
 TARGET_UNIFIED_DEVICE := true
