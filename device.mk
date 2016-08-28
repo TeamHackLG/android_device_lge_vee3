@@ -40,4 +40,7 @@ PRODUCT_COPY_FILES += \
 # Light HAL
 PRODUCT_PACKAGES += lights.msm7x27a
 
+# Gello
+PRODUCT_PACKAGES += Gello
+
 include device/lge/vee3/system_prop.mk
