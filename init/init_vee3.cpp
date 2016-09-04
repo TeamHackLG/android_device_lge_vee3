@@ -38,8 +38,6 @@
 void vendor_load_properties() {
     char gversionbb[92];
     char dversionbb[92];
-    char o_gversionbb[92];
-    char o_dversionbb[92];
     FILE *fp;
 
     fp = popen("/system/bin/printf $(/system/bin/strings /dev/block/mmcblk0p12 | /system/bin/egrep -e '-V10' -e '-V20')", "r");
@@ -64,9 +62,4 @@ void vendor_load_properties() {
         property_set("ro.product.device", "vee3");
         property_set("ro.product.model", "vee3");
     };
-
-    property_get("gsm.version.baseband", o_gversionbb);
-    property_get("ro.product.device", o_dversionbb);
-
-    ERROR("Found %s gsm baseband setting build properties for %s device\n", o_gversionbb, o_dversionbb);
 }
