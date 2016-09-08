@@ -13,15 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# MSM7x27a-common
-LGE_PROJECT := l
+# inherit from the proprietary things
 include device/lge/msm7x27a-common/BoardConfigCommon.mk
-
-# inherit from the proprietary version
--include vendor/lge/vee3/BoardConfigVendor.mk
+include vendor/lge/vee3/BoardConfigVendor.mk
 
 # Kernel
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01300000
 BOARD_KERNEL_CMDLINE := androidboot.hardware=vee3 androidboot.selinux=permissive
 TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
 
