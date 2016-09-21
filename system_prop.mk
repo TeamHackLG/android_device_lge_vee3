@@ -17,5 +17,3 @@
 PRODUCT_PROPERTY_OVERRIDES += ro.sf.lcd_density="120"
 # Enforce Phone Mode view
 PRODUCT_PROPERTY_OVERRIDES += ro.screen.layout="normal"
-# RIL
-PRODUCT_PROPERTY_OVERRIDES += ro.telephony.ril.v3="qcomdsds,signalstrength"
