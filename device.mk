@@ -40,4 +40,11 @@ PRODUCT_COPY_FILES += \
 # Light HAL
 PRODUCT_PACKAGES += lights.msm7x27a
 
-include device/lge/vee3/system_prop.mk
+# Display
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sf.lcd_density="120" \
+    ro.screen.layout="normal"
+
+# RIL
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.ril.v3="qcomdsds,signalstrength"
