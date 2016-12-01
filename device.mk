@@ -24,6 +24,11 @@ DEVICE_PACKAGE_OVERLAYS += device/lge/vee3/overlay
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := ldpi
 
+# Boot animation
+TARGET_BOOTANIMATION_HALF_RES := true
+TARGET_SCREEN_HEIGHT := 320
+TARGET_SCREEN_WIDTH := 240
+
 PRODUCT_COPY_FILES += \
     device/lge/vee3/rootdir/root/fstab.vee3:root/fstab.vee3 \
     device/lge/vee3/rootdir/root/init.vee3.rc:root/init.vee3.rc \
@@ -36,12 +41,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     device/lge/msm7x27a-common/rootdir/system/etc/gen2_media_profiles.xml:system/etc/media_profiles.xml
-
-# Light HAL
-PRODUCT_PACKAGES += lights.msm7x27a
-
-# Gello
-PRODUCT_PACKAGES += Gello
 
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \
