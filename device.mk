@@ -16,10 +16,10 @@
 # This file includes all definitions that apply to ALL L3II devices
 # Everything in this directory will become public
 
+LGE_MSM7X27A_DEVICE := vee3
+
 $(call inherit-product, device/lge/msm7x27a-common/msm7x27a-common.mk)
 $(call inherit-product-if-exists, vendor/lge/vee3/vee3-vendor.mk)
-
-DEVICE_PACKAGE_OVERLAYS += device/lge/vee3/overlay
 
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := ldpi
@@ -29,17 +29,10 @@ TARGET_SCREEN_HEIGHT := 320
 TARGET_SCREEN_WIDTH := 240
 
 PRODUCT_COPY_FILES += \
-    device/lge/vee3/rootdir/root/fstab.vee3:root/fstab.vee3 \
-    device/lge/vee3/rootdir/root/init.vee3.rc:root/init.vee3.rc \
-    device/lge/vee3/rootdir/root/init.vee3ds.sh:root/init.vee3ds.sh \
-    device/lge/vee3/rootdir/root/ueventd.vee3.rc:root/ueventd.vee3.rc
+    device/lge/vee3/rootdir/root/init.vee3ds.sh:root/init.vee3ds.sh
 
 PRODUCT_COPY_FILES += \
-    device/lge/vee3/rootdir/system/usr/keylayout/touch_mcs8000.kl:system/usr/keylayout/touch_mcs8000.kl \
-    device/lge/vee3/rootdir/system/usr/keylayout/vee3_keypad.kl:system/usr/keylayout/vee3_keypad.kl
-
-PRODUCT_COPY_FILES += \
-    device/lge/msm7x27a-common/rootdir/system/etc/gen2_media_profiles.xml:system/etc/media_profiles.xml
+    device/lge/vee3/rootdir/system/usr/keylayout/touch_mcs8000.kl:system/usr/keylayout/touch_mcs8000.kl
 
 # Display
 PRODUCT_PROPERTY_OVERRIDES += \

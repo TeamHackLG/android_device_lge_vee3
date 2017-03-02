@@ -13,12 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+LGE_MSM7X27A_DEVICE := vee3
+
 # inherit from the proprietary things
 include device/lge/msm7x27a-common/BoardConfigCommon.mk
 include vendor/lge/vee3/BoardConfigVendor.mk
 
 # Kernel
-BOARD_KERNEL_CMDLINE := androidboot.hardware=vee3 androidboot.selinux=permissive
 TARGET_KERNEL_CONFIG := cyanogenmod_vee3_defconfig
 
 # Partitions
@@ -26,12 +27,6 @@ BOARD_BOOTIMAGE_PARTITION_SIZE := 12582912
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 12582912
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 958398464
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 1876951040
-
-# Recovery FSTAB
-TARGET_RECOVERY_FSTAB := device/lge/vee3/rootdir/root/fstab.vee3
-
-# BT Include
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/vee3/bluetooth
 
 # Recovery
 DEVICE_RESOLUTION := 240x240
@@ -59,6 +54,3 @@ TARGET_OTA_ASSERT_DEVICE := E425,E430,E431,E435,vee3
 # Set Device in init based on baseband
 TARGET_INIT_VENDOR_LIB := libinit_vee3
 TARGET_LIBINIT_DEFINES_FILE := device/lge/vee3/init/init_vee3.cpp
-
-# Audio
-NEW_INPUT_AUDIO_HAL := true
