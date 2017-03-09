@@ -1,5 +1,6 @@
-# Copyright 2016 The Android Open Source Project
-# Copyright 2016 TeamHacklG
+# Copyright (C) 2016 The Android Open Source Project
+#               2017 The LineageOS Project
+#                    TeamHacklG
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,12 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Inherit some common CM stuff.
+# Inherit some common Lineage stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 # Inherit device configuration
 $(call inherit-product, device/lge/vee3/full_vee3.mk)
 
 # Device identifier. This must come after all inclusions
-PRODUCT_NAME := cm_vee3
+PRODUCT_NAME := lineage_vee3
 PRODUCT_RELEASE_NAME := L3II
