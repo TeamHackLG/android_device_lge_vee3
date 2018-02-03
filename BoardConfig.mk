@@ -54,7 +54,3 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 # Unified Device
 TARGET_UNIFIED_DEVICE := true
 TARGET_OTA_ASSERT_DEVICE := E425,E430,E431,E435,vee3
-
-# Set Device in init based on baseband
-TARGET_INIT_VENDOR_LIB := libinit_vee3
-TARGET_LIBINIT_DEFINES_FILE := device/lge/vee3/init/init_vee3.cpp
