@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-add_lunch_combo cm_vee3-userdebug
-add_lunch_combo cm_vee3-eng
+add_lunch_combo lineage_vee3-userdebug
+add_lunch_combo lineage_vee3-eng
 add_lunch_combo full_vee3-userdebug
 add_lunch_combo full_vee3-eng
